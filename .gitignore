@@ -1,0 +1,34 @@
+# Visual Studio specific
+.vs/
+*.vcxproj.user
+*.vcxproj.filters
+
+# Build files
+Debug/
+Release/
+
+# Temporary files
+*.obj
+*.exe
+*.log
+*.pdb
+*.idb
+*.ipch
+*.iobj
+*.ipdb
+
+# Image Cache
+*.tlog
+*.lastbuildstate
+
+# IntelliSense databases
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.opendb
+
+# Visual Studio Code specific
+.vscode/
+
+# Backup files
+*.bak

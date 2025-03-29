@@ -133,6 +133,7 @@
     <ClInclude Include="Patient.h" />
     <ClInclude Include="PriQueue.h" />
     <ClInclude Include="Queue.h" />
+    <ClInclude Include="Resource.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="Treatment.h" />
   </ItemGroup>

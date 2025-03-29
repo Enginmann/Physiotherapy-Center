@@ -4,16 +4,16 @@ class Treatment
 {
 private:
 	int duration;
-	int assignment_Time;
+	int st;
 	Resource* assigned_Resource;
 
 public:
 	int getDuration();
 
-	int getST();
+	int getSt();
 
 	bool canAssign();
 
-	void AddToWait();
+	void addToWait();
 };
 

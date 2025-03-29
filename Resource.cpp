@@ -1,13 +1,22 @@
 #include "Resource.h"
 
+#include <fstream>
 
+
+using namespace std;
+
+
+Resource::Resource()
+{
+	return;
+}
 
 int Resource::getId()
 {
 	return id;
 }
 
-int Resource::getType()
+char Resource::getType()
 {
 	return type;
 }

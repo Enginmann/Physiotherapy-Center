@@ -5,9 +5,11 @@ class Resource
 {
 private:
 	int id;
-	int type; // 0->U, 1-> E, 2->X
+	char type;
 
 public:
+	Resource();
+
 	int getId();
-	int getType();
+	char getType();
 };

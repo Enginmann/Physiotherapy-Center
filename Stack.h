@@ -15,13 +15,26 @@ class ArrayStack
 protected:
 	T items[STACK_SIZE];
 	int top;
+	int count;
 
 public:
 
 	ArrayStack()
 	{
 		top = -1;
-	}  // end default constructor
+		count = 0;
+	}
+
+	int getCount()
+	{
+		return count;
+	}
+
+	void print()
+	{
+		for (int i = 0; i < count; i++)
+			cout << items[i]->getId();
+	}
 
 	int getCapacity()
 	{
@@ -37,6 +50,8 @@ public:
 	{
 		if (top == STACK_SIZE - 1) return false;	//Stack is FULL
 
+		count++;
+
 		top++;
 		items[top] = newEntry;
 		return true;
@@ -45,6 +60,8 @@ public:
 	bool pop(T & TopEntry)
 	{
 		if (isEmpty()) return false;
+
+		count--;
 
 		TopEntry = items[top];
 		top--;

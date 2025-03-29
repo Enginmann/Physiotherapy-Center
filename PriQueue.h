@@ -42,8 +42,6 @@ public:
 }; // end Node
 
 
-
-
 //This class impelements the priority queue as a sorted list (Linked List)
 //The item with highest priority is at the front of the queue
 template <typename T>
@@ -51,8 +49,12 @@ class priQueue
 {
 protected:
     priNode<T> * head;
+    int count;
 public:
-    priQueue() : head(nullptr) {}
+    priQueue() : head(nullptr)
+    {
+        count = 0;
+    }
 
     ~priQueue()
     {
@@ -64,6 +66,8 @@ public:
     //insert the new node in its correct position according to its priority
     void enqueue(const T & data, int priority)
     {
+        count++;
+
         priNode<T> * newNode = new priNode<T>(data, priority);
 
         if (head == nullptr || priority > head->getPri())
@@ -87,6 +91,8 @@ public:
     {
         if (isEmpty())
             return false;
+
+        count--;
 
         topEntry = head->getItem(pri);
         priNode<T> * temp = head;

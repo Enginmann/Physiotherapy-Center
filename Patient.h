@@ -9,17 +9,33 @@ private:
 	int id;
 	int pt;
 	int vt;
-	int type; // 0->Normal, 1->Recovering
-	int status;
+	char type;
+	int status; // 0:idle, 1:early, 2:late, 3:wait, 4:serve, 5:finish
+	int ft;
+	int wt;
+	int tt;
+	bool cancelState;
+	bool rescState;
 
 	LinkedQueue<Treatment *> reqTreatments;
 
 public:
+	Patient(int id, int pt, int vt, int type);
+
 	int getId();
 	int getPt();
 	int getVt();
-	int getType();
+	int getFt();
+	int getWt();
+	int getTt();
+	char getType();
 	int getStatus();
+	bool isCancel();
+	bool isResc();
+
+	void setStatus(int status);
+	void setReqTreatment(Treatment * treatment);
+
 
 	Treatment * getTreatment();
 };

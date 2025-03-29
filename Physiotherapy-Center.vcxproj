@@ -146,6 +146,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Patient.cpp" />
     <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="Scheduler.cpp" />
     <ClCompile Include="Treatment.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

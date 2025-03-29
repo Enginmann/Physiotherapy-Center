@@ -29,7 +29,13 @@ private:
 	LinkedQueue<Resource *> xRooms;
 
 public:
+	Scheduler();
+
 	void loadAllPatients();
+
+	int getAllPatientsCount();
+
+	int getFinishedPatientsCount();
 
 	/// Phase 2 methods
 };

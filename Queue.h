@@ -59,16 +59,21 @@ template <typename T>
 class LinkedQueue
 {
 protected:
-
 	Node<T> * backPtr;
 	Node<T> * frontPtr;
+	int count;
 public:
 
 	LinkedQueue()
 	{
 		backPtr = nullptr;
 		frontPtr = nullptr;
+		count = 0;
+	}
 
+	int getCount()
+	{
+		return count;
 	}
 
 	bool isEmpty() const
@@ -78,6 +83,8 @@ public:
 
 	bool enqueue(const T & newEntry)
 	{
+		count++;
+
 		Node<T> * newNodePtr = new Node<T>(newEntry);
 		// Insert the new node
 		if (isEmpty())	//special case if this is the first node to insert
@@ -86,6 +93,7 @@ public:
 			backPtr->setNext(newNodePtr); // The queue was not empty
 
 		backPtr = newNodePtr; // New node is the last node now
+		
 		return true;
 	}
 
@@ -93,6 +101,8 @@ public:
 	{
 		if (isEmpty())
 			return false;
+
+		count--;
 
 		Node<T> * nodeToDeletePtr = frontPtr;
 		frntEntry = frontPtr->getItem();

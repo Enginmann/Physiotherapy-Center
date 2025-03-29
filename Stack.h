@@ -12,7 +12,7 @@ using namespace std;
 template<typename T>
 class ArrayStack
 {
-private:
+protected:
 	T items[STACK_SIZE];
 	int top;
 

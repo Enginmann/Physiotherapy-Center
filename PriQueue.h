@@ -49,6 +49,7 @@ public:
 template <typename T>
 class priQueue
 {
+protected:
     priNode<T> * head;
 public:
     priQueue() : head(nullptr) {}

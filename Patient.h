@@ -21,5 +21,5 @@ public:
 	int getType();
 	int getStatus();
 
-	// Treatment * getTreatment();
+	Treatment * getTreatment();
 };

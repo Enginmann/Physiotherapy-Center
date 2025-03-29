@@ -6,22 +6,14 @@ private:
 	int duration;
 	int assignment_Time;
 	Resource* assigned_Resource;
+
 public:
-	int getDuration()
-	{
-		return duration;
-	}
-	int getST()
-	{
-		return assignment_Time;
-	}
-	bool canAssign()
-	{
+	int getDuration();
 
-	}
-	void AddToWait()
-	{
+	int getST();
 
-	}
+	bool canAssign();
+
+	void AddToWait();
 };
 

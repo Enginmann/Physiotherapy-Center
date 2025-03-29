@@ -1,7 +1,7 @@
 # Visual Studio specific
 .vs/
 *.vcxproj.user
-*.vcxproj.filters
+# *.vcxproj.filters
 
 # Build files
 Debug/

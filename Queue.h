@@ -76,6 +76,17 @@ public:
 		return count;
 	}
 
+	void print()
+	{
+		Node<T> * ptr = frontPtr;
+		while (ptr)
+		{
+			cout << ptr->getItem()->print() << ", ";
+			ptr = ptr->getNext();
+		}
+		cout << endl;
+	}
+
 	bool isEmpty() const
 	{
 		return (frontPtr == nullptr);
@@ -159,13 +170,3 @@ public:
 	}
 
 };
-
-
-template <typename T>
-void PrintQueue(LinkedQueue<T> Q)
-{
-	T K;
-	while (Q.dequeue(K))
-		cout << K << " ";
-	cout << endl;
-}

@@ -130,12 +130,20 @@
     <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EarlyPriQueue.h" />
+    <ClInclude Include="EUWaitingQueue.h" />
     <ClInclude Include="Patient.h" />
     <ClInclude Include="PriQueue.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Scheduler.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="Treatment.h" />
+    <ClInclude Include="UI.h" />
+    <ClInclude Include="XWaitingQueue.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

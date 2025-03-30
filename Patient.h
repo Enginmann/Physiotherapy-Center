@@ -20,7 +20,7 @@ private:
 	LinkedQueue<Treatment *> reqTreatments;
 
 public:
-	Patient(int id, int pt, int vt, int type);
+	Patient(int id, int pt, int vt, char type);
 
 	int getId();
 	int getPt();

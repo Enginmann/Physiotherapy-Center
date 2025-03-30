@@ -81,7 +81,7 @@ public:
 		Node<T> * ptr = frontPtr;
 		while (ptr)
 		{
-			cout << ptr->getItem()->print() << ", ";
+			cout << ptr->getItem() << ", ";
 			ptr = ptr->getNext();
 		}
 		cout << endl;

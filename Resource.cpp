@@ -20,3 +20,10 @@ char Resource::getType()
 {
 	return type;
 }
+
+ostream & operator<<(ostream & out, Resource * resource)
+{
+	
+
+	return out;
+}

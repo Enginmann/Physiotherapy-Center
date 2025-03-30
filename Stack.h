@@ -33,7 +33,7 @@ public:
 	void print()
 	{
 		for (int i = 0; i < count; i++)
-			cout << items[i]->getId() << ", ";
+			cout << items[i] << ", ";
 		cout << endl;
 	}
 

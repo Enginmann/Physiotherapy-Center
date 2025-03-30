@@ -51,6 +51,18 @@ protected:
     priNode<T> * head;
     int count;
 public:
+
+    void print()
+    {
+        priNode<T> * ptr = head;
+        while (ptr)
+        {
+            cout << ptr->getItem() << ", ";
+            ptr = ptr->getNext();
+        }
+        cout << endl;
+    }
+
     priQueue() : head(nullptr)
     {
         count = 0;

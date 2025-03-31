@@ -8,16 +8,16 @@ void simulate()
 	Scheduler scheduler;
 
 	/// File loading
-	scheduler.loadAllPatients();
+	scheduler.loadInputFile();
 	int count = scheduler.getAllPatientsCount();
 
 	/// Loop
-	while (scheduler.getFinishedPatientsCount() != count)
-	{
-		/// Logic
-		// if () move late
-		// else move early
-	}
+	//while (scheduler.getFinishedPatientsCount() != count)
+	//{
+	//	/// Logic
+	//	// if () move late
+	//	// else move early
+	//}
 
 	/// Print
 
@@ -27,5 +27,7 @@ void simulate()
 
 int main()
 {
+	simulate();
+
 	return 0;
 }

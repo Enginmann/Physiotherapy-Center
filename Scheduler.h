@@ -13,6 +13,9 @@
 class Scheduler
 {
 private:
+	int pCancel;
+	int pResc;
+
 	LinkedQueue<Patient *> allPatients;
 	EarlyPriQueue<Patient *> earlyPatients;
 	priQueue<Patient *> latePatients;
@@ -31,7 +34,7 @@ private:
 public:
 	Scheduler();
 
-	void loadAllPatients();
+	void loadInputFile();
 
 	int getAllPatientsCount();
 

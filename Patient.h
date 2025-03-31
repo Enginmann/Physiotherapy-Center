@@ -6,10 +6,10 @@
 class Patient
 {
 private:
+	char type;
 	int id;
 	int pt;
 	int vt;
-	char type;
 	int status; // 0:idle, 1:early, 2:late, 3:wait, 4:serve, 5:finish
 	int ft;
 	int wt;

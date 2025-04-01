@@ -8,6 +8,7 @@
 #include "EarlyPriQueue.h"
 #include "EUWaitingQueue.h"
 #include "XWaitingQueue.h"
+#include "Patient.h"
 
 
 class Scheduler
@@ -39,6 +40,8 @@ public:
 	int getAllPatientsCount();
 
 	int getFinishedPatientsCount();
+
+	void addTOEarlyOrLate(int timestep);
 
 	/// Phase 2 methods
 };

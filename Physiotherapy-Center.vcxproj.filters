@@ -9,5 +9,18 @@
     <ClInclude Include="PriQueue.h" />
     <ClInclude Include="Patient.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="EarlyPriQueue.h" />
+    <ClInclude Include="EUWaitingQueue.h" />
+    <ClInclude Include="Scheduler.h" />
+    <ClInclude Include="Treatment.h" />
+    <ClInclude Include="UI.h" />
+    <ClInclude Include="XWaitingQueue.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Patient.cpp" />
+    <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="Scheduler.cpp" />
+    <ClCompile Include="Treatment.cpp" />
   </ItemGroup>
 </Project>

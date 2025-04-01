@@ -6,11 +6,11 @@ class Resource
 private:
 	int id;
 	char type;
-	int xCapacity;
+
 public:
-	Resource();
-	Resource(int Id,char Type, int xCap = 0);
+	Resource(int Id, char Type);
+
 	int getId();
+
 	char getType();
-	int getxCapacity();
 };

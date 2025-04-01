@@ -6,18 +6,10 @@
 using namespace std;
 
 
-Resource::Resource()
-{
-	return;
-}
-
-Resource::Resource(int Id, char Type, int xCap )
+Resource::Resource(int Id, char Type)
 {
 	id = Id;
-	if (Type == 'E' || Type == 'U' || Type == 'X')
-		type = Type;
-	if (type == 'X')
-		xCapacity = xCap;
+	type = Type;
 }
 
 int Resource::getId()
@@ -30,14 +22,9 @@ char Resource::getType()
 	return type;
 }
 
-int Resource::getxCapacity()
-{
-	return xCapacity;
-}
-
 ostream & operator<<(ostream & out, Resource * resource)
 {
-	
+	/// Later
 
 	return out;
 }

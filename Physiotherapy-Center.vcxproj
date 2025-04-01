@@ -140,6 +140,7 @@
     <ClInclude Include="Stack.h" />
     <ClInclude Include="Treatment.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="XResource.h" />
     <ClInclude Include="XWaitingQueue.h" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +149,7 @@
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="Scheduler.cpp" />
     <ClCompile Include="Treatment.cpp" />
+    <ClCompile Include="XResource.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

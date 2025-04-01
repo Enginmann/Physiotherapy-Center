@@ -2,6 +2,7 @@
 
 #include "Patient.h"
 #include "Resource.h"
+#include "XResource.h"
 #include "Queue.h"
 #include "PriQueue.h"
 #include "Stack.h"

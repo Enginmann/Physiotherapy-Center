@@ -24,19 +24,21 @@ void Scheduler::loadInputFile()
 	
 	for (int i = 0; i < eDevice; i++)
 	{
-		Resource* eResource = new Resource(i+1,'E');
+		Resource* eResource = new Resource(i, 'E');
 		eDevices.enqueue(eResource);
 	}
+
 	for (int i = 0; i < uDevice; i++)
 	{
-		Resource* uResource = new Resource(i + 1, 'U');
+		Resource* uResource = new Resource(i, 'U');
 		uDevices.enqueue(uResource);
 	}
+
 	for (int i = 0; i < xRoom; i++)
 	{
 		int xCap;
 		inFile >> xCap;
-		Resource* xR = new Resource(i + 1, 'X', xCap);
+		XResource* xR = new XResource(i, 'X', xCap);
 		xRooms.enqueue(xR);
 	}
 

@@ -6,8 +6,11 @@ template <class T>
 class EUWaitingQueue : public LinkedQueue<T>
 {
 private:
-
+	int latency;
 public:
+	EUWaitingQueue() {
+		latency = 0;
+	}
 	void insertSorted(T patient, int val)
 	{
 		Node<T>* newNode = new Node<T>(patient);

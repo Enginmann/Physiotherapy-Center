@@ -16,14 +16,31 @@ void Scheduler::loadInputFile()
 	if (!inFile)
 		return;
 
-	string buffer;
+	
 
-	/// devices later
-	getline(inFile, buffer);
+	/// devices,rooms and capacity
+	int eDevice, uDevice, xRoom;
+	inFile >> eDevice >> uDevice >> xRoom;
+	
+	for (int i = 0; i < eDevice; i++)
+	{
+		Resource* eResource = new Resource(i+1,'E');
+		eDevices.enqueue(eResource);
+	}
+	for (int i = 0; i < uDevice; i++)
+	{
+		Resource* uResource = new Resource(i + 1, 'U');
+		uDevices.enqueue(uResource);
+	}
+	for (int i = 0; i < xRoom; i++)
+	{
+		int xCap;
+		inFile >> xCap;
+		Resource* xR = new Resource(i + 1, 'X', xCap);
+		xRooms.enqueue(xR);
+	}
 
-	/// rooms and capacity later
-	getline(inFile, buffer);
-
+	
 	/// cancel and resc
 	inFile >> pCancel >> pResc;
 
@@ -62,4 +79,23 @@ int Scheduler::getAllPatientsCount()
 int Scheduler::getFinishedPatientsCount()
 {
 	return finishedPatients.getCount();
+}
+
+void Scheduler::addTOEarlyOrLate(int timestep)
+{
+	Patient* patient;
+	allPatients.peek(patient);
+	if (timestep == patient->getVt())
+	{
+		if (timestep < patient->getPt()) //early
+		{
+			allPatients.dequeue(patient);
+			earlyPatients.enqueue(patient, patient->getPt());
+		}
+		else if (timestep > patient->getPt()) //late
+		{
+			allPatients.dequeue(patient);
+			latePatients.enqueue(patient, timestep + (timestep - patient->getPt()) / 2);
+		}
+	}
 }

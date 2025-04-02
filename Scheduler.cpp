@@ -89,16 +89,12 @@ void Scheduler::addTOEarlyOrLate(int timestep)
 	allPatients.peek(patient);
 	if (timestep == patient->getVt())
 	{
+		allPatients.dequeue(patient);
+
 		if (timestep < patient->getPt()) //early
-		{
-			allPatients.dequeue(patient);
-			earlyPatients.enqueue(patient, patient->getPt());
-		}
+			earlyPatients.enqueue(patient, - patient->getPt());
 		else if (timestep > patient->getPt()) //late
-		{
-			allPatients.dequeue(patient);
-			latePatients.enqueue(patient, timestep + (timestep - patient->getPt()) / 2);
-		}
+			latePatients.enqueue(patient, - (timestep + (timestep - patient->getPt()) / 2));
 	}
 }
 

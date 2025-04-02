@@ -18,20 +18,20 @@ private:
 	int pCancel;
 	int pResc;
 
-	LinkedQueue<Patient *> allPatients;
-	EarlyPriQueue<Patient *> earlyPatients;
-	priQueue<Patient *> latePatients;
-	
-	priQueue<Patient *> inTreatmentPatients;
-	ArrayStack<Patient *> finishedPatients;
+	LinkedQueue<Patient*> allPatients;
+	EarlyPriQueue<Patient*> earlyPatients;
+	priQueue<Patient*> latePatients;
 
-	EUWaitingQueue<Patient *> uWaiting;
-	EUWaitingQueue<Patient *> eWaiting;
-	XWaitingQueue<Patient *> xWaiting;
+	priQueue<Patient*> inTreatmentPatients;
+	ArrayStack<Patient*> finishedPatients;
 
-	LinkedQueue<Resource *> uDevices;
-	LinkedQueue<Resource *> eDevices;
-	LinkedQueue<Resource *> xRooms;
+	EUWaitingQueue<Patient*> uWaiting;
+	EUWaitingQueue<Patient*> eWaiting;
+	XWaitingQueue<Patient*> xWaiting;
+
+	LinkedQueue<Resource*> uDevices;
+	LinkedQueue<Resource*> eDevices;
+	LinkedQueue<Resource*> xRooms;
 
 public:
 	Scheduler();
@@ -43,6 +43,22 @@ public:
 	int getFinishedPatientsCount();
 
 	void addTOEarlyOrLate(int timestep);
+
+	void moveEearlyQueue(int timestep);
+
+	void moveLateQueue(int timestep);
+
+	void moveWqueues(int timestep);
+
+	void moveEWqueues(int timestep);
+
+	void moveUWqueues(int timestep);
+
+	void moveXWqueues(int timestep);
+
+
+
+
 
 	/// Phase 2 methods
 };

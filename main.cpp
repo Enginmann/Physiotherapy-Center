@@ -12,12 +12,21 @@ void simulate()
 	int count = scheduler.getAllPatientsCount();
 
 	/// Loop
-	//while (scheduler.getFinishedPatientsCount() != count)
-	//{
-	//	/// Logic
-	//	// if () move late
-	//	// else move early
-	//}
+	while (scheduler.getFinishedPatientsCount() != count)
+	{
+		if(count!=0)
+			scheduler.addTOEarlyOrLate(timeStep);
+		//scheduler.moveEearlyQueue(timeStep);
+		
+		//scheduler.moveEearlyQueue(timeStep);
+
+		//scheduler.moveWQueues(timeStep);
+
+		/// Logic
+		// if () move late
+		// else move early
+		timeStep++;
+	}
 
 	/// Print
 

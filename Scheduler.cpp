@@ -101,3 +101,25 @@ void Scheduler::addTOEarlyOrLate(int timestep)
 		}
 	}
 }
+
+void Scheduler::moveEearlyQueue(int timestep)
+{
+	Patient* patient;
+	allPatients.peek(patient);
+	if (timestep == patient->getPt())
+	{
+		allPatients.dequeue(patient);
+			// check for the type of the patient 
+		if (patient->getType() == 'N');
+			//move to waiting queues with order
+		else;
+			//move using latency
+
+	}
+}
+
+void Scheduler::moveLateQueue(int timestep)
+{
+	//to do  hint :using priority
+
+}

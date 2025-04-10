@@ -10,3 +10,9 @@ private:
 public:
 	void reschedule();
 };
+
+template<class T>
+inline void EarlyPriQueue<T>::reschedule()
+{
+
+}

@@ -36,6 +36,7 @@ public:
 	void setStatus(int status);
 	void setReqTreatment(Treatment * treatment);
 
+	int getTreatmentDuration();
 
 	Treatment * getTreatment();
 };

@@ -48,6 +48,8 @@ public:
 
 	void moveToTreatment(int timestep);
 
+	void simulate(int x);
+
 private:
 	void moveToRandomWaiting(Patient * patient);
 };

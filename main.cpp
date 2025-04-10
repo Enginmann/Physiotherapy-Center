@@ -19,8 +19,7 @@ void simulate()
 
 		int x = rand() % 100;
 
-		if (x < 10)
-			scheduler.moveFromEarlyToRandom();
+		scheduler.simulate(x);
 			
 			
 			

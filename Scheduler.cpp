@@ -103,6 +103,69 @@ void Scheduler::movePatient(int timestep)
 	}
 }
 
+void Scheduler::simulate(int x)
+{
+	/// check null
+	Patient * patient = nullptr;
+	int temp;
+
+	if (x < 10)
+	{
+		int temp;
+		earlyPatients.dequeue(patient, temp);
+		if (patient)
+			moveToRandomWaiting(patient);
+	}
+	else if (x < 20)
+	{
+		latePatients.dequeue(patient, temp);
+		if (patient)
+			moveToRandomWaiting(patient);
+	}
+	else if (x < 40)
+	{
+		int n = rand() % 100;
+		Patient * patient2 = nullptr;
+
+		if (n < 33)
+		{
+			eWaiting.dequeue(patient);
+			eWaiting.dequeue(patient2);
+		}
+		if (n < 66)
+		{
+			uWaiting.dequeue(patient);
+			uWaiting.dequeue(patient2);
+		}
+		else
+		{
+			xWaiting.dequeue(patient);
+			xWaiting.dequeue(patient2);
+		}
+		inTreatmentPatients.enqueue(patient, - patient->getTreatmentDuration());
+		inTreatmentPatients.enqueue(patient2, - patient2->getTreatmentDuration());
+	}
+	else if (x < 60)
+	{
+		inTreatmentPatients.dequeue(patient, temp);
+		finishedPatients.push(patient);
+	}
+	else if (x < 70)
+	{
+		//xWaiting.dequeue(patient);
+		finishedPatients.push(patient);
+	}
+	else if (x < 80)
+	{
+		//xWaiting.dequeue(patient);
+		finishedPatients.push(patient);
+	}
+	else
+	{
+
+	}
+}
+
 void Scheduler::moveToRandomWaiting(Patient * patient)
 {
 	int n = rand() % 100;

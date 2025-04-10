@@ -68,6 +68,14 @@ void Patient::setReqTreatment(Treatment * treatment)
 	reqTreatments.enqueue(treatment);
 }
 
+int Patient::getTreatmentDuration()
+{
+	/// check null
+	Treatment * treatment = nullptr;
+	reqTreatments.peek(treatment);
+	return treatment->getDuration();
+}
+
 bool Patient::isCancel()
 {
 	return cancelState;

@@ -1,8 +1,6 @@
 #include "Scheduler.h"
 #include <string>
 #include <fstream>
-#include <random>
-#include <ctime>
 
 using namespace std;
 
@@ -106,7 +104,7 @@ void Scheduler::movePatient(int timestep)
 void Scheduler::simulate(int x)
 {
 	/// check null
-	Patient * patient = nullptr;
+	Patient* patient = nullptr;
 	int temp;
 
 	if (x < 10)
@@ -125,7 +123,7 @@ void Scheduler::simulate(int x)
 	else if (x < 40)
 	{
 		int n = rand() % 100;
-		Patient * patient2 = nullptr;
+		Patient* patient2 = nullptr;
 
 		if (n < 33)
 		{
@@ -142,8 +140,8 @@ void Scheduler::simulate(int x)
 			xWaiting.dequeue(patient);
 			xWaiting.dequeue(patient2);
 		}
-		inTreatmentPatients.enqueue(patient, - patient->getTreatmentDuration());
-		inTreatmentPatients.enqueue(patient2, - patient2->getTreatmentDuration());
+		inTreatmentPatients.enqueue(patient, -patient->getTreatmentDuration());
+		inTreatmentPatients.enqueue(patient2, -patient2->getTreatmentDuration());
 	}
 	else if (x < 60)
 	{
@@ -152,17 +150,13 @@ void Scheduler::simulate(int x)
 	}
 	else if (x < 70)
 	{
-		//xWaiting.dequeue(patient);
+		xWaiting.cancel(patient);
 		finishedPatients.push(patient);
 	}
 	else if (x < 80)
 	{
-		//xWaiting.dequeue(patient);
-		finishedPatients.push(patient);
-	}
-	else
-	{
-
+		earlyPatients.reschedule();
+		
 	}
 }
 

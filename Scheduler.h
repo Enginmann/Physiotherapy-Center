@@ -42,23 +42,12 @@ public:
 
 	int getFinishedPatientsCount();
 
-	void addTOEarlyOrLate(int timestep);
+	void movePatient(int timestep); /// takes the patient from allPatients list and moves them to early or late or random waiting
 
-	void moveEearlyQueue(int timestep);
+	void moveToWaiting(int timestep); /// moves the patient to his correct waiting list
 
-	void moveLateQueue(int timestep);
+	void moveToTreatment(int timestep);
 
-	void moveWqueues(int timestep);
-
-	void moveEWqueues(int timestep);
-
-	void moveUWqueues(int timestep);
-
-	void moveXWqueues(int timestep);
-
-
-
-
-
-	/// Phase 2 methods
+private:
+	void moveToRandomWaiting(Patient * patient);
 };

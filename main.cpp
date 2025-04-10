@@ -15,16 +15,16 @@ void simulate()
 	while (scheduler.getFinishedPatientsCount() != count)
 	{
 		if(count!=0)
-			scheduler.addTOEarlyOrLate(timeStep);
-		//scheduler.moveEearlyQueue(timeStep);
-		
-		//scheduler.moveEearlyQueue(timeStep);
+			scheduler.movePatient(timeStep);
 
-		//scheduler.moveWQueues(timeStep);
+		int x = rand() % 100;
 
-		/// Logic
-		// if () move late
-		// else move early
+		if (x < 10)
+			scheduler.moveFromEarlyToRandom();
+			
+			
+			
+			
 		timeStep++;
 	}
 

@@ -1,11 +1,14 @@
 #include "Scheduler.h"
 #include <string>
 #include <fstream>
+#include <random>
+#include <ctime>
 
 using namespace std;
 
 Scheduler::Scheduler()
 {
+	srand(time(0));
 }
 
 void Scheduler::loadInputFile()
@@ -83,7 +86,7 @@ int Scheduler::getFinishedPatientsCount()
 	return finishedPatients.getCount();
 }
 
-void Scheduler::addTOEarlyOrLate(int timestep)
+void Scheduler::movePatient(int timestep)
 {
 	Patient* patient;
 	allPatients.peek(patient);
@@ -92,30 +95,23 @@ void Scheduler::addTOEarlyOrLate(int timestep)
 		allPatients.dequeue(patient);
 
 		if (timestep < patient->getPt()) //early
-			earlyPatients.enqueue(patient, - patient->getPt());
+			earlyPatients.enqueue(patient, -patient->getPt());
 		else if (timestep > patient->getPt()) //late
-			latePatients.enqueue(patient, - (timestep + (timestep - patient->getPt()) / 2));
+			latePatients.enqueue(patient, -(timestep + (timestep - patient->getPt()) / 2));
+		else
+			moveToRandomWaiting(patient);
 	}
 }
 
-void Scheduler::moveEearlyQueue(int timestep)
+void Scheduler::moveToRandomWaiting(Patient * patient)
 {
-	Patient* patient;
-	allPatients.peek(patient);
-	if (timestep == patient->getPt())
-	{
-		allPatients.dequeue(patient);
-			// check for the type of the patient 
-		if (patient->getType() == 'N');
-			//move to waiting queues with order
-		else;
-			//move using latency
+	int n = rand() % 100;
 
-	}
+	if (n < 33)
+		eWaiting.enqueue(patient);
+	else if (n < 66)
+		uWaiting.enqueue(patient);
+	else
+		xWaiting.enqueue(patient);
 }
 
-void Scheduler::moveLateQueue(int timestep)
-{
-	//to do  hint :using priority
-
-}

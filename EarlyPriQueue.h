@@ -8,31 +8,45 @@ class EarlyPriQueue : public priQueue<T>
 private:
 
 public:
-	bool reschedule()
+	bool reschedule(int maxPt)
 	{
 		if (this->count == 0)
 			return false;
 
 		int index = rand() % this->count;
-		priNode<T>* ptr = this->head;
 
 		if (!this->head)
-			return;
+			return false;
+		
+		priNode<T>* ptr = this->head;
+		priNode<T>* ptr2 = ptr->getNext();
 
-		for (int i = 0; i < index - 1; i++)
+		if (this->head->getNext())
 		{
-			ptr = ptr->getNext();
+			for (int i = 0; i < index - 1; i++)
+				ptr = ptr->getNext();
+
+			ptr->setNext(ptr2->getNext());
+			ptr2->setNext(nullptr);
+			int temp = 0;
+			int oldVt = ptr2->getItem(temp)->getPt();
+			int newPt = -1;
+			while (oldVt >= newPt)
+				newPt = rand() % maxPt;
+			ptr2->getItem(temp)->setPt(newPt);
+		
+			this->enqueue(ptr2->getItem(temp), -newPt);
+		}
+		else /// head only
+		{
+			int temp = 0;
+			int oldVt = this->head->getItem(temp)->getPt();
+			int newPt = -1;
+			while (oldVt >= newPt)
+				newPt = rand() % maxPt;
+			this->head->getItem(temp)->setPt(newPt);
 		}
 
-		priNode<T>* ptr2 = ptr->getNext();
-		ptr->setNext(ptr2->getNext());
-		ptr2->setNext(nullptr);
-
-
-		///////
-	    int newPt = rand() % 999999999;
-		int temp = 0;
-		priQueue<T>::enqueue(ptr2->getItem(temp), -newPt);
 		return true;
 	}
 };

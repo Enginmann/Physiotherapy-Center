@@ -20,6 +20,7 @@ class Scheduler
 private:
 	int pCancel;
 	int pResc;
+	int maxPt;
 
 	LinkedQueue<Patient*> allPatients;
 	EarlyPriQueue<Patient*> earlyPatients;

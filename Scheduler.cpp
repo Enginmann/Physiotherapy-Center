@@ -6,6 +6,7 @@
 Scheduler::Scheduler()
 {
 	srand(time(0));
+
 }
 
 void Scheduler::loadInputFile(string fileName)
@@ -61,6 +62,8 @@ void Scheduler::loadInputFile(string fileName)
 			treatment = new Treatment(tType, tDuration);
 			patient->setReqTreatment(treatment);
 		}
+		if (i == num - 1)
+			maxPt = patient->getVt();
 		allPatients.enqueue(patient);
 	}
 
@@ -153,7 +156,7 @@ void Scheduler::simulate(int x)
 	}
 	else if (x < 80)
 	{
-		earlyPatients.reschedule();
+		earlyPatients.reschedule(maxPt);
 	}
 }
 

@@ -63,6 +63,11 @@ void Patient::setStatus(int status)
 	this->status = status;
 }
 
+void Patient::setPt(int pt)
+{
+	this->pt = pt;
+}
+
 void Patient::setReqTreatment(Treatment * treatment)
 {
 	reqTreatments.enqueue(treatment);

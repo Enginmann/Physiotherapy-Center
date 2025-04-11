@@ -111,9 +111,18 @@ void Patient::print(int count)
 		status == 3 || // wait
 		status == 5	 // finish
 		)
-		cout << id << ", ";
+		cout << id;
 	else			// serve
-		cout << "P" << id << "_";
+	{
+		Treatment * treatment = nullptr;
+		reqTreatments.peek(treatment);
+		if (!treatment)
+			return;
+		Resource * resource = treatment->getResource();
+		if (!resource)
+			return;
+		cout << "P" << id << "_" << resource->getType() << resource->getId();
+	}
 }
 
 //ostream & operator<<(ostream & out, Patient * patient)

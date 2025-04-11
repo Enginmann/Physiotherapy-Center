@@ -4,6 +4,7 @@ Treatment::Treatment(char type, int duration)
 {
 	this->type = type;
 	this->duration = duration;
+	resource = nullptr;
 }
 
 int Treatment::getDuration()
@@ -32,7 +33,12 @@ void Treatment::addToWait()
 	return;
 }
 
+Resource * Treatment::getResource()
+{
+	return resource;
+}
+
 void Treatment::print(int count)
 {
-
+	return;
 }

@@ -33,7 +33,11 @@ public:
 	void print()
 	{
 		for (int i = 0; i < count; i++)
-			items[i]->print();
+		{
+			items[i]->print(count);
+			if (i != count - 1)
+				cout << ", ";
+		}
 		cout << endl;
 	}
 

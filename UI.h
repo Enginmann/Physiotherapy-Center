@@ -64,10 +64,13 @@ public:
         cout << endl;
         
 		cout << "========= In-treatment List =========" << endl;
-        cout << inTreatmentPatients.getCount() << " ==> ";
+        cout << inTreatmentPatients.getCount() << " In-treatment patients" << ": ";
         inTreatmentPatients.print();
-        /*
-		cout << "========= Finished List =========" << timestep << endl;
-        finishedPatients.print();*/
+        cout << endl;
+
+		cout << "========= Finished List =========" << endl;
+        cout << finishedPatients.getCount() << " Finished patients" << ": ";
+        finishedPatients.print();
+        cout << endl;
 	}
 };

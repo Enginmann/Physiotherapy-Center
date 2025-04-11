@@ -6,7 +6,7 @@ private:
 	char type;
 	int duration;
 	int st;
-	Resource* assigned_Resource;
+	Resource* resource;
 
 public:
 	Treatment(char type, int duration);
@@ -20,5 +20,8 @@ public:
 	bool canAssign();
 
 	void addToWait();
+
+	Resource * getResource();
+
 	void print(int count);
 };

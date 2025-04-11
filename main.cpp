@@ -15,14 +15,13 @@ void simulate()
 	int count = scheduler.getAllPatientsCount();
 
 	/// Main Loop
-	//while (scheduler.getFinishedPatientsCount() != count)
+	while (scheduler.getFinishedPatientsCount() != count)
 	{
 		scheduler.print();
 		
 		scheduler.movePatientFromAll();
 
 		int x = rand() % 100;
-		cout << scheduler.getFinishedPatientsCount() << endl;
 
 		scheduler.simulate(x);			
 		
@@ -34,6 +33,8 @@ void simulate()
 int main()
 {
 	simulate();
+
 	cout << "end" << endl;
+	
 	return 0;
 }

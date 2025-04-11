@@ -49,17 +49,23 @@ public:
         cout << endl;
         
 		cout << "========= Avail E-devices =========" << endl;
+        cout << eDevices.getCount() << " Electro devices: ";
         eDevices.print();
+        cout << endl;
 
-		/*cout << "========= Avail U-devices =========" << timestep << endl;
+		cout << "========= Avail U-devices =========" << endl;
+        cout << uDevices.getCount() << " Ultra devices: ";
         uDevices.print();
+        cout << endl;
 
-		cout << "========= Avail X-Rooms =========" << timestep << endl;
+		cout << "========= Avail X-Rooms =========" <<  endl;
+        cout << xRooms.getCount() << " rooms: ";
         xRooms.print();
-
+        cout << endl;
+        
 		cout << "========= In-treatment List =========" << timestep << endl;
         inTreatmentPatients.print();
-        
+        /*
 		cout << "========= Finished List =========" << timestep << endl;
         finishedPatients.print();*/
 	}

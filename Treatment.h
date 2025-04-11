@@ -20,4 +20,5 @@ public:
 	bool canAssign();
 
 	void addToWait();
+	void print(int count);
 };

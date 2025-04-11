@@ -31,3 +31,8 @@ void Treatment::addToWait()
 {
 	return;
 }
+
+void Treatment::print(int count)
+{
+
+}

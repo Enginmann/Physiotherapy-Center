@@ -3,7 +3,7 @@
 
 class Resource
 {
-private:
+protected:
 	int id;
 	char type;
 
@@ -14,5 +14,5 @@ public:
 
 	char getType();
 
-	void print();
+	virtual void print(int count);
 };

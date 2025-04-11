@@ -81,7 +81,7 @@ public:
 		Node<T> * ptr = frontPtr;
 		while (ptr && limit)
 		{
-			ptr->getItem()->print();
+			ptr->getItem()->print(count);
 			ptr = ptr->getNext();
 			limit--;
 			if (ptr && limit)

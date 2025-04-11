@@ -100,7 +100,7 @@ Treatment * Patient::getTreatment()
 	return treatment;
 }
 
-void Patient::print()
+void Patient::print(int count)
 {
 	// 0:idle, 1:early, 2:late, 3:wait, 4:serve, 5:finish
 	if (status == 0) // idle

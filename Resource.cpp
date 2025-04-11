@@ -1,6 +1,6 @@
 #include "Resource.h"
 
-#include <fstream>
+#include <iostream>
 
 
 using namespace std;
@@ -22,9 +22,15 @@ char Resource::getType()
 	return type;
 }
 
-ostream & operator<<(ostream & out, Resource * resource)
+ void  Resource::print(int count) 
 {
-	/// Later
+	cout << id;
 
-	return out;
 }
+
+//ostream & operator<<(ostream & out, Resource * resource)
+//{
+//	/// Later
+//
+//	return out;
+//}

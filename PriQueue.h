@@ -58,7 +58,7 @@ public:
         priNode<T> * ptr = head;
         while (ptr)
         {
-            ptr->getItem(temp)->print();
+            ptr->getItem(temp)->print(count);
             ptr = ptr->getNext();
             if (ptr)
                 cout << ", ";

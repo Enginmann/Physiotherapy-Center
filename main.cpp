@@ -35,6 +35,8 @@ int main()
 	simulate();
 
 	cout << "end" << endl;
+	int x;
+	cin >> x;
 	
 	return 0;
 }

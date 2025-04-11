@@ -95,11 +95,8 @@ void Scheduler::movePatientFromAll()
 {
 	Patient* patient = nullptr;
 	allPatients.peek(patient);
-
-	if (!patient)
-		return;
-
-	if (timeStep == patient->getVt())
+	
+	while (patient && patient->getVt() == timeStep)
 	{
 		allPatients.dequeue(patient);
 
@@ -109,6 +106,9 @@ void Scheduler::movePatientFromAll()
 			latePatients.enqueue(patient, -(timeStep + (timeStep - patient->getPt()) / 2));
 		else
 			moveToRandomWaiting(patient);
+
+		patient = nullptr;
+		allPatients.peek(patient);
 	}
 }
 

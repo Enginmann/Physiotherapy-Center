@@ -160,6 +160,13 @@ void Scheduler::simulate(int x)
 	}
 }
 
+void Scheduler::print()
+{
+	cout << "======== ALL List =======" << endl;
+	cout << allPatients.getCount() << " patients remaining: ";
+	//print 10 patients
+}
+
 void Scheduler::moveToRandomWaiting(Patient * patient)
 {
 	int n = rand() % 100;

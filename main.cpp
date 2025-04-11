@@ -17,6 +17,8 @@ void simulate()
 	/// Main Loop
 	while (scheduler.getFinishedPatientsCount() != count)
 	{
+		UI ui;
+		ui.print(timeStep, scheduler);
 		scheduler.movePatientFromAll(timeStep);
 
 		int x = rand() % 100;

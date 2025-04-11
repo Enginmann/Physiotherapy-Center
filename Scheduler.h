@@ -54,6 +54,8 @@ public:
 
 	void simulate(int x);
 
+	void print();
+
 private:
 	void moveToRandomWaiting(Patient * patient);
 };

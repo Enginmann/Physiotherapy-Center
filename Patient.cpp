@@ -73,6 +73,8 @@ int Patient::getTreatmentDuration()
 	/// check null
 	Treatment * treatment = nullptr;
 	reqTreatments.peek(treatment);
+	if (!treatment)
+		return -1;
 	return treatment->getDuration();
 }
 

@@ -2,6 +2,8 @@
 #include <iostream>
 #include "Scheduler.h"
 #include "Patient.h"
+#include <conio.h>
+
 
 using namespace std;
 
@@ -24,6 +26,8 @@ public:
         LinkedQueue<Resource*>& eDevices,
         LinkedQueue<Resource*>& xRooms)
 	{
+        system("cls");
+
 		cout << "Current Timestep: " << timestep << endl;
         cout << endl;
         
@@ -72,5 +76,8 @@ public:
         cout << finishedPatients.getCount() << " Finished patients" << ": ";
         finishedPatients.print();
         cout << endl;
+
+        /////////////////////////////////////////
+        while (!_getch());
 	}
 };

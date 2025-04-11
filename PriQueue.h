@@ -58,10 +58,17 @@ public:
         priNode<T> * ptr = head;
         while (ptr)
         {
-            cout << ptr->getItem(temp) << ", ";
+            ptr->getItem(temp)->print();
             ptr = ptr->getNext();
+            if (ptr)
+                cout << ", ";
         }
         cout << endl;
+    }
+
+    int getCount()
+    {
+        return count;
     }
 
     priQueue() : head(nullptr)

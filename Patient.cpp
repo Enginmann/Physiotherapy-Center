@@ -100,23 +100,39 @@ Treatment * Patient::getTreatment()
 	return treatment;
 }
 
-ostream & operator<<(ostream & out, Patient * patient)
+void Patient::print()
 {
 	// 0:idle, 1:early, 2:late, 3:wait, 4:serve, 5:finish
-	if (patient->getStatus() == 0) // idle
-		out << "P" << patient->getId() << "_" << patient->getVt() << ", ";
+	if (status == 0) // idle
+		cout << "P" << id << "_" << vt;
 	else if (
-		patient->getStatus() == 1 || // early
-		patient->getStatus() == 2 || // late
-		patient->getStatus() == 3 || // wait
-		patient->getStatus() == 5	 // finish
+		status == 1 || // early
+		status == 2 || // late
+		status == 3 || // wait
+		status == 5	 // finish
 		)
-		out << patient->getId() << ", ";
+		cout << id << ", ";
 	else							 // serve
-		out << "P" << patient->getId() << "_";
-
-	return out;
+		cout << "P" << id << "_";
 }
+
+//ostream & operator<<(ostream & out, Patient * patient)
+//{
+//	// 0:idle, 1:early, 2:late, 3:wait, 4:serve, 5:finish
+//	if (patient->getStatus() == 0) // idle
+//		out << "P" << patient->getId() << "_" << patient->getVt() << ", ";
+//	else if (
+//		patient->getStatus() == 1 || // early
+//		patient->getStatus() == 2 || // late
+//		patient->getStatus() == 3 || // wait
+//		patient->getStatus() == 5	 // finish
+//		)
+//		out << patient->getId() << ", ";
+//	else							 // serve
+//		out << "P" << patient->getId() << "_";
+//
+//	return out;
+//}
 
 fstream & operator<<(fstream & out, Patient * patient)
 {

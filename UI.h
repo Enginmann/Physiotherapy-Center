@@ -25,25 +25,33 @@ public:
         LinkedQueue<Resource*>& xRooms)
 	{
 		cout << "Current Timestep: " << timestep << endl;
+        cout << endl;
         
-		cout << "========= All List =========" << timestep << endl;
-        allPatients.print();
+		cout << "========= All List =========" << endl;
+        cout << allPatients.getCount() << " patients remaining: ";
+        allPatients.print(10);
+        cout << endl;
         
-		/*cout << "========= Waiting Lists =========" << timestep << endl;
-        uWaiting.print();
+		cout << "========= Waiting Lists =========" << endl;
         eWaiting.print();
+        uWaiting.print();
         xWaiting.print();
+        cout << endl;
 
-		cout << "========= Early List =========" << timestep << endl;
+		cout << "========= Early List =========" << endl;
+        cout << earlyPatients.getCount() << " patients: ";
         earlyPatients.print();
+        cout << endl;
 
-		cout << "========= Late List =========" << timestep << endl;
+		cout << "========= Late List =========" << endl;
+        cout << latePatients.getCount() << " patients: ";
         latePatients.print();
+        cout << endl;
         
-		cout << "========= Avail E-devices =========" << timestep << endl;
+		cout << "========= Avail E-devices =========" << endl;
         eDevices.print();
 
-		cout << "========= Avail U-devices =========" << timestep << endl;
+		/*cout << "========= Avail U-devices =========" << timestep << endl;
         uDevices.print();
 
 		cout << "========= Avail X-Rooms =========" << timestep << endl;

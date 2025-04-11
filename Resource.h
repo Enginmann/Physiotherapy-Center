@@ -13,4 +13,6 @@ public:
 	int getId();
 
 	char getType();
+
+	void print();
 };

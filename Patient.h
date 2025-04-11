@@ -38,6 +38,7 @@ public:
 	void setReqTreatment(Treatment * treatment);
 
 	int getTreatmentDuration();
+	void print();
 
 	Treatment * getTreatment();
 };

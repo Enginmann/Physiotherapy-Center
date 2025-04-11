@@ -17,7 +17,7 @@ public:
 		priNode<T>* ptr = this->head;
 
 		if (!this->head)
-			return;
+			return 0;
 
 		for (int i = 0; i < index - 1; i++)
 		{

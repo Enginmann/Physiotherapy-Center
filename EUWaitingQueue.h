@@ -19,7 +19,7 @@ public:
 			this->frontPtr = this->backPtr = newNode;
 			return;
 		}
-		if (val <= this->frontPtr->getItem()) //insert first
+		if (val <= this->frontPtr->getItem()->getPt()) //insert first
 		{
 			newNode->setNext(this->frontPtr);
 			this->frontPtr = newNode;
@@ -31,11 +31,15 @@ public:
 		{
 			temp = temp->getNext();
 		}
-		newNode->setNext(temp->getNext);
+		newNode->setNext(temp->getNext());
 		temp->setNext(newNode);
 		if (!newNode->getNext()) // update backptr if inserted at the last
 			this->backPtr = newNode;
 		
 	}
-	int calcTreatmentLatency();
+
+	int calcTreatmentLatency()
+	{
+		return 0;
+	}
 };

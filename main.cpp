@@ -14,7 +14,7 @@ void simulate()
 	scheduler.loadInputFile(fileName);
 	int count = scheduler.getAllPatientsCount();
 
-	/// Loop
+	/// Main Loop
 	while (scheduler.getFinishedPatientsCount() != count)
 	{
 		scheduler.movePatientFromAll(timeStep);

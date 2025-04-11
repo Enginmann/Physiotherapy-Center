@@ -8,28 +8,23 @@ void simulate()
 	Scheduler scheduler;
 
 	/// File loading
-	scheduler.loadInputFile();
+	cout << "Enter File Name (without .txt): ";
+	string fileName;
+	cin >> fileName;
+	scheduler.loadInputFile(fileName);
 	int count = scheduler.getAllPatientsCount();
 
 	/// Loop
 	while (scheduler.getFinishedPatientsCount() != count)
 	{
-		if(count!=0)
-			scheduler.movePatient(timeStep);
+		scheduler.movePatientFromAll(timeStep);
 
 		int x = rand() % 100;
 
-		scheduler.simulate(x);
-			
-			
-			
+		scheduler.simulate(x);			
 			
 		timeStep++;
 	}
-
-	/// Print
-
-	/// End
 }
 
 

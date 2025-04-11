@@ -50,8 +50,8 @@ class priQueue
 protected:
     priNode<T> * head;
     int count;
-public:
 
+public:
     void print()
     {
         priNode<T> * ptr = head;

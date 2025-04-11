@@ -59,8 +59,8 @@ template <typename T>
 class LinkedQueue
 {
 protected:
-	Node<T> * backPtr;
 	Node<T> * frontPtr;
+	Node<T> * backPtr;
 	int count;
 public:
 

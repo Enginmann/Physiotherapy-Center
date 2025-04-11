@@ -2,22 +2,17 @@
 #include <string>
 #include <fstream>
 
-using namespace std;
 
 Scheduler::Scheduler()
 {
 	srand(time(0));
 }
 
-void Scheduler::loadInputFile()
+void Scheduler::loadInputFile(string fileName)
 {
-	/// Get the name of the input file from the user later
-
-	ifstream inFile("test.txt");
+	ifstream inFile(fileName + ".txt");
 	if (!inFile)
 		return;
-
-	
 
 	/// devices,rooms and capacity
 	int eDevice, uDevice, xRoom;
@@ -42,7 +37,6 @@ void Scheduler::loadInputFile()
 		XResource* xR = new XResource(i, 'X', xCap);
 		xRooms.enqueue(xR);
 	}
-
 	
 	/// cancel and resc
 	inFile >> pCancel >> pResc;
@@ -84,7 +78,7 @@ int Scheduler::getFinishedPatientsCount()
 	return finishedPatients.getCount();
 }
 
-void Scheduler::movePatient(int timestep)
+void Scheduler::movePatientFromAll(int timestep)
 {
 	Patient* patient;
 	allPatients.peek(patient);

@@ -9,8 +9,11 @@
 #include "EarlyPriQueue.h"
 #include "EUWaitingQueue.h"
 #include "XWaitingQueue.h"
-#include "Patient.h"
 
+#include <string>
+
+
+using namespace std;
 
 class Scheduler
 {
@@ -36,17 +39,17 @@ private:
 public:
 	Scheduler();
 
-	void loadInputFile();
+	void loadInputFile(string fileName);
 
 	int getAllPatientsCount();
 
 	int getFinishedPatientsCount();
 
-	void movePatient(int timestep); /// takes the patient from allPatients list and moves them to early or late or random waiting
+	void movePatientFromAll(int timestep); /// takes the patient from allPatients list and moves them to early or late or random waiting
 
-	void moveToWaiting(int timestep); /// moves the patient to his correct waiting list
+	//void moveToWaiting(int timestep); /// moves the patient to his correct waiting list
 
-	void moveToTreatment(int timestep);
+	//void moveToTreatment(int timestep);
 
 	void simulate(int x);
 

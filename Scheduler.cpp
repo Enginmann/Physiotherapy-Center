@@ -134,23 +134,26 @@ void Scheduler::simulate(int x)
 			xWaiting.dequeue(patient);
 			xWaiting.dequeue(patient2);
 		}
-		inTreatmentPatients.enqueue(patient, -patient->getTreatmentDuration());
-		inTreatmentPatients.enqueue(patient2, -patient2->getTreatmentDuration());
+		if (patient)
+			inTreatmentPatients.enqueue(patient, -patient->getTreatmentDuration());
+		if (patient2)
+			inTreatmentPatients.enqueue(patient2, -patient2->getTreatmentDuration());
 	}
 	else if (x < 60)
 	{
 		inTreatmentPatients.dequeue(patient, temp);
-		finishedPatients.push(patient);
+		if (patient)
+			finishedPatients.push(patient);
 	}
 	else if (x < 70)
 	{
 		xWaiting.cancel(patient);
-		finishedPatients.push(patient);
+		if (patient)
+			finishedPatients.push(patient);
 	}
 	else if (x < 80)
 	{
 		earlyPatients.reschedule();
-		
 	}
 }
 

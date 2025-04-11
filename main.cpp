@@ -1,5 +1,5 @@
 #include "Scheduler.h"
-
+#include "UI.h"
 
 void simulate()
 {
@@ -22,7 +22,7 @@ void simulate()
 		int x = rand() % 100;
 
 		scheduler.simulate(x);			
-			
+		
 		timeStep++;
 	}
 }

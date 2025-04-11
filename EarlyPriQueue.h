@@ -8,7 +8,7 @@ class EarlyPriQueue : public priQueue<T>
 private:
 
 public:
-	bool reschedule(int maxPt)
+	bool reschedule(int & maxPt)
 	{
 		if (this->count == 0)
 			return false;
@@ -19,19 +19,35 @@ public:
 			return false;
 		
 		priNode<T>* ptr = this->head;
-		priNode<T>* ptr2 = ptr->getNext();
+		priNode<T>* ptr2 = nullptr;
 
-		if (this->head->getNext())
+		if (index == 0)
+		{
+			this->head = this->head->getNext();
+			ptr->setNext(nullptr);
+			int temp = 0;
+			int oldPt = ptr->getItem(temp)->getPt();
+			int newPt = -1;
+			if (oldPt == maxPt)
+				maxPt += 10;
+			while (oldPt >= newPt)
+				newPt = rand() % maxPt;
+			ptr->getItem(temp)->setPt(newPt);
+
+			this->enqueue(ptr->getItem(temp), -newPt);
+		}
+		else if (this->head->getNext())
 		{
 			for (int i = 0; i < index - 1; i++)
 				ptr = ptr->getNext();
 
+			ptr2 = ptr->getNext();
 			ptr->setNext(ptr2->getNext());
 			ptr2->setNext(nullptr);
 			int temp = 0;
 			int oldPt = ptr2->getItem(temp)->getPt();
 			int newPt = -1;
-			if (oldPt + 1 == maxPt)
+			if (oldPt == maxPt)
 				maxPt += 10;
 			while (oldPt >= newPt)
 				newPt = rand() % maxPt;
@@ -44,7 +60,7 @@ public:
 			int temp = 0;
 			int oldPt = this->head->getItem(temp)->getPt();
 			int newPt = -1;
-			if (oldPt + 1 == maxPt)
+			if (oldPt == maxPt)
 				maxPt += 10;
 			while (oldPt >= newPt)
 				newPt = rand() % maxPt;

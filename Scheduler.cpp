@@ -170,7 +170,7 @@ void Scheduler::simulate(int x)
 	}
 	else if (x < 80)
 	{
-		//earlyPatients.reschedule(maxPt);
+		earlyPatients.reschedule(maxPt);
 	}
 }
 

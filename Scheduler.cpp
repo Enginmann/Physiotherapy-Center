@@ -147,12 +147,14 @@ void Scheduler::simulate(int x)
 		inTreatmentPatients.dequeue(patient, temp);
 		if (patient)
 			finishedPatients.push(patient);
+		//cout << "finished" << endl;
 	}
 	else if (x < 70)
 	{
 		xWaiting.cancel(patient);
 		if (patient)
 			finishedPatients.push(patient);
+		//cout << "finished" << endl;
 	}
 	else if (x < 80)
 	{

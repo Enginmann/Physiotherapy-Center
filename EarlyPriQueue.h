@@ -40,9 +40,11 @@ public:
 		else /// head only
 		{
 			int temp = 0;
-			int oldVt = this->head->getItem(temp)->getPt();
+			int oldPt = this->head->getItem(temp)->getPt();
 			int newPt = -1;
-			while (oldVt >= newPt)
+			if (oldPt + 1 == maxPt)
+				maxPt++;
+			while (oldPt >= newPt)
 				newPt = rand() % maxPt;
 			this->head->getItem(temp)->setPt(newPt);
 		}

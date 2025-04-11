@@ -20,6 +20,7 @@ void simulate()
 		scheduler.movePatientFromAll(timeStep);
 
 		int x = rand() % 100;
+		cout << scheduler.getFinishedPatientsCount() << endl;
 
 		scheduler.simulate(x);			
 		
@@ -31,6 +32,6 @@ void simulate()
 int main()
 {
 	simulate();
-
+	cout << "end" << endl;
 	return 0;
 }

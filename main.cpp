@@ -6,7 +6,7 @@ void simulate()
 	/// Initializations
 	int timeStep = 0;
 	Scheduler scheduler;
-
+	//UI ui;
 	/// File loading
 	cout << "Enter File Name (without .txt): ";
 	string fileName;
@@ -17,8 +17,8 @@ void simulate()
 	/// Main Loop
 	while (scheduler.getFinishedPatientsCount() != count)
 	{
-		UI ui;
-		ui.print(timeStep, scheduler);
+		
+		//ui.print(timeStep, scheduler);
 		scheduler.movePatientFromAll(timeStep);
 
 		int x = rand() % 100;

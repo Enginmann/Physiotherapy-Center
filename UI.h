@@ -63,7 +63,8 @@ public:
         xRooms.print();
         cout << endl;
         
-		cout << "========= In-treatment List =========" << timestep << endl;
+		cout << "========= In-treatment List =========" << endl;
+        cout << inTreatmentPatients.getCount() << " ==> ";
         inTreatmentPatients.print();
         /*
 		cout << "========= Finished List =========" << timestep << endl;

@@ -112,7 +112,7 @@ void Patient::print(int count)
 		status == 5	 // finish
 		)
 		cout << id << ", ";
-	else							 // serve
+	else			// serve
 		cout << "P" << id << "_";
 }
 

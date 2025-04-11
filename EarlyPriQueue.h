@@ -29,9 +29,11 @@ public:
 			ptr->setNext(ptr2->getNext());
 			ptr2->setNext(nullptr);
 			int temp = 0;
-			int oldVt = ptr2->getItem(temp)->getPt();
+			int oldPt = ptr2->getItem(temp)->getPt();
 			int newPt = -1;
-			while (oldVt >= newPt)
+			if (oldPt + 1 == maxPt)
+				maxPt += 10;
+			while (oldPt >= newPt)
 				newPt = rand() % maxPt;
 			ptr2->getItem(temp)->setPt(newPt);
 		
@@ -43,7 +45,7 @@ public:
 			int oldPt = this->head->getItem(temp)->getPt();
 			int newPt = -1;
 			if (oldPt + 1 == maxPt)
-				maxPt++;
+				maxPt += 10;
 			while (oldPt >= newPt)
 				newPt = rand() % maxPt;
 			this->head->getItem(temp)->setPt(newPt);

@@ -104,16 +104,16 @@ ostream & operator<<(ostream & out, Patient * patient)
 {
 	// 0:idle, 1:early, 2:late, 3:wait, 4:serve, 5:finish
 	if (patient->getStatus() == 0) // idle
-		cout << "P" << patient->getId() << "_" << patient->getVt() << ", ";
+		out << "P" << patient->getId() << "_" << patient->getVt() << ", ";
 	else if (
 		patient->getStatus() == 1 || // early
 		patient->getStatus() == 2 || // late
 		patient->getStatus() == 3 || // wait
 		patient->getStatus() == 5	 // finish
 		)
-		cout << patient->getId() << ", ";
+		out << patient->getId() << ", ";
 	else							 // serve
-		cout << "P" << patient->getId() << "_";
+		out << "P" << patient->getId() << "_";
 
 	return out;
 }

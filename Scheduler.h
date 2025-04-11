@@ -9,6 +9,7 @@
 #include "EarlyPriQueue.h"
 #include "EUWaitingQueue.h"
 #include "XWaitingQueue.h"
+#include "UI.h"
 
 #include <string>
 
@@ -21,6 +22,8 @@ private:
 	int pCancel;
 	int pResc;
 	int maxPt;
+	int timeStep;
+	UI ui;
 
 	LinkedQueue<Patient*> allPatients;
 	EarlyPriQueue<Patient*> earlyPatients;
@@ -40,13 +43,17 @@ private:
 public:
 	Scheduler();
 
+	void incrementTimeStep();
+
+	int getTimeStep();
+
 	void loadInputFile(string fileName);
 
 	int getAllPatientsCount();
 
 	int getFinishedPatientsCount();
 
-	void movePatientFromAll(int timestep); /// takes the patient from allPatients list and moves them to early or late or random waiting
+	void movePatientFromAll(); /// takes the patient from allPatients list and moves them to early or late or random waiting
 
 	//void moveToWaiting(int timestep); /// moves the patient to his correct waiting list
 

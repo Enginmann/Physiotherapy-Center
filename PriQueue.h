@@ -54,10 +54,11 @@ protected:
 public:
     void print()
     {
+        int temp;
         priNode<T> * ptr = head;
         while (ptr)
         {
-            cout << ptr->getItem() << ", ";
+            cout << ptr->getItem(temp) << ", ";
             ptr = ptr->getNext();
         }
         cout << endl;

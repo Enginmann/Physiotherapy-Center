@@ -1,12 +1,12 @@
 #include "Scheduler.h"
-#include "UI.h"
+
 
 void simulate()
 {
 	/// Initializations
-	int timeStep = 0;
 	Scheduler scheduler;
-	//UI ui;
+
+
 	/// File loading
 	cout << "Enter File Name (without .txt): ";
 	string fileName;
@@ -15,18 +15,18 @@ void simulate()
 	int count = scheduler.getAllPatientsCount();
 
 	/// Main Loop
-	while (scheduler.getFinishedPatientsCount() != count)
+	//while (scheduler.getFinishedPatientsCount() != count)
 	{
+		scheduler.print();
 		
-		//ui.print(timeStep, scheduler);
-		scheduler.movePatientFromAll(timeStep);
+		scheduler.movePatientFromAll();
 
 		int x = rand() % 100;
 		cout << scheduler.getFinishedPatientsCount() << endl;
 
 		scheduler.simulate(x);			
 		
-		timeStep++;
+		scheduler.incrementTimeStep();
 	}
 }
 

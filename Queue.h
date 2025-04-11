@@ -76,13 +76,14 @@ public:
 		return count;
 	}
 
-	void print()
+	void print(int limit = -1)
 	{
 		Node<T> * ptr = frontPtr;
-		while (ptr)
+		while (ptr && limit)
 		{
 			cout << ptr->getItem() << ", ";
 			ptr = ptr->getNext();
+			limit--;
 		}
 		cout << endl;
 	}

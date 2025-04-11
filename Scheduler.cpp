@@ -6,7 +6,17 @@
 Scheduler::Scheduler()
 {
 	srand(time(0));
+	timeStep = 0;
+}
 
+void Scheduler::incrementTimeStep()
+{
+	timeStep++;
+}
+
+int Scheduler::getTimeStep()
+{
+	return timeStep;
 }
 
 void Scheduler::loadInputFile(string fileName)
@@ -81,18 +91,18 @@ int Scheduler::getFinishedPatientsCount()
 	return finishedPatients.getCount();
 }
 
-void Scheduler::movePatientFromAll(int timestep)
+void Scheduler::movePatientFromAll()
 {
 	Patient* patient;
 	allPatients.peek(patient);
-	if (timestep == patient->getVt())
+	if (timeStep == patient->getVt())
 	{
 		allPatients.dequeue(patient);
 
-		if (timestep < patient->getPt()) //early
+		if (timeStep < patient->getPt()) //early
 			earlyPatients.enqueue(patient, -patient->getPt());
-		else if (timestep > patient->getPt()) //late
-			latePatients.enqueue(patient, -(timestep + (timestep - patient->getPt()) / 2));
+		else if (timeStep > patient->getPt()) //late
+			latePatients.enqueue(patient, -(timeStep + (timeStep - patient->getPt()) / 2));
 		else
 			moveToRandomWaiting(patient);
 	}
@@ -164,9 +174,20 @@ void Scheduler::simulate(int x)
 
 void Scheduler::print()
 {
-	cout << "======== ALL List =======" << endl;
-	cout << allPatients.getCount() << " patients remaining: ";
-	//print 10 patients
+	ui.print(
+		timeStep,
+		allPatients,
+		earlyPatients,
+		latePatients,
+		inTreatmentPatients,
+		finishedPatients,
+		uWaiting,
+		eWaiting,
+		xWaiting,
+		uDevices,
+		eDevices,
+		xRooms
+	);
 }
 
 void Scheduler::moveToRandomWaiting(Patient * patient)

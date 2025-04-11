@@ -10,13 +10,20 @@ private:
 public:
 	bool reschedule()
 	{
-		//check the same null in xwaiting 
+		if (this->count == 0)
+			return false;
+
 		int index = rand() % this->count;
 		priNode<T>* ptr = this->head;
+
+		if (!this->head)
+			return 0;
+
 		for (int i = 0; i < index - 1; i++)
 		{
 			ptr = ptr->getNext();
 		}
+
 		priNode<T>* ptr2 = ptr->getNext();
 		ptr->setNext(ptr2->getNext());
 		ptr2->setNext(nullptr);

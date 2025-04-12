@@ -23,6 +23,7 @@ private:
 	int pResc;
 	int maxPt;
 	int timeStep;
+	bool over;
 	UI ui;
 
 	LinkedQueue<Patient*> allPatients;
@@ -54,6 +55,8 @@ public:
 	int getFinishedPatientsCount();
 
 	void movePatientFromAll(); /// takes the patient from allPatients list and moves them to early or late or random waiting
+
+	bool isOver();
 
 	//void moveToWaiting(int timestep); /// moves the patient to his correct waiting list
 

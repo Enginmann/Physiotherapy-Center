@@ -9,6 +9,6 @@ private:
 
 public:
 	XResource(int id, char type, int capacity);
-	void print(int count);
+	void print(int count = 0);
 	int getCapacity();
 };

@@ -38,6 +38,11 @@ Resource * Treatment::getResource()
 	return resource;
 }
 
+void Treatment::setResource(Resource* resource)
+{
+	this->resource = resource;
+}
+
 void Treatment::print(int count)
 {
 	return;

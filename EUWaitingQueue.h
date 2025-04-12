@@ -13,13 +13,14 @@ public:
 	}
 	void insertSorted(T patient, int val)
 	{
+		this->count++;
 		Node<T>* newNode = new Node<T>(patient);
 		if (!this->frontPtr) //empty
 		{
 			this->frontPtr = this->backPtr = newNode;
 			return;
 		}
-		if (val <= this->frontPtr->getItem()->getPt()) //insert first
+		if (val < this->frontPtr->getItem()->getPt()) //insert first
 		{
 			newNode->setNext(this->frontPtr);
 			this->frontPtr = newNode;
@@ -27,7 +28,7 @@ public:
 		}
 		// insert at exact position
 		Node<T>* temp = this->frontPtr;
-		while (temp->getNext() && temp->getNext()->getItem() < val)
+		while (temp->getNext() && temp->getNext()->getItem()->getPt() <= val)
 		{
 			temp = temp->getNext();
 		}

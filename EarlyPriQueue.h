@@ -51,9 +51,6 @@ public:
         // reinsert with newPt
         this->enqueue(patient, -newPt);  
 
-        // delete curr
-        curr->setNext(nullptr);
-        delete curr;
         return true;
     }
 };

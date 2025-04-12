@@ -7,6 +7,7 @@ Scheduler::Scheduler()
 {
 	srand(time(0));
 	timeStep = 0;
+	over = false;
 }
 
 void Scheduler::incrementTimeStep()
@@ -123,6 +124,13 @@ void Scheduler::movePatientFromAll()
 	}
 }
 
+bool Scheduler::isOver()
+{
+	return over;
+}
+
+
+
 void Scheduler::simulate(int x)
 {
 	/// check null
@@ -231,12 +239,16 @@ void Scheduler::print()
 		eDevices,
 		xRooms
 	);
+
+	char key = ui.getKey();
+	if (key == 27)
+		over = true;
 }
 
 void Scheduler::moveToRandomWaiting(Patient * patient)
 {
 	int n = rand() % 100;
-	if (patient->getStatus() == 2)
+	if (patient->getStatus() == 2) // late
 	{
 		if (n < 33)
 			eWaiting.insertSorted(patient, patient->getPt() + (patient->getVt() - patient->getPt()) / 2);
@@ -245,14 +257,14 @@ void Scheduler::moveToRandomWaiting(Patient * patient)
 		else
 			xWaiting.insertSorted(patient, patient->getPt() + (patient->getVt() - patient->getPt()) / 2);
 	}
-	else if (patient->getStatus() == 4)
+	else if (patient->getStatus() == 4) // serve
 	{
 		if (n < 33)
-			eWaiting.insertSorted(patient, patient->getPt());
+			eWaiting.insertSorted(patient, -patient->getPt());
 		else if (n < 66)
-			uWaiting.insertSorted(patient, patient->getPt());
+			uWaiting.insertSorted(patient, -patient->getPt());
 		else
-			xWaiting.insertSorted(patient, patient->getPt());
+			xWaiting.insertSorted(patient, -patient->getPt());
 	}
 	else
 	{

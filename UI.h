@@ -81,6 +81,15 @@ public:
         cout << endl;
 
         /////////////////////////////////////////
-        while (!_getch());
+        
+        //if (key == 27) // Escape key in ASCII
+
 	}
+
+    char getKey()
+    {
+        char key = 0;
+        while (!(key = _getch()));
+        return key;
+    }
 };

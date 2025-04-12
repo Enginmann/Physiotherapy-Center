@@ -15,7 +15,7 @@ void simulate()
 	int count = scheduler.getAllPatientsCount();
 
 	/// Main Loop
-	while (scheduler.getFinishedPatientsCount() != count)
+	while (!scheduler.isOver() && scheduler.getFinishedPatientsCount() != count)
 	{
 		scheduler.movePatientFromAll();
 
@@ -23,9 +23,9 @@ void simulate()
 
 		scheduler.simulate(x);			
 		
-		scheduler.incrementTimeStep();
-
 		scheduler.print();
+
+		scheduler.incrementTimeStep();
 	}
 }
 
@@ -34,9 +34,7 @@ int main()
 {
 	simulate();
 
-	cout << "end" << endl;
-	int x;
-	cin >> x;
+	cout << "========= End =========" << endl;
 	
 	return 0;
 }

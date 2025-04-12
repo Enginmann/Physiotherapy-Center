@@ -104,9 +104,14 @@ void Patient::print(int count)
 {
 	const char * resetColor = "\033[0m";
 	const char * greenColor = "\033[32m";
+	const char * yellowColor = "\033[33m";
 	
 	cout << resetColor;
-	cout << greenColor;
+	if (type == 'N')
+		cout << greenColor;
+	else
+		cout << yellowColor;
+
 	
 	// 0:idle, 1:early, 2:late, 3:wait, 4:serve, 5:finish
 

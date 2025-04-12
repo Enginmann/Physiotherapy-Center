@@ -29,6 +29,7 @@ public:
 		ptr->setNext(ptr2->getNext());
 		if(ptr2->getNext())
 			ptr2->setNext(nullptr);
+		this->count--;
 		patient = ptr2->getItem();
 		return 1;
 	} 

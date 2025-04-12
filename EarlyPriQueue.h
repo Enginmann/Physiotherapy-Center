@@ -18,7 +18,8 @@ public:
         priNode<T>* curr = this->head;
 
         // traverse to the selected node
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < index; i++) 
+        {
             prev = curr;
             curr = curr->getNext();
         }

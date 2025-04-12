@@ -79,11 +79,6 @@ public:
         cout << finishedPatients.getCount() << " Finished patients" << ": ";
         finishedPatients.print();
         cout << endl;
-
-        /////////////////////////////////////////
-        
-        //if (key == 27) // Escape key in ASCII
-
 	}
 
     char getKey()

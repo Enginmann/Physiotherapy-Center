@@ -144,7 +144,7 @@ void Scheduler::simulate(int x)
 		if (patient)
 		{
 			moveToRandomWaiting(patient);
-			patient->setStatus(3);
+			patient->setStatus(3); // wait
 		}
 	}
 	else if (x < 20)
@@ -153,7 +153,7 @@ void Scheduler::simulate(int x)
 		if (patient)
 		{
 			moveToRandomWaiting(patient);
-			patient->setStatus(3);
+			patient->setStatus(3); // wait
 		}
 	}
 	else if (x < 40)
@@ -179,13 +179,12 @@ void Scheduler::simulate(int x)
 		if (patient)
 		{
 			inTreatmentPatients.enqueue(patient, -patient->getTreatmentDuration());
-			patient->setStatus(4);
-			patient->getTreatment();
+			patient->setStatus(4); // serve
 		}
 		if (patient2)
 		{
 			inTreatmentPatients.enqueue(patient2, -patient2->getTreatmentDuration());
-			patient2->setStatus(4);
+			patient2->setStatus(4); // serve
 		}
 		
 		
@@ -196,7 +195,7 @@ void Scheduler::simulate(int x)
 		if (patient)
 		{
 			moveToRandomWaiting(patient);
-			patient->setStatus(3);
+			patient->setStatus(3); // wait
 		}
 	}
 	else if (x < 60)
@@ -205,7 +204,7 @@ void Scheduler::simulate(int x)
 		if (patient)
 		{
 			finishedPatients.push(patient);
-			patient->setStatus(5);
+			patient->setStatus(5); // finish
 		}
 	}
 	else if (x < 70)
@@ -214,7 +213,7 @@ void Scheduler::simulate(int x)
 		if (patient)
 		{
 			finishedPatients.push(patient);
-			patient->setStatus(5);
+			patient->setStatus(5); // finish
 		}
 	}
 	else if (x < 80)

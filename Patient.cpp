@@ -111,7 +111,7 @@ void Patient::print(int count)
 		status == 3 || // wait
 		status == 5	 // finish
 		)
-		cout << id;
+		cout << "P" << id;
 	else			// serve
 	{
 		Treatment * treatment = nullptr;

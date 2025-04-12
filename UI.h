@@ -37,8 +37,11 @@ public:
         cout << endl;
         
 		cout << "========= Waiting Lists =========" << endl;
+        cout << eWaiting.getCount() << " E-therapy patients: ";
         eWaiting.print();
+        cout << uWaiting.getCount() << " U-therapy patients: ";
         uWaiting.print();
+        cout << xWaiting.getCount() << " X-therapy patients: ";
         xWaiting.print();
         cout << endl;
 

@@ -23,5 +23,7 @@ public:
 
 	Resource * getResource();
 
+	void setResource(Resource* resource);
+
 	void print(int count);
 };

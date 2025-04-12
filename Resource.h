@@ -14,5 +14,5 @@ public:
 
 	char getType();
 
-	virtual void print(int count);
+	virtual void print(int count = 0);
 };

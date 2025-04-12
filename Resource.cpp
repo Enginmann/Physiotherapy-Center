@@ -22,10 +22,9 @@ char Resource::getType()
 	return type;
 }
 
- void  Resource::print(int count) 
+void Resource::print(int count) 
 {
-	cout << id;
-
+	cout << type << id;
 }
 
 //ostream & operator<<(ostream & out, Resource * resource)

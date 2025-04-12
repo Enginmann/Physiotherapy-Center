@@ -102,7 +102,14 @@ Treatment * Patient::getTreatment()
 
 void Patient::print(int count)
 {
+	const char * resetColor = "\033[0m";
+	const char * greenColor = "\033[32m";
+	
+	cout << resetColor;
+	cout << greenColor;
+	
 	// 0:idle, 1:early, 2:late, 3:wait, 4:serve, 5:finish
+
 	if (status == 0) // idle
 		cout << "P" << id << "_" << vt;
 	else if (
@@ -116,13 +123,19 @@ void Patient::print(int count)
 	{
 		Treatment * treatment = nullptr;
 		reqTreatments.peek(treatment);
-		if (!treatment)
+		if (!treatment || !treatment->getResource())
+		{
+			cout << resetColor;
 			return;
+		}
+
 		Resource * resource = treatment->getResource();
-		if (!resource)
-			return;
-		cout << "P" << id << "_" << resource->getType() << resource->getId();
+		
+		cout << "P" << id << "_";
+		resource->print();
 	}
+
+	cout << resetColor;
 }
 
 //ostream & operator<<(ostream & out, Patient * patient)

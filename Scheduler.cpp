@@ -260,11 +260,11 @@ void Scheduler::moveToRandomWaiting(Patient * patient)
 	else if (patient->getStatus() == 4) // serve
 	{
 		if (n < 33)
-			eWaiting.insertSorted(patient, -patient->getPt());
+			eWaiting.insertSorted(patient, patient->getPt());
 		else if (n < 66)
-			uWaiting.insertSorted(patient, -patient->getPt());
+			uWaiting.insertSorted(patient, patient->getPt());
 		else
-			xWaiting.insertSorted(patient, -patient->getPt());
+			xWaiting.insertSorted(patient, patient->getPt());
 	}
 	else
 	{

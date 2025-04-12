@@ -186,8 +186,6 @@ void Scheduler::simulate(int x)
 			inTreatmentPatients.enqueue(patient2, -patient2->getTreatmentDuration());
 			patient2->setStatus(4); // serve
 		}
-		
-		
 	}
 	else if (x < 50)
 	{

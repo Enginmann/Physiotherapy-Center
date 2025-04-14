@@ -87,8 +87,6 @@ void Scheduler::loadInputFile(string fileName)
 			inFile >> tType >> tDuration;
 			treatment = new Treatment(tType, tDuration);
 			patient->setReqTreatment(treatment); // enqueue treatment but does not have assigned resource
-			/*Resource* reqResource = new Resource(2, tType);
-			treatment->setResource(reqResource);*/
 		}
 		if (i == num - 1)
 			maxPt = patient->getVt();

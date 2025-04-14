@@ -15,7 +15,7 @@ public:
 		if (!this->count)
 			return false;
 
-		int index = rand() % this->count;
+		int index = this->count - 1; //rand() % this->count;
 		if (!index)
 		{
 			this->dequeue(patient);

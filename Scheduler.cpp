@@ -20,6 +20,21 @@ int Scheduler::getTimeStep()
 	return timeStep;
 }
 
+int Scheduler::getAllPatientsCount()
+{
+	return allPatients.getCount();
+}
+
+int Scheduler::getFinishedPatientsCount()
+{
+	return finishedPatients.getCount();
+}
+
+bool Scheduler::isOver()
+{
+	return over;
+}
+
 void Scheduler::loadInputFile(string fileName)
 {
 	ifstream inFile(fileName + ".txt");
@@ -83,17 +98,6 @@ void Scheduler::loadInputFile(string fileName)
 	inFile.close();
 }
 
-
-int Scheduler::getAllPatientsCount()
-{
-	return allPatients.getCount();
-}
-
-int Scheduler::getFinishedPatientsCount()
-{
-	return finishedPatients.getCount();
-}
-
 void Scheduler::movePatientFromAll()
 {
 	Patient* patient = nullptr;
@@ -122,124 +126,6 @@ void Scheduler::movePatientFromAll()
 		patient = nullptr;
 		allPatients.peek(patient);
 	}
-}
-
-bool Scheduler::isOver()
-{
-	return over;
-}
-
-
-
-void Scheduler::simulate(int x)
-{
-	/// check null
-	Patient* patient = nullptr;
-	int temp;
-	
-	if (x < 10)
-	{
-		int temp;
-		earlyPatients.dequeue(patient, temp);
-		if (patient)
-		{
-			patient->setStatus(3); // wait
-			moveToRandomWaiting(patient);
-		}
-	}
-	else if (x < 20)
-	{
-		latePatients.dequeue(patient, temp);
-		if (patient)
-		{
-			patient->setStatus(3); // wait
-			moveToRandomWaiting(patient);
-		}
-	}
-	else if (x < 40)
-	{
-		int n = rand() % 100;
-		Patient* patient2 = nullptr;
-
-		if (n < 33)
-		{
-			eWaiting.dequeue(patient);
-			eWaiting.dequeue(patient2);
-		}
-		else if (n < 66)
-		{
-			uWaiting.dequeue(patient);
-			uWaiting.dequeue(patient2);
-		}
-		else
-		{
-			xWaiting.dequeue(patient);
-			xWaiting.dequeue(patient2);
-		}
-		if (patient)
-		{
-			patient->setStatus(4); // serve
-			inTreatmentPatients.enqueue(patient, -patient->getTreatmentDuration());
-		}
-		if (patient2)
-		{
-			patient2->setStatus(4); // serve
-			inTreatmentPatients.enqueue(patient2, -patient2->getTreatmentDuration());
-		}
-	}
-	else if (x < 50)
-	{
-		inTreatmentPatients.dequeue(patient, temp);
-		if (patient)
-		{
-			patient->setStatus(3); // wait
-			moveToRandomWaiting(patient);
-		}
-	}
-	else if (x < 60)
-	{
-		inTreatmentPatients.dequeue(patient, temp);
-		if (patient)
-		{
-			patient->setStatus(5); // finish
-			finishedPatients.push(patient);
-		}
-	}
-	else if (x < 70)
-	{
-		xWaiting.cancel(patient);
-		if (patient)
-		{
-			patient->setStatus(5); // finish
-			finishedPatients.push(patient);
-		}
-	}
-	else if (x < 80)
-	{
-		earlyPatients.reschedule(maxPt);
-	}
-}
-
-void Scheduler::print()
-{
-	ui.print(
-		timeStep,
-		allPatients,
-		earlyPatients,
-		latePatients,
-		inTreatmentPatients,
-		finishedPatients,
-		uWaiting,
-		eWaiting,
-		xWaiting,
-		uDevices,
-		eDevices,
-		xRooms
-	);
-
-	char key = ui.getKey();
-	if (key == 27) // Escape key
-		over = true;
 }
 
 void Scheduler::moveToRandomWaiting(Patient * patient)
@@ -274,3 +160,119 @@ void Scheduler::moveToRandomWaiting(Patient * patient)
 	}
 }
 
+void Scheduler::simulate(int x)
+{
+	/// check null
+	Patient* patient = nullptr;
+	int temp;
+	
+	/// early ==> random wait
+	if (x < 10) 
+	{
+		earlyPatients.dequeue(patient, temp);
+		if (patient)
+		{
+			patient->setStatus(3); // wait
+			moveToRandomWaiting(patient);
+		}
+	}
+	/// late ==> random wait
+	else if (x < 20) 
+	{
+		latePatients.dequeue(patient, temp);
+		if (patient)
+		{
+			patient->setStatus(3); // wait
+			moveToRandomWaiting(patient);
+		}
+	}
+	/// 2 patients random wait ==> in-treatment
+	else if (x < 40)
+	{
+		int n = rand() % 100;
+		Patient* patient2 = nullptr;
+
+		if (n < 33)
+		{
+			eWaiting.dequeue(patient);
+			eWaiting.dequeue(patient2);
+		}
+		else if (n < 66)
+		{
+			uWaiting.dequeue(patient);
+			uWaiting.dequeue(patient2);
+		}
+		else
+		{
+			xWaiting.dequeue(patient);
+			xWaiting.dequeue(patient2);
+		}
+		if (patient)
+		{
+			patient->setStatus(4); // serve
+			inTreatmentPatients.enqueue(patient, -patient->getTreatmentDuration());
+		}
+		if (patient2)
+		{
+			patient2->setStatus(4); // serve
+			inTreatmentPatients.enqueue(patient2, -patient2->getTreatmentDuration());
+		}
+	}
+	/// in-treatment ==> random wait
+	else if (x < 50)
+	{
+		inTreatmentPatients.dequeue(patient, temp);
+		if (patient)
+		{
+			patient->setStatus(3); // wait
+			moveToRandomWaiting(patient);
+		}
+	}
+	/// in-treatment ==> finish
+	else if (x < 60)
+	{
+		inTreatmentPatients.dequeue(patient, temp);
+		if (patient)
+		{
+			patient->setStatus(5); // finish
+			finishedPatients.push(patient);
+		}
+	}
+	/// x-waiting ==> finish
+	else if (x < 70)
+	{
+		xWaiting.cancel(patient);
+		if (patient)
+		{
+			patient->setStatus(5); // finish
+			finishedPatients.push(patient);
+		}
+	}
+	/// reschedule
+	else if (x < 80)
+	{
+		earlyPatients.reschedule(maxPt);
+	}
+}
+
+void Scheduler::print()
+{
+	ui.print(
+		timeStep,
+		allPatients,
+		earlyPatients,
+		latePatients,
+		inTreatmentPatients,
+		finishedPatients,
+		uWaiting,
+		eWaiting,
+		xWaiting,
+		uDevices,
+		eDevices,
+		xRooms
+	);
+
+	char key = ui.getKey();
+	if (key == 27) // Escape key
+		over = true;
+}

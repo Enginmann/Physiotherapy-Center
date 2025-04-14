@@ -17,6 +17,8 @@ public:
 		int index = rand() % this->count;
 		if (!index) {
 			this->dequeue(patient, temp);
+			if (maxPt == patient->getPt())
+				maxPt += 2;
 			int npt = patient->getPt() + rand() % (maxPt - patient->getPt()) + 1;
 			patient->setPt(npt);
 			this->enqueue(patient, -npt);
@@ -33,7 +35,7 @@ public:
 		ptr2->setNext(nullptr);
 		patient = ptr2->getItem(temp);
 		if (patient->getPt() == maxPt)
-			maxPt *= 2;
+			maxPt += 2;
 		int npt = patient->getPt() + rand() % (maxPt - patient->getPt()) + 1;
 		patient->setPt(npt);
 		this->count--;

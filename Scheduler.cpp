@@ -166,7 +166,7 @@ void Scheduler::simulate(int x)
 			eWaiting.dequeue(patient);
 			eWaiting.dequeue(patient2);
 		}
-		if (n < 66)
+		else if (n < 66)
 		{
 			uWaiting.dequeue(patient);
 			uWaiting.dequeue(patient2);
@@ -238,7 +238,7 @@ void Scheduler::print()
 	);
 
 	char key = ui.getKey();
-	if (key == 27)
+	if (key == 27) // Escape key
 		over = true;
 }
 

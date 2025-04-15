@@ -12,28 +12,42 @@ private:
 public:
 	bool cancel(T & patient)
 	{
-		if (!this->count)
+		if (this->count == 0)
 			return false;
 
-		int index = this->count - 1; //rand() % this->count;
-		if (!index)
+		if (this->count == 1)
 		{
-			this->dequeue(patient);
+			patient = this->frontPtr->getItem();
+			delete this->frontPtr;
+
+			this->frontPtr = nullptr;
+			this->backPtr = nullptr;
+			
+			this->count--;
 			return true;
 		}
 
-		Node<T>* ptr = this->frontPtr;
+		Node<T> * ptr = this->frontPtr;
+		Node<T> * ptr2 = this->frontPtr;
+		//int index = rand() % this->count;
+		int index = this->count - 1;
+
 		for (int i = 0; i < index - 1; i++)
 			ptr = ptr->getNext();
 
-		Node<T>* ptr2 = ptr->getNext();
-		ptr->setNext(ptr2->getNext());
-		ptr2->setNext(nullptr);
-		this->count--;
-		patient = ptr2->getItem();
+		ptr2 = ptr->getNext();
 
-		/*if (this->count == 1)
-			this->backPtr = this->frontPtr;*/
+		/*if (!ptr2)
+			return false;*/
+
+		if (index == this->count - 1)
+		{
+			ptr->setNext(nullptr);
+			this->backPtr = ptr;
+			patient = ptr2->getItem();
+			this->count--;
+			return true;
+		}
 		return true;
 	} 
 };

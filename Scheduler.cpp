@@ -5,8 +5,8 @@
 
 Scheduler::Scheduler()
 {
-	//srand(time(0));
-	srand(0);
+	srand(time(0));
+	//srand(0);
 	timeStep = 0;
 	over = false;
 }
@@ -286,4 +286,9 @@ void Scheduler::print()
 void Scheduler::inputFileName()
 {
 	fileName = ui.inputFileName();
+}
+
+void Scheduler::reset()
+{
+	return;
 }

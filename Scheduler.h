@@ -69,6 +69,8 @@ public:
 
 	void inputFileName();
 
+	void reset();
+
 private:
 	void moveToRandomWaiting(Patient * patient);
 };

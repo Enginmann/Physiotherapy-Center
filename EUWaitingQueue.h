@@ -44,6 +44,7 @@ public:
 		if (this->count == 0)
 			return 0;
 		Node<T>* ptr = this->frontPtr;
+		latency = 0;
 		while (ptr)
 		{
 			latency += ptr->getItem()->getTt();

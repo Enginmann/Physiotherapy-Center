@@ -29,16 +29,12 @@ public:
 
 		Node<T> * ptr = this->frontPtr;
 		Node<T> * ptr2 = this->frontPtr;
-		//int index = rand() % this->count;
-		int index = this->count - 1;
+		int index = rand() % this->count;
 
 		for (int i = 0; i < index - 1; i++)
 			ptr = ptr->getNext();
 
 		ptr2 = ptr->getNext();
-
-		/*if (!ptr2)
-			return false;*/
 
 		if (index == this->count - 1)
 		{

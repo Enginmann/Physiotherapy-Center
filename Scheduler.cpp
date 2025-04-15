@@ -135,7 +135,7 @@ void Scheduler::moveToRandomWaiting(Patient * patient)
 	int n = rand() % 100;
 
 	/// late
-	/*if (patient->getStatus() == 2) 
+	if (patient->getStatus() == 2) 
 	{
 		if (n < 33)
 			eWaiting.insertSorted(patient, patient->getPt() + (patient->getVt() - patient->getPt()) / 2);
@@ -153,9 +153,9 @@ void Scheduler::moveToRandomWaiting(Patient * patient)
 			uWaiting.insertSorted(patient, patient->getPt());
 		else
 			xWaiting.insertSorted(patient, patient->getPt());
-	}*/
+	}
 	/// early
-	//else
+	else
 	{
 		if (n < 33)
 			eWaiting.enqueue(patient);

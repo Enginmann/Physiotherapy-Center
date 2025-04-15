@@ -128,7 +128,8 @@ void Patient::print(int count)
 	{
 		Treatment * treatment = nullptr;
 		reqTreatments.peek(treatment);
-		if (!treatment || !treatment->getResource())
+		//if (!treatment || !treatment->getResource())
+		if (!treatment)
 		{
 			cout << resetColor;
 			return;
@@ -137,7 +138,7 @@ void Patient::print(int count)
 		Resource * resource = treatment->getResource();
 		
 		cout << "P" << id << "_";
-		resource->print();
+		//resource->print();
 	}
 
 	cout << resetColor;

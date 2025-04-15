@@ -3,6 +3,8 @@
 #include "Scheduler.h"
 #include "Patient.h"
 #include <conio.h>
+#include <string>
+#include <fstream>
 
 
 using namespace std;
@@ -86,5 +88,13 @@ public:
         char key = 0;
         //while (!(key = _getch()));
         return key;
+    }
+
+    string inputFileName()
+    {
+        cout << "Enter File Name (without .txt): ";
+        string fileName;
+        cin >> fileName;
+        return fileName;
     }
 };

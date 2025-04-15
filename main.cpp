@@ -8,10 +8,8 @@ void simulate()
 
 
 	/// File loading
-	cout << "Enter File Name (without .txt): ";
-	string fileName;
-	cin >> fileName;
-	scheduler.loadInputFile(fileName);
+	scheduler.inputFileName();
+	scheduler.loadInputFile();
 	int count = scheduler.getAllPatientsCount();
 
 	/// Main Loop

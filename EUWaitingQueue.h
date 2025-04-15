@@ -41,6 +41,14 @@ public:
 
 	int calcTreatmentLatency()
 	{
-		return 0;
+		if (this->count == 0)
+			return 0;
+		Node<T>* ptr = this->frontPtr;
+		while (ptr)
+		{
+			latency += ptr->getItem()->getTt();
+			ptr = ptr->getNext();
+		}
+		return latency;
 	}
 };

@@ -24,6 +24,7 @@ private:
 	int maxPt;
 	int timeStep;
 	bool over;
+	string fileName;
 	UI ui;
 
 	LinkedQueue<Patient*> allPatients;
@@ -48,7 +49,7 @@ public:
 
 	int getTimeStep();
 
-	void loadInputFile(string fileName);
+	void loadInputFile();
 
 	int getAllPatientsCount();
 
@@ -65,6 +66,8 @@ public:
 	void simulate(int x);
 
 	void print();
+
+	void inputFileName();
 
 private:
 	void moveToRandomWaiting(Patient * patient);

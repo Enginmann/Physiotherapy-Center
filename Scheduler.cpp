@@ -35,7 +35,7 @@ bool Scheduler::isOver()
 	return over;
 }
 
-void Scheduler::loadInputFile(string fileName)
+void Scheduler::loadInputFile()
 {
 	ifstream inFile(fileName + ".txt");
 	if (!inFile)
@@ -273,4 +273,9 @@ void Scheduler::print()
 	char key = ui.getKey();
 	if (key == 27) // Escape key
 		over = true;
+}
+
+void Scheduler::inputFileName()
+{
+	fileName = ui.inputFileName();
 }

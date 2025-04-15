@@ -73,6 +73,14 @@ public:
 
 	int getCount()
 	{
+		/*int c = 0;
+		Node<T> * ptr = frontPtr;
+		while (ptr)
+		{
+			ptr = ptr->getNext();
+			c++;
+		}*/
+
 		return count;
 	}
 
@@ -97,8 +105,6 @@ public:
 
 	bool enqueue(const T & newEntry)
 	{
-		count++;
-
 		Node<T> * newNodePtr = new Node<T>(newEntry);
 		// Insert the new node
 		if (isEmpty())	//special case if this is the first node to insert
@@ -108,6 +114,7 @@ public:
 
 		backPtr = newNodePtr; // New node is the last node now
 		
+		count++;
 		return true;
 	}
 

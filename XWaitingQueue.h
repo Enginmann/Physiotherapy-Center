@@ -32,8 +32,8 @@ public:
 		this->count--;
 		patient = ptr2->getItem();
 
-		if (!this->frontPtr->getNext())
-			this->backPtr = this->frontPtr;
+		/*if (this->count == 1)
+			this->backPtr = this->frontPtr;*/
 		return true;
 	} 
 };

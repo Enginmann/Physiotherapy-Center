@@ -5,7 +5,8 @@
 
 Scheduler::Scheduler()
 {
-	srand(time(0));
+	//srand(time(0));
+	srand(0);
 	timeStep = 0;
 	over = false;
 }
@@ -128,8 +129,13 @@ void Scheduler::movePatientFromAll()
 
 void Scheduler::moveToRandomWaiting(Patient * patient)
 {
+	if (!patient)
+		return;
+
 	int n = rand() % 100;
-	if (patient->getStatus() == 2) // late
+
+	/// late
+	/*if (patient->getStatus() == 2) 
 	{
 		if (n < 33)
 			eWaiting.insertSorted(patient, patient->getPt() + (patient->getVt() - patient->getPt()) / 2);
@@ -138,7 +144,8 @@ void Scheduler::moveToRandomWaiting(Patient * patient)
 		else
 			xWaiting.insertSorted(patient, patient->getPt() + (patient->getVt() - patient->getPt()) / 2);
 	}
-	else if (patient->getStatus() == 4) // serve
+	/// serve
+	else if (patient->getStatus() == 4)
 	{
 		if (n < 33)
 			eWaiting.insertSorted(patient, patient->getPt());
@@ -146,8 +153,9 @@ void Scheduler::moveToRandomWaiting(Patient * patient)
 			uWaiting.insertSorted(patient, patient->getPt());
 		else
 			xWaiting.insertSorted(patient, patient->getPt());
-	}
-	else
+	}*/
+	/// early
+	//else
 	{
 		if (n < 33)
 			eWaiting.enqueue(patient);

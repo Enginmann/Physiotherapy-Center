@@ -8,18 +8,24 @@ class EUWaitingQueue : public LinkedQueue<T>
 private:
 	int latency;
 public:
-	EUWaitingQueue() {
+	EUWaitingQueue()
+	{
 		latency = 0;
 	}
 	void insertSorted(T patient, int val)
 	{
+		if (!patient)
+			return;
+
 		this->count++;
 		Node<T>* newNode = new Node<T>(patient);
 		if (!this->frontPtr) //empty
 		{
-			this->frontPtr = this->backPtr = newNode;
+			this->frontPtr = newNode;
+			this->backPtr = newNode;
 			return;
 		}
+
 		if (val < this->frontPtr->getItem()->getPt()) //insert first
 		{
 			newNode->setNext(this->frontPtr);
@@ -34,9 +40,8 @@ public:
 		}
 		newNode->setNext(temp->getNext());
 		temp->setNext(newNode);
-		if (!newNode->getNext()) // update backptr if inserted at the last
+		if (!newNode->getNext()) // update backptr if inserted in the end
 			this->backPtr = newNode;
-		
 	}
 
 	int calcTreatmentLatency()

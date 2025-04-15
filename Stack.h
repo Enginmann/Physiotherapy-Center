@@ -32,10 +32,10 @@ public:
 
 	void print()
 	{
-		for (int i = 0; i < count; i++)
+		for (int i = top; i >= 0; i--)
 		{
 			items[i]->print(count);
-			if (i != count - 1)
+			if (i != 0)
 				cout << ", ";
 		}
 		cout << endl;

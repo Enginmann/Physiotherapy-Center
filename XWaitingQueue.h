@@ -11,7 +11,7 @@ private:
 
 public:
 	bool cancel(T & patient)
-	{// done :emad
+	{
 		if (!this->count)
 			return false;
 
@@ -31,6 +31,9 @@ public:
 		ptr2->setNext(nullptr);
 		this->count--;
 		patient = ptr2->getItem();
+
+		if (!this->frontPtr->getNext())
+			this->backPtr = this->frontPtr;
 		return true;
 	} 
 };

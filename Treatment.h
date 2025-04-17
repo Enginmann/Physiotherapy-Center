@@ -17,9 +17,9 @@ public:
 
 	int getSt();
 
-	bool canAssign();
+	virtual bool canAssign(); /// phase 2
 
-	void addToWait();
+	virtual void addToWait(); /// phase 2
 
 	Resource * getResource();
 

@@ -65,7 +65,7 @@ public:
 
 	void simulate(int x);
 
-	void print();
+	void print(int x);
 
 	void inputFileName();
 

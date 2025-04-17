@@ -106,20 +106,23 @@ void Scheduler::movePatientFromAll()
 	{
 		allPatients.dequeue(patient);
 
-		if (timeStep < patient->getPt()) //early
+		/// early
+		if (timeStep < patient->getPt())
 		{
-			earlyPatients.enqueue(patient, -patient->getPt());
 			patient->setStatus(1);
+			earlyPatients.enqueue(patient, -patient->getPt());
 		}
-		else if (timeStep > patient->getPt()) //late
+		/// late
+		else if (timeStep > patient->getPt())
 		{
-			latePatients.enqueue(patient, -(timeStep + (timeStep - patient->getPt()) / 2));
 			patient->setStatus(2);
+			latePatients.enqueue(patient, -(timeStep + (timeStep - patient->getPt()) / 2));
 		}
+		/// serve
 		else
 		{
-			moveToRandomWaiting(patient);
 			patient->setStatus(3);
+			moveToRandomWaiting(patient);
 		}
 
 		patient = nullptr;
@@ -261,7 +264,7 @@ void Scheduler::simulate(int x)
 	}
 }
 
-void Scheduler::print()
+void Scheduler::print(int x)
 {
 	ui.print(
 		timeStep,
@@ -275,7 +278,8 @@ void Scheduler::print()
 		xWaiting,
 		uDevices,
 		eDevices,
-		xRooms
+		xRooms,
+		x /// for demo purposes
 	);
 
 	char key = ui.getKey();

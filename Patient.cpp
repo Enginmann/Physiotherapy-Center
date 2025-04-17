@@ -93,7 +93,7 @@ bool Patient::isResc()
 	return rescState;
 }
 
-Treatment * Patient::getTreatment()
+Treatment * Patient::removeTreatment()
 {
 	Treatment * treatment = nullptr;
 	reqTreatments.dequeue(treatment);
@@ -142,6 +142,13 @@ void Patient::print(int count)
 	}
 
 	cout << resetColor;
+}
+
+Treatment * Patient::getTreatment()
+{
+	Treatment * treatment = nullptr;
+	reqTreatments.peek(treatment);
+	return treatment;
 }
 
 //ostream & operator<<(ostream & out, Patient * patient)

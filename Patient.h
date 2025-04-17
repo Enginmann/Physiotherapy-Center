@@ -40,5 +40,6 @@ public:
 	int getTreatmentDuration();
 	void print(int count);
 
+	Treatment * removeTreatment();
 	Treatment * getTreatment();
 };

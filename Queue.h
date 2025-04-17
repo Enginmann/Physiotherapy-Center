@@ -73,13 +73,7 @@ public:
 
 	int getCount()
 	{
-		/*int c = 0;
-		Node<T> * ptr = frontPtr;
-		while (ptr)
-		{
-			ptr = ptr->getNext();
-			c++;
-		}*/
+		
 
 		return count;
 	}

@@ -41,4 +41,5 @@ public:
 	void print(int count);
 
 	Treatment * getTreatment();
+	bool canCancel();
 };

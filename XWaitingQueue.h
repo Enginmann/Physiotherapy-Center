@@ -71,7 +71,24 @@ public:
 
 		Node<T>* ptr = this->frontPtr;
 		Node<T>* ptr2 = this->frontPtr;
-		int index = rand() % this->count;
+
+		Node<T>* tempPtr = this->frontPtr;
+		int * tempContainer = new int[this->count];
+		int tempIndex = 0; /// to track the index of the patients that can cancel inside the queue
+		int tempCount = 0; /// to track the index of the indecies stored in the temp container
+
+		while (tempPtr)
+		{
+			if (tempPtr->getItem()->canCancel())		// Example
+			{											// [p0, p1, p2, p3], where p0 and p2 only can cancel
+				tempContainer[tempCount] = tempIndex;	// therefore tempCount = 2, tempContainer = [0, 2] (the indecies of p0 and p2 respectively)
+				tempCount++;
+			}
+			tempPtr = tempPtr->getNext();
+			tempIndex++;
+		}
+
+		int index = tempContainer[rand() % tempCount];
 
 		for (int i = 0; i < index - 1; i++)
 			ptr = ptr->getNext();

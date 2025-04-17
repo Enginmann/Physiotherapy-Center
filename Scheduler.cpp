@@ -178,8 +178,8 @@ void Scheduler::simulate(int x)
 		earlyPatients.dequeue(patient, temp);
 		if (patient)
 		{
-			patient->setStatus(3); // wait
 			moveToRandomWaiting(patient);
+			patient->setStatus(3); // wait
 		}
 	}
 	/// late ==> random wait
@@ -188,8 +188,8 @@ void Scheduler::simulate(int x)
 		latePatients.dequeue(patient, temp);
 		if (patient)
 		{
-			patient->setStatus(3); // wait
 			moveToRandomWaiting(patient);
+			patient->setStatus(3); // wait
 		}
 	}
 	/// 2 patients random wait ==> in-treatment
@@ -230,8 +230,8 @@ void Scheduler::simulate(int x)
 		inTreatmentPatients.dequeue(patient, temp);
 		if (patient)
 		{
-			patient->setStatus(3); // wait
 			moveToRandomWaiting(patient);
+			patient->setStatus(3); // wait
 		}
 	}
 	/// in-treatment ==> finish

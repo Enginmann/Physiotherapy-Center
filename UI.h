@@ -81,6 +81,9 @@ public:
         cout << finishedPatients.getCount() << " Finished patients" << ": ";
         finishedPatients.print();
         cout << endl;
+
+        cout << endl;
+        cout << "Press any key to Continue - Press Escape to Exit" << endl;
 	}
 
     char getKey()

@@ -37,14 +37,22 @@ public:
 
 		ptr2 = ptr->getNext();
 
+		
 		if (index == this->count - 1)
 		{
 			ptr->setNext(nullptr);
 			this->backPtr = ptr;
 			patient = ptr2->getItem();
+			delete ptr2;
 			this->count--;
 			return true;
 		}
+
+		ptr->setNext(ptr2->getNext());
+		patient = ptr2->getItem();
+		ptr2->setNext(nullptr);
+		delete ptr2;
+		this->count--;
 		return true;
 	} 
 

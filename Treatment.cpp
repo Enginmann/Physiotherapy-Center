@@ -7,6 +7,11 @@ Treatment::Treatment(char type, int duration)
 	resource = nullptr;
 }
 
+char Treatment::getType()
+{
+	return type;
+}
+
 int Treatment::getDuration()
 {
 	return duration;

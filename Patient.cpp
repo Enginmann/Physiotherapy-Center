@@ -100,6 +100,13 @@ Treatment * Patient::removeTreatment()
 	return treatment;
 }
 
+bool Patient::canCancel(){// for phase 2
+	Treatment* temp=nullptr;
+	reqTreatments.peek(temp);
+	if (!temp)return 0;
+	return (reqTreatments.getCount() == 1) && (temp->getType() == 'X');
+}
+
 void Patient::print(int count)
 {
 	const char * resetColor = "\033[0m";

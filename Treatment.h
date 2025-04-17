@@ -10,7 +10,7 @@ private:
 
 public:
 	Treatment(char type, int duration);
-
+	char getType();
 	int getDuration();
 
 	void setSt(int st);

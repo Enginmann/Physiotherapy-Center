@@ -42,4 +42,5 @@ public:
 
 	Treatment * removeTreatment();
 	Treatment * getTreatment();
+	bool canCancel();
 };

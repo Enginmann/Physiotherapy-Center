@@ -33,7 +33,6 @@ int main()
 	simulate();
 
 	cout << "========= End =========" << endl;
-	int i;
-	cin >> i;
+
 	return 0;
 }

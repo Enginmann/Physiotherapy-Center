@@ -86,7 +86,7 @@ public:
     char getKey()
     {
         char key = 0;
-        //while (!(key = _getch()));
+        while (!(key = _getch()));
         return key;
     }
 

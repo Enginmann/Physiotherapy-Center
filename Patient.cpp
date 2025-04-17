@@ -135,7 +135,7 @@ void Patient::print(int count)
 	{
 		Treatment * treatment = nullptr;
 		reqTreatments.peek(treatment);
-		//if (!treatment || !treatment->getResource())
+		//if (!treatment || !treatment->getResource()) // no resource yet in phase 1.2
 		if (!treatment)
 		{
 			cout << resetColor;
@@ -144,7 +144,7 @@ void Patient::print(int count)
 
 		Resource * resource = treatment->getResource();
 		
-		cout << "P" << id << "_";
+		cout << "P" << id << "_" << treatment->getType() << "#"; // '#' no resource is assigned to the treatment yet (phase 1.2)
 		//resource->print();
 	}
 

@@ -5,8 +5,7 @@
 
 Scheduler::Scheduler()
 {
-	//srand(time(0));
-	srand(250);
+	srand(time(0));
 	timeStep = 0;
 	over = false;
 }

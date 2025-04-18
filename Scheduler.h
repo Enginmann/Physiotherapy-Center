@@ -27,20 +27,20 @@ private:
 	string fileName;
 	UI ui;
 
-	LinkedQueue<Patient*> allPatients;
-	EarlyPriQueue<Patient*> earlyPatients;
-	priQueue<Patient*> latePatients;
+	LinkedQueue<Patient*> allPatients;		/// patients are loaded sorted according to their vt from the input file
+	EarlyPriQueue<Patient*> earlyPatients;	/// patients are sorted according to their pt, reschedule
+	priQueue<Patient*> latePatients;		/// patients are sorted according to their pt + penality
 
-	priQueue<Patient*> inTreatmentPatients;
-	ArrayStack<Patient*> finishedPatients;
+	priQueue<Patient*> inTreatmentPatients;	/// patients are sorted according to their treatment duration
+	ArrayStack<Patient*> finishedPatients;	/// patients are pushed to the stack in order according to their finish time
 
-	EUWaitingQueue<Patient*> uWaiting;
-	EUWaitingQueue<Patient*> eWaiting;
-	XWaitingQueue<Patient*> xWaiting;
+	EUWaitingQueue<Patient*> uWaiting;		/// patients are sorted according to their pt, insertSorted
+	EUWaitingQueue<Patient*> eWaiting;		/// patients are sorted according to their pt, insertSorted
+	XWaitingQueue<Patient*> xWaiting;		/// patients are sorted according to their pt, insertSorted, cancel
 
-	LinkedQueue<Resource*> uDevices;
-	LinkedQueue<Resource*> eDevices;
-	LinkedQueue<Resource*> xRooms;
+	LinkedQueue<Resource*> uDevices;		/// devices are inserted whenever they get available
+	LinkedQueue<Resource*> eDevices;		/// devices are inserted whenever they get available
+	LinkedQueue<Resource*> xRooms;			/// devices are inserted whenever they get available
 
 public:
 	Scheduler();

@@ -40,7 +40,7 @@ private:
 
 	LinkedQueue<Resource*> uDevices;		/// devices are inserted whenever they get available
 	LinkedQueue<Resource*> eDevices;		/// devices are inserted whenever they get available
-	LinkedQueue<Resource*> xRooms;			/// devices are inserted whenever they get available
+	LinkedQueue<XResource*> xRooms;			/// devices are inserted whenever they get available
 
 public:
 	Scheduler();

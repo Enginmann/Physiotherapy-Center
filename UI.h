@@ -26,7 +26,7 @@ public:
         XWaitingQueue<Patient*>& xWaiting,
         LinkedQueue<Resource*>& uDevices,
         LinkedQueue<Resource*>& eDevices,
-        LinkedQueue<Resource*>& xRooms,
+        LinkedQueue<XResource*>& xRooms,
         int x) /// for demo purposes
 	{
         system("cls");

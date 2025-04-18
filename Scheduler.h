@@ -59,10 +59,6 @@ public:
 
 	bool isOver();
 
-	//void moveToWaiting(int timestep); /// moves the patient to his correct waiting list
-
-	//void moveToTreatment(int timestep);
-
 	void simulate(int x);
 
 	void print(int x);

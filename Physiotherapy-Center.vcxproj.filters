@@ -16,6 +16,9 @@
     <ClInclude Include="UI.h" />
     <ClInclude Include="XWaitingQueue.h" />
     <ClInclude Include="XResource.h" />
+    <ClInclude Include="ETreatment.h" />
+    <ClInclude Include="UTreatment.h" />
+    <ClInclude Include="XTreatment.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -24,5 +27,8 @@
     <ClCompile Include="Scheduler.cpp" />
     <ClCompile Include="Treatment.cpp" />
     <ClCompile Include="XResource.cpp" />
+    <ClCompile Include="ETreatment.cpp" />
+    <ClCompile Include="UTreatment.cpp" />
+    <ClCompile Include="XTreatment.cpp" />
   </ItemGroup>
 </Project>

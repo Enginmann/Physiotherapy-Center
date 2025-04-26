@@ -1,5 +1,7 @@
 #include "Treatment.h"
-
+#include "Resource.h"
+#include "Patient.h"
+#include "Scheduler.h"
 Treatment::Treatment(char type, int duration)
 {
 	this->type = type;
@@ -27,16 +29,6 @@ int Treatment::getSt()
 	return st;
 }
 
-bool Treatment::canAssign()
-{
-	/// logic later
-	return false;
-}
-
-void Treatment::addToWait()
-{
-	return;
-}
 
 Resource * Treatment::getResource()
 {

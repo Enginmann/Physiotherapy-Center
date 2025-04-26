@@ -74,7 +74,7 @@ void Scheduler::loadInputFile()
 
 	int pt, vt, tNum, tDuration;
 	char pType, tType;
-	Treatment * treatment;
+	Treatment* treatment = nullptr;
 	
 	for (int i = 0; i < num; i++)
 	{
@@ -85,8 +85,23 @@ void Scheduler::loadInputFile()
 		for (int j = 0; j < tNum; j++)
 		{
 			inFile >> tType >> tDuration;
-			treatment = new Treatment(tType, tDuration);
-			patient->setReqTreatment(treatment); // enqueue treatment but does not have assigned resource
+			if (tType == 'E')
+			{
+				
+				//treatment = new ETreatment(tType, tDuration);
+				patient->setReqTreatment(treatment); // enqueue treatment but does not have assigned resource
+			}
+			else if (tType == 'U')
+			{
+				//treatment = new UTreatment(tType, tDuration);
+				patient->setReqTreatment(treatment); // enqueue treatment but does not have assigned resource
+			}
+			else if (tType == 'X')
+			{
+				//treatment = new XTreatment(tType, tDuration);
+				patient->setReqTreatment(treatment); // enqueue treatment but does not have assigned resource
+			}
+			
 		}
 		if (i == num - 1)
 			maxPt = patient->getVt();
@@ -120,8 +135,14 @@ void Scheduler::movePatientFromAll()
 		/// serve
 		else
 		{
-			patient->setStatus(3);
-			moveToRandomWaiting(patient);
+			if (patient->getType() == 'R')
+			{
+				
+				handleRPatient(patient);
+				return;
+			}
+			Treatment* treatment = patient->removeTreatment();
+			treatment->addToWait(patient, *this);
 		}
 
 		patient = nullptr;
@@ -129,138 +150,10 @@ void Scheduler::movePatientFromAll()
 	}
 }
 
-void Scheduler::moveToRandomWaiting(Patient * patient)
-{
-	if (!patient)
-		return;
-
-	int n = rand() % 100;
-
-	/// late
-	if (patient->getStatus() == 2) 
-	{
-		if (n < 33)
-			eWaiting.insertSorted(patient, patient->getPt() + (patient->getVt() - patient->getPt()) / 2);
-		else if (n < 66)
-			uWaiting.insertSorted(patient, patient->getPt() + (patient->getVt() - patient->getPt()) / 2);
-		else
-			xWaiting.insertSorted(patient, patient->getPt() + (patient->getVt() - patient->getPt()) / 2);
-	}
-	/// serve
-	else if (patient->getStatus() == 4)
-	{
-		if (n < 33)
-			eWaiting.insertSorted(patient, patient->getPt());
-		else if (n < 66)
-			uWaiting.insertSorted(patient, patient->getPt());
-		else
-			xWaiting.insertSorted(patient, patient->getPt());
-	}
-	/// early
-	else
-	{
-		if (n < 33)
-			eWaiting.enqueue(patient);
-		else if (n < 66)
-			uWaiting.enqueue(patient);
-		else
-			xWaiting.enqueue(patient);
-	}
-}
 
 void Scheduler::simulate(int x)
 {
-	/// check null
-	Patient* patient = nullptr;
-	int temp;
 	
-	/// early ==> random wait
-	if (x < 10) 
-	{
-		earlyPatients.dequeue(patient, temp);
-		if (patient)
-		{
-			moveToRandomWaiting(patient);
-			patient->setStatus(3); // wait
-		}
-	}
-	/// late ==> random wait
-	else if (x < 20) 
-	{
-		latePatients.dequeue(patient, temp);
-		if (patient)
-		{
-			moveToRandomWaiting(patient);
-			patient->setStatus(3); // wait
-		}
-	}
-	/// 2 patients random wait ==> in-treatment
-	else if (x < 40)
-	{
-		int n = rand() % 100;
-		Patient* patient2 = nullptr;
-
-		if (n < 33)
-		{
-			eWaiting.dequeue(patient);
-			eWaiting.dequeue(patient2);
-		}
-		else if (n < 66)
-		{
-			uWaiting.dequeue(patient);
-			uWaiting.dequeue(patient2);
-		}
-		else
-		{
-			xWaiting.dequeue(patient);
-			xWaiting.dequeue(patient2);
-		}
-		if (patient)
-		{
-			patient->setStatus(4); // serve
-			inTreatmentPatients.enqueue(patient, -patient->getTreatmentDuration());
-		}
-		if (patient2)
-		{
-			patient2->setStatus(4); // serve
-			inTreatmentPatients.enqueue(patient2, -patient2->getTreatmentDuration());
-		}
-	}
-	/// in-treatment ==> random wait
-	else if (x < 50)
-	{
-		inTreatmentPatients.dequeue(patient, temp);
-		if (patient)
-		{
-			moveToRandomWaiting(patient);
-			patient->setStatus(3); // wait
-		}
-	}
-	/// in-treatment ==> finish
-	else if (x < 60)
-	{
-		inTreatmentPatients.dequeue(patient, temp);
-		if (patient)
-		{
-			patient->setStatus(5); // finish
-			finishedPatients.push(patient);
-		}
-	}
-	/// x-waiting ==> finish
-	else if (x < 70)
-	{
-		xWaiting.cancel(patient);
-		if (patient)
-		{
-			patient->setStatus(5); // finish
-			finishedPatients.push(patient);
-		}
-	}
-	/// reschedule
-	else if (x < 80)
-	{
-		earlyPatients.reschedule(maxPt);
-	}
 }
 
 void Scheduler::print(int x)
@@ -294,4 +187,24 @@ void Scheduler::inputFileName()
 void Scheduler::reset()
 {
 	return;
+}
+
+void Scheduler::handleRPatient(Patient* patient)
+{
+
+}
+
+void Scheduler::addEWaiting(Patient* patient)
+{
+	eWaiting.enqueue(patient);
+}
+
+void Scheduler::addUWaiting(Patient* patient)
+{
+	uWaiting.enqueue(patient);
+}
+
+void Scheduler::addXWaiting(Patient* patient)
+{
+	xWaiting.enqueue(patient);
 }

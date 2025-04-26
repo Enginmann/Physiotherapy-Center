@@ -43,4 +43,6 @@ public:
 	Treatment * removeTreatment();
 	Treatment * getTreatment();
 	bool canCancel();
+
+	void chooseMinLatency(int eWaiting, int uWaiting, int xWaiting);
 };

@@ -10,6 +10,10 @@
 #include "EUWaitingQueue.h"
 #include "XWaitingQueue.h"
 #include "UI.h"
+#include "Treatment.h"
+#include "ETreatment.h"
+#include "UTreatment.h"
+#include "XTreatment.h"
 
 #include <string>
 
@@ -66,7 +70,12 @@ public:
 	void inputFileName();
 
 	void reset();
+	
+	void handleRPatient(Patient* patient);
 
-private:
-	void moveToRandomWaiting(Patient * patient);
+	void addEWaiting(Patient* patient);
+
+	void addUWaiting(Patient* patient);
+
+	void addXWaiting(Patient* patient);
 };

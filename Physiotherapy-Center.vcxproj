@@ -131,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EarlyPriQueue.h" />
+    <ClInclude Include="ETreatment.h" />
     <ClInclude Include="EUWaitingQueue.h" />
     <ClInclude Include="Patient.h" />
     <ClInclude Include="PriQueue.h" />
@@ -140,16 +141,21 @@
     <ClInclude Include="Stack.h" />
     <ClInclude Include="Treatment.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="UTreatment.h" />
     <ClInclude Include="XResource.h" />
+    <ClInclude Include="XTreatment.h" />
     <ClInclude Include="XWaitingQueue.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ETreatment.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Patient.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="Scheduler.cpp" />
     <ClCompile Include="Treatment.cpp" />
+    <ClCompile Include="UTreatment.cpp" />
     <ClCompile Include="XResource.cpp" />
+    <ClCompile Include="XTreatment.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

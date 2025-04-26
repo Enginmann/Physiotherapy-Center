@@ -1,5 +1,7 @@
 #pragma once
-#include "Resource.h"
+class Resource;
+class Scheduler;
+class Patient;
 class Treatment
 {
 private:
@@ -17,9 +19,9 @@ public:
 
 	int getSt();
 
-	virtual bool canAssign(); /// phase 2
+	virtual bool canAssign() = 0; /// phase 2
 
-	virtual void addToWait(); /// phase 2
+	virtual void addToWait(Patient* patient, Scheduler& scheduler) = 0; /// phase 2
 
 	Resource * getResource();
 

@@ -107,6 +107,86 @@ bool Patient::canCancel(){// for phase 2
 	return (reqTreatments.getCount() == 1) && (temp->getType() == 'X');
 }
 
+void Patient::chooseMinLatency(int eWaiting, int uWaiting, int xWaiting)
+{
+	if (reqTreatments.getCount() == 1 || reqTreatments.getCount() == 0)
+		return;
+	if (reqTreatments.getCount() == 2)
+	{
+		Treatment* treatment = nullptr;
+		reqTreatments.peek(treatment);
+		char type1 = treatment->getType();
+		int latency1 = 0;
+		if (type1 == 'E')
+			latency1 = eWaiting;
+		else if (type1 == 'U')
+			latency1 = uWaiting;
+		else if (type1 == 'X')
+			latency1 = xWaiting;
+
+		LinkedQueue<Treatment*>Q;
+		reqTreatments.dequeue(treatment);
+		Q.enqueue(treatment);
+		reqTreatments.peek(treatment);
+		char type2 = treatment->getType();
+		int latency2 = 0;
+		if (type2 == 'E')
+			latency2 = eWaiting;
+		else if (type2 == 'U')
+			latency2 = uWaiting;
+		else if (type2 == 'X')
+			latency2 = xWaiting;
+
+		int min = latency1;
+		if (latency2 < min)
+			min = latency2;
+
+		if (min == latency2)
+		{
+			reqTreatments.dequeue(treatment);
+			Q.dequeue(treatment);
+			reqTreatments.enqueue(treatment);
+		}
+		else if (min == latency1)
+		{
+			Q.dequeue(treatment);
+		}
+
+		
+	}
+	else if (reqTreatments.getCount() == 3)
+	{
+		int min = eWaiting;
+		if (uWaiting < min)
+			min = uWaiting;
+		if (xWaiting < min)
+			min = xWaiting;
+		Treatment* treatment = nullptr;
+		LinkedQueue<Treatment*>Q;
+		while (reqTreatments.dequeue(treatment))
+		{
+			if (treatment->getType() == 'E' && min == eWaiting)
+			{
+				break;
+			}
+			else if (treatment->getType() == 'U' && min == uWaiting)
+			{
+				break;
+			}
+			else if (treatment->getType() == 'X' && min == xWaiting)
+			{
+				break;
+			}
+			Q.enqueue(treatment);
+		}
+		Treatment* treatment2 = nullptr;
+		while (Q.dequeue(treatment2))
+		{
+			reqTreatments.enqueue(treatment2);
+		}
+	}
+}
+
 void Patient::print(int count)
 {
 	const char * resetColor = "\033[0m";

@@ -137,12 +137,18 @@ void Scheduler::movePatientFromAll()
 		{
 			if (patient->getType() == 'R')
 			{
+				Treatment* treatment = patient->chooseMinLatency(eWaiting.calcTreatmentLatency(), uWaiting.calcTreatmentLatency(), xWaiting.calcTreatmentLatency());
+				treatment->addToWait(patient, *this);
+				patient->setStatus(3);
 				
-				handleRPatient(patient);
 				return;
 			}
-			Treatment* treatment = patient->removeTreatment();
-			treatment->addToWait(patient, *this);
+			else
+			{
+				Treatment* treatment = patient->removeTreatment();
+				treatment->addToWait(patient, *this);
+				patient->setStatus(3);;
+			}
 		}
 
 		patient = nullptr;

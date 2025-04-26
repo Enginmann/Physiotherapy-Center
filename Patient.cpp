@@ -107,13 +107,19 @@ bool Patient::canCancel(){// for phase 2
 	return (reqTreatments.getCount() == 1) && (temp->getType() == 'X');
 }
 
-void Patient::chooseMinLatency(int eWaiting, int uWaiting, int xWaiting)
+Treatment* Patient::chooseMinLatency(int eWaiting, int uWaiting, int xWaiting)
 {
-	if (reqTreatments.getCount() == 1 || reqTreatments.getCount() == 0)
-		return;
+	Treatment* treatment = nullptr;
+	if (reqTreatments.getCount() == 0)
+		return treatment;
+	if (reqTreatments.getCount() == 1)
+	{
+		reqTreatments.dequeue(treatment);
+		return treatment;
+	}
 	if (reqTreatments.getCount() == 2)
 	{
-		Treatment* treatment = nullptr;
+		
 		reqTreatments.peek(treatment);
 		char type1 = treatment->getType();
 		int latency1 = 0;
@@ -151,7 +157,7 @@ void Patient::chooseMinLatency(int eWaiting, int uWaiting, int xWaiting)
 		{
 			Q.dequeue(treatment);
 		}
-
+		return treatment;
 		
 	}
 	else if (reqTreatments.getCount() == 3)
@@ -161,7 +167,7 @@ void Patient::chooseMinLatency(int eWaiting, int uWaiting, int xWaiting)
 			min = uWaiting;
 		if (xWaiting < min)
 			min = xWaiting;
-		Treatment* treatment = nullptr;
+		
 		LinkedQueue<Treatment*>Q;
 		while (reqTreatments.dequeue(treatment))
 		{
@@ -179,11 +185,12 @@ void Patient::chooseMinLatency(int eWaiting, int uWaiting, int xWaiting)
 			}
 			Q.enqueue(treatment);
 		}
-		Treatment* treatment2 = nullptr;
-		while (Q.dequeue(treatment2))
+		
+		while (Q.dequeue(treatment))
 		{
-			reqTreatments.enqueue(treatment2);
+			reqTreatments.enqueue(treatment);
 		}
+		return treatment;
 	}
 }
 

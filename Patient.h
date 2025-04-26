@@ -44,5 +44,5 @@ public:
 	Treatment * getTreatment();
 	bool canCancel();
 
-	void chooseMinLatency(int eWaiting, int uWaiting, int xWaiting);
+	Treatment* chooseMinLatency(int eWaiting, int uWaiting, int xWaiting);
 };

@@ -114,7 +114,7 @@ Treatment* Patient::chooseMinLatency(int eWaiting, int uWaiting, int xWaiting)
 		return treatment;
 	if (reqTreatments.getCount() == 1)
 	{
-		reqTreatments.dequeue(treatment);
+		reqTreatments.peek(treatment);
 		return treatment;
 	}
 	if (reqTreatments.getCount() == 2)
@@ -149,17 +149,23 @@ Treatment* Patient::chooseMinLatency(int eWaiting, int uWaiting, int xWaiting)
 
 		if (min == latency2)
 		{
-			reqTreatments.dequeue(treatment);
 			Q.dequeue(treatment);
 			reqTreatments.enqueue(treatment);
+			reqTreatments.peek(treatment);
 		}
 		else if (min == latency1)
 		{
-			Q.dequeue(treatment);
+			reqTreatments.dequeue(treatment);
+			Q.enqueue(treatment);
+			while (Q.dequeue(treatment))
+				reqTreatments.enqueue(treatment);
+			reqTreatments.peek(treatment);
+			
 		}
 		return treatment;
 		
 	}
+
 	else if (reqTreatments.getCount() == 3)
 	{
 		int min = eWaiting;
@@ -169,7 +175,7 @@ Treatment* Patient::chooseMinLatency(int eWaiting, int uWaiting, int xWaiting)
 			min = xWaiting;
 		
 		LinkedQueue<Treatment*>Q;
-		while (reqTreatments.dequeue(treatment))
+		while (reqTreatments.peek(treatment))
 		{
 			if (treatment->getType() == 'E' && min == eWaiting)
 			{
@@ -183,6 +189,7 @@ Treatment* Patient::chooseMinLatency(int eWaiting, int uWaiting, int xWaiting)
 			{
 				break;
 			}
+			reqTreatments.dequeue(treatment);
 			Q.enqueue(treatment);
 		}
 		
@@ -190,6 +197,7 @@ Treatment* Patient::chooseMinLatency(int eWaiting, int uWaiting, int xWaiting)
 		{
 			reqTreatments.enqueue(treatment);
 		}
+		reqTreatments.peek(treatment);
 		return treatment;
 	}
 }

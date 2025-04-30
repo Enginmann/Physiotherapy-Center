@@ -145,9 +145,9 @@ void Scheduler::movePatientFromAll()
 			}
 			else
 			{
-				Treatment* treatment = patient->removeTreatment();
+				Treatment* treatment = patient->getTreatment();
 				treatment->addToWait(patient, *this);
-				patient->setStatus(3);;
+				patient->setStatus(3);
 			}
 		}
 

@@ -11,7 +11,7 @@ bool XTreatment::canAssign()
 	return false;
 }
 
-void XTreatment::addToWait(Patient* patient, Scheduler& scheduler)
+void XTreatment::addToWait(Patient* patient, Scheduler* scheduler)
 {
-	scheduler.addXWaiting(patient);
+	scheduler->addXWaiting(patient);
 }

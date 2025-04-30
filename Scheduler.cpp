@@ -138,7 +138,7 @@ void Scheduler::movePatientFromAll()
 			if (patient->getType() == 'R')
 			{
 				Treatment* treatment = patient->chooseMinLatency(eWaiting.calcTreatmentLatency(), uWaiting.calcTreatmentLatency(), xWaiting.calcTreatmentLatency());
-				treatment->addToWait(patient, *this);
+				treatment->addToWait(patient, this);
 				patient->setStatus(3);
 				
 				return;
@@ -146,7 +146,7 @@ void Scheduler::movePatientFromAll()
 			else
 			{
 				Treatment* treatment = patient->getTreatment();
-				treatment->addToWait(patient, *this);
+				treatment->addToWait(patient, this);
 				patient->setStatus(3);
 			}
 		}
@@ -202,15 +202,88 @@ void Scheduler::handleRPatient(Patient* patient)
 
 void Scheduler::addEWaiting(Patient* patient)
 {
+	if (patient->getStatus() == 2) {
+		int penalty = (patient->getVt() - patient->getPt()) / 2+ patient->getPt();
+		eWaiting.insertSorted(patient, penalty);
+	}
+	else
 	eWaiting.enqueue(patient);
 }
 
 void Scheduler::addUWaiting(Patient* patient)
 {
-	uWaiting.enqueue(patient);
+	if (patient->getStatus() == 2) {
+		int penalty = (patient->getVt() - patient->getPt()) / 2 + patient->getPt();
+		uWaiting.insertSorted(patient, penalty);
+	}
+	else
+		uWaiting.enqueue(patient);
 }
 
 void Scheduler::addXWaiting(Patient* patient)
 {
-	xWaiting.enqueue(patient);
+	if (patient->getStatus() == 2) {
+		int penalty = (patient->getVt() - patient->getPt()) / 2 + patient->getPt();
+		xWaiting.insertSorted(patient, penalty);
+	}
+	else
+		xWaiting.enqueue(patient);
+}
+
+void Scheduler::assignX(Patient* patient)
+{
+
+}
+
+void Scheduler::moveFromEarly()
+{
+	Patient* patient;
+	int pT=-99;
+	earlyPatients.peek(patient,pT);
+	if (!(-pT == timeStep))
+		return;
+	earlyPatients.dequeue(patient, pT);
+
+	if (patient->getType() == 'R')
+	{
+		Treatment* treatment = patient->chooseMinLatency(eWaiting.calcTreatmentLatency(), uWaiting.calcTreatmentLatency(), xWaiting.calcTreatmentLatency());
+		treatment->addToWait(patient, this);
+		patient->setStatus(3);
+
+		
+	}
+	else
+	{
+		 
+		patient->getTreatment()->addToWait(patient, this);
+		patient->setStatus(3);
+	}
+
+
+}
+
+void Scheduler::moveFromLate()
+{
+	Patient* patient;
+	int pT = -99;
+	latePatients.peek(patient, pT);
+	if (!(-pT == timeStep))
+		return;
+	latePatients.dequeue(patient, pT);
+
+	if (patient->getType() == 'R')
+	{
+		Treatment* treatment = patient->chooseMinLatency(eWaiting.calcTreatmentLatency(), uWaiting.calcTreatmentLatency(), xWaiting.calcTreatmentLatency());
+		treatment->addToWait(patient, this);
+		patient->setStatus(3);
+
+
+	}
+	else
+	{
+
+		patient->getTreatment()->addToWait(patient, this);
+		patient->setStatus(3);
+	}
+
 }

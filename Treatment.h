@@ -21,7 +21,7 @@ public:
 
 	virtual bool canAssign() = 0; /// phase 2
 
-	virtual void addToWait(Patient* patient, Scheduler& scheduler) = 0; /// phase 2
+	virtual void addToWait(Patient* patient, Scheduler* scheduler) = 0; /// phase 2
 
 	Resource * getResource();
 

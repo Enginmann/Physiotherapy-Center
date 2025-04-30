@@ -9,6 +9,6 @@ public:
 
 	virtual bool canAssign();
 
-	virtual void addToWait(Patient* patient , Scheduler& scheduler);
+	virtual void addToWait(Patient* patient , Scheduler* scheduler);
 };
 

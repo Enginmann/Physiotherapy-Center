@@ -5,6 +5,7 @@ using namespace std;
 XResource::XResource(int id, char type, int capacity) : Resource(id, type)
 {
 	this->capacity = capacity;
+	this->numOfPatient = 0;
 }
 
 void XResource::print(int count)
@@ -23,4 +24,18 @@ void XResource::print(int count)
 int XResource::getCapacity()
 {
 	return capacity;
+}
+
+int XResource::getNumOfPatient()
+{
+	return numOfPatient;
+}
+
+void XResource::decNumOfPatient()
+{
+	numOfPatient--;
+}
+
+void XResource::incNumOfPatient() {
+	numOfPatient++;
 }

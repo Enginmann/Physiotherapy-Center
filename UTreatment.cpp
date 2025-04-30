@@ -9,7 +9,7 @@ bool UTreatment::canAssign()
 	return false;
 }
 
-void UTreatment::addToWait(Patient* patient, Scheduler& scheduler)
+void UTreatment::addToWait(Patient* patient, Scheduler* scheduler)
 {
-	scheduler.addUWaiting(patient);
+	scheduler->addUWaiting(patient);
 }

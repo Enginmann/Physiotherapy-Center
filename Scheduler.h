@@ -78,4 +78,10 @@ public:
 	void addUWaiting(Patient* patient);
 
 	void addXWaiting(Patient* patient);
+
+	void assignX(Patient* patient);
+	void moveFromEarly();
+	void moveFromLate();
+
+	
 };

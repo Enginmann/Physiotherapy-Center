@@ -10,9 +10,9 @@ bool ETreatment::canAssign()
 	return false;
 }
 
-void ETreatment::addToWait(Patient* patient, Scheduler& scheduler)
+void ETreatment::addToWait(Patient* patient, Scheduler* scheduler)
 {
-	scheduler.addEWaiting(patient);
+	scheduler->addEWaiting(patient);
 }
 
 

@@ -242,19 +242,11 @@ void Scheduler::assignX()
 			xWaiting.dequeue(patient);
 			inTreatmentPatients.enqueue(patient, -patient->getTreatmentDuration());
 			xRooms.peek(xroom);
-			if (!xroom->incNumOfPatient())
+			xroom->incNumOfPatient();
+			patient->getTreatment()->setResource(xroom);
+			if (xroom->getCapacity() == xroom->getNumOfPatient())
 			{
 				xRooms.dequeue(xroom);
-				xRooms.peek(xroom);
-				if (xroom)
-				{
-					xroom->incNumOfPatient();
-					patient->getTreatment()->setResource(xroom);
-				}
-			}
-			else
-			{
-				patient->getTreatment()->setResource(xroom);
 			}
 		}
 	}
@@ -362,4 +354,10 @@ bool Scheduler::isUAvailable()
 bool Scheduler::isXAvailable()
 {
 	return !xRooms.isEmpty();
+}
+
+void Scheduler::moveFromInTreatmentToWaitOrFinish()
+{
+	
+
 }

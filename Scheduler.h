@@ -88,5 +88,5 @@ public:
 	bool isEAvailable();
 	bool isUAvailable();
 	bool isXAvailable();
-	
+	void moveFromInTreatmentToWaitOrFinish();
 };

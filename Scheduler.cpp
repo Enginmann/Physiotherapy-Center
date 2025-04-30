@@ -141,7 +141,7 @@ void Scheduler::movePatientFromAll()
 				treatment->addToWait(patient, this);
 				patient->setStatus(3);
 				
-				return;
+				
 			}
 			else
 			{

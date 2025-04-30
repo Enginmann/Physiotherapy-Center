@@ -230,9 +230,70 @@ void Scheduler::addXWaiting(Patient* patient)
 		xWaiting.enqueue(patient);
 }
 
-void Scheduler::assignX(Patient* patient)
+void Scheduler::assignX()
 {
+	Patient* patient = nullptr;
+	xWaiting.peek(patient);
+	if (patient)
+	{
+		if (patient->getTreatment()->canAssign(this))
+		{
+			XResource* xroom;
+			xWaiting.dequeue(patient);
+			inTreatmentPatients.enqueue(patient, -patient->getTreatmentDuration());
+			xRooms.peek(xroom);
+			if (!xroom->incNumOfPatient())
+			{
+				xRooms.dequeue(xroom);
+				xRooms.peek(xroom);
+				if (xroom)
+				{
+					xroom->incNumOfPatient();
+					patient->getTreatment()->setResource(xroom);
+				}
+			}
+			else
+			{
+				patient->getTreatment()->setResource(xroom);
+			}
+		}
+	}
+}
 
+void Scheduler::assignU()
+{
+	Patient* patient = nullptr;
+	uWaiting.peek(patient);
+	if (patient)
+	{
+		if (patient->getTreatment()->canAssign(this))
+		{
+			Resource* resource;
+			uWaiting.dequeue(patient);
+			inTreatmentPatients.enqueue(patient, -patient->getTreatmentDuration());
+			uDevices.dequeue(resource);
+			patient->getTreatment()->setResource(resource);
+
+		}
+	}
+}
+
+void Scheduler::assignE()
+{
+	Patient* patient = nullptr;
+	eWaiting.peek(patient);
+	if (patient)
+	{
+		if (patient->getTreatment()->canAssign(this))
+		{
+			Resource* resource;
+			eWaiting.dequeue(patient);
+			inTreatmentPatients.enqueue(patient,-patient->getTreatmentDuration());
+			eDevices.dequeue(resource);
+			patient->getTreatment()->setResource(resource);
+
+		}
+	}
 }
 
 void Scheduler::moveFromEarly()
@@ -286,4 +347,19 @@ void Scheduler::moveFromLate()
 		patient->setStatus(3);
 	}
 
+}
+
+bool Scheduler::isEAvailable()
+{
+	return !eDevices.isEmpty();
+}
+
+bool Scheduler::isUAvailable()
+{
+	return !uDevices.isEmpty();
+}
+
+bool Scheduler::isXAvailable()
+{
+	return !xRooms.isEmpty();
 }

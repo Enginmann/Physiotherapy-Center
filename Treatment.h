@@ -19,7 +19,7 @@ public:
 
 	int getSt();
 
-	virtual bool canAssign() = 0; /// phase 2
+	virtual bool canAssign(Scheduler* scheduler) = 0; /// phase 2
 
 	virtual void addToWait(Patient* patient, Scheduler* scheduler) = 0; /// phase 2
 

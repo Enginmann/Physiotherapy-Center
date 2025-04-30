@@ -4,9 +4,9 @@ UTreatment::UTreatment(char type, int duration) : Treatment(type, duration)
 {
 }
 
-bool UTreatment::canAssign()
+bool UTreatment::canAssign(Scheduler* scheduler)
 {
-	return false;
+	return scheduler->isUAvailable();
 }
 
 void UTreatment::addToWait(Patient* patient, Scheduler* scheduler)

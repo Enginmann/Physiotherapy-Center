@@ -7,7 +7,7 @@ class UTreatment : public Treatment
 public:
 	UTreatment(char type, int duaration);
 
-	virtual bool canAssign();
+	virtual bool canAssign(Scheduler* scheduler);
 
 	virtual void addToWait(Patient* patient , Scheduler* scheduler);
 };

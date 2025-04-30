@@ -5,9 +5,9 @@ ETreatment::ETreatment(char type, int duration) : Treatment(type, duration)
 {
 
 }
-bool ETreatment::canAssign()
+bool ETreatment::canAssign(Scheduler* scheduler)
 {
-	return false;
+	return scheduler->isEAvailable();
 }
 
 void ETreatment::addToWait(Patient* patient, Scheduler* scheduler)

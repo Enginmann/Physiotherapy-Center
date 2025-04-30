@@ -36,6 +36,9 @@ void XResource::decNumOfPatient()
 	numOfPatient--;
 }
 
-void XResource::incNumOfPatient() {
+bool XResource::incNumOfPatient() {
+	if (numOfPatient == capacity)
+		return false;
 	numOfPatient++;
+	return true;
 }

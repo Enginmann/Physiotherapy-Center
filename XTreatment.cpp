@@ -6,9 +6,9 @@ XTreatment::XTreatment(char type, int duration) : Treatment(type, duration)
 
 }
 
-bool XTreatment::canAssign()
+bool XTreatment::canAssign(Scheduler* scheduler)
 {
-	return false;
+	return scheduler->isXAvailable();
 }
 
 void XTreatment::addToWait(Patient* patient, Scheduler* scheduler)

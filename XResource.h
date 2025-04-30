@@ -13,7 +13,7 @@ public:
 	void print(int count = 0);
 	int getCapacity();
 	void decNumOfPatient();
-	void incNumOfPatient();
+	bool incNumOfPatient();
 	int getNumOfPatient();
 };
 

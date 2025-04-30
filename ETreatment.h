@@ -8,7 +8,7 @@ public:
 
 	ETreatment(char type, int duration);
 	
-	virtual bool canAssign();
+	virtual bool canAssign(Scheduler* scheduler);
 
 	virtual void addToWait(Patient* patient, Scheduler* scheduler);
 

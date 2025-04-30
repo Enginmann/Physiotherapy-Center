@@ -79,9 +79,14 @@ public:
 
 	void addXWaiting(Patient* patient);
 
-	void assignX(Patient* patient);
+	void assignX();
+	void assignU();
+	void assignE();
+
 	void moveFromEarly();
 	void moveFromLate();
-
+	bool isEAvailable();
+	bool isUAvailable();
+	bool isXAvailable();
 	
 };

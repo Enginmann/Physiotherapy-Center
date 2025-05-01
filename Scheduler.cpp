@@ -99,17 +99,17 @@ void Scheduler::loadInputFile()
 			{
 				
 				treatment = new ETreatment(tType, tDuration);
-				patient->setReqTreatment(treatment); // enqueue treatment but does not have assigned resource
+				patient->setReqTreatment(treatment);
 			}
 			else if (tType == 'U')
 			{
 				treatment = new UTreatment(tType, tDuration);
-				patient->setReqTreatment(treatment); // enqueue treatment but does not have assigned resource
+				patient->setReqTreatment(treatment);
 			}
 			else if (tType == 'X')
 			{
 				treatment = new XTreatment(tType, tDuration);
-				patient->setReqTreatment(treatment); // enqueue treatment but does not have assigned resource
+				patient->setReqTreatment(treatment);
 			}
 			
 		}
@@ -356,7 +356,7 @@ void Scheduler::moveFromLate()
 		return;
 	latePatients.peek(patient, pT);
 
-	while (patient && patient->getPt() == timeStep)
+	while (patient && -pT == timeStep)
 	{
 		latePatients.dequeue(patient, pT);
 
@@ -399,47 +399,50 @@ bool Scheduler::isXAvailable()
 
 void Scheduler::moveFromInTreatmentToWaitOrFinish()
 {
-	
 	Patient* patient = nullptr;
 	int due = -99;
 
 	inTreatmentPatients.peek(patient,due);
-	while (patient && patient->getTreatment()->getSt() - due == timeStep) {
+
+	while (patient && patient->getTreatment()->getSt() - due == timeStep)
+	{
 		inTreatmentPatients.dequeue(patient, due);
+
 		Treatment* treatment = patient->removeTreatment();
 		XResource* resource = dynamic_cast<XResource*>(treatment->getResource());
-		if (resource) {
+		if (resource)
+		{
 			resource->decNumOfPatient();
 			if (resource->getCapacity() - resource->getNumOfPatient()==1)
-			{
-				
 				xRooms.enqueue(resource);
-			}
-			
 		}
-		else if (treatment->getResource()->getType()=='E') {
+		else if (treatment->getResource()->getType()=='E')
+		{
 			eDevices.enqueue(treatment->getResource());
 		}
-		else {
+		else
+		{
 			uDevices.enqueue(treatment->getResource());
 		}
+		
+		treatment = nullptr;
 		treatment = patient->getTreatment();
-		if (!treatment) {
+		
+		if (!treatment)
+		{
 			finishedPatients.push(patient);
 			patient->setStatus(5);
-
 		}
-		else {
+		else
+		{
 			if (patient->getType() == 'R')
 			{
 				Treatment* treatment = patient->chooseMinLatency(eWaiting.calcTreatmentLatency(), uWaiting.calcTreatmentLatency(), xWaiting.calcTreatmentLatency());
 				treatment->addToWait(patient, this);
 				patient->setStatus(3);
-
 			}
 			else
 			{
-
 				patient->getTreatment()->addToWait(patient, this);
 				patient->setStatus(3);
 			}
@@ -447,8 +450,6 @@ void Scheduler::moveFromInTreatmentToWaitOrFinish()
 		patient = nullptr;
 		inTreatmentPatients.peek(patient, due);
 	}
-
-
 }
 
 void Scheduler::toOutFile(string fileName)

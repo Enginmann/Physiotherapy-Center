@@ -52,7 +52,7 @@ public:
 		latency = 0;
 		while (ptr)
 		{
-			latency += ptr->getItem()->getTt();
+			latency += ptr->getItem()->getTreatmentDuration();
 			ptr = ptr->getNext();
 		}
 		return latency;

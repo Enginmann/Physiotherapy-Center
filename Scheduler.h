@@ -71,8 +71,6 @@ public:
 
 	void reset();
 	
-	void handleRPatient(Patient* patient);
-
 	void addEWaiting(Patient* patient);
 
 	void addUWaiting(Patient* patient);

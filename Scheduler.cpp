@@ -206,6 +206,9 @@ void Scheduler::addEWaiting(Patient* patient)
 		int penalty = (patient->getVt() - patient->getPt()) / 2+ patient->getPt();
 		eWaiting.insertSorted(patient, penalty);
 	}
+	else if (patient->getStatus() == 4) {
+		eWaiting.insertSorted(patient, patient->getPt());
+	}
 	else
 	eWaiting.enqueue(patient);
 }
@@ -216,6 +219,9 @@ void Scheduler::addUWaiting(Patient* patient)
 		int penalty = (patient->getVt() - patient->getPt()) / 2 + patient->getPt();
 		uWaiting.insertSorted(patient, penalty);
 	}
+	else if (patient->getStatus() == 4) {
+		uWaiting.insertSorted(patient, patient->getPt());
+	}
 	else
 		uWaiting.enqueue(patient);
 }
@@ -225,6 +231,9 @@ void Scheduler::addXWaiting(Patient* patient)
 	if (patient->getStatus() == 2) {
 		int penalty = (patient->getVt() - patient->getPt()) / 2 + patient->getPt();
 		xWaiting.insertSorted(patient, penalty);
+	}
+	else if (patient->getStatus() == 4) {
+		xWaiting.insertSorted(patient, patient->getPt());
 	}
 	else
 		xWaiting.enqueue(patient);
@@ -245,6 +254,8 @@ void Scheduler::assignX()
 			xroom->incNumOfPatient();
 			patient->getTreatment()->setResource(xroom);
 			patient->getTreatment()->setSt(timeStep);
+			patient->setStatus(4);
+
 			if (xroom->getCapacity() == xroom->getNumOfPatient())
 			{
 				xRooms.dequeue(xroom);
@@ -267,6 +278,7 @@ void Scheduler::assignU()
 			uDevices.dequeue(resource);
 			patient->getTreatment()->setResource(resource);
 			patient->getTreatment()->setSt(timeStep);
+			patient->setStatus(4);
 
 		}
 	}
@@ -286,6 +298,7 @@ void Scheduler::assignE()
 			eDevices.dequeue(resource);
 			patient->getTreatment()->setResource(resource);
 			patient->getTreatment()->setSt(timeStep);
+			patient->setStatus(4);
 		}
 	}
 }
@@ -387,9 +400,23 @@ void Scheduler::moveFromInTreatmentToWaitOrFinish()
 		treatment = patient->getTreatment();
 		if (!treatment) {
 			finishedPatients.push(patient);
+			patient->setStatus(5);
+
 		}
 		else {
-			treatment->addToWait(patient, this);
+			if (patient->getType() == 'R')
+			{
+				Treatment* treatment = patient->chooseMinLatency(eWaiting.calcTreatmentLatency(), uWaiting.calcTreatmentLatency(), xWaiting.calcTreatmentLatency());
+				treatment->addToWait(patient, this);
+				patient->setStatus(3);
+
+			}
+			else
+			{
+
+				patient->getTreatment()->addToWait(patient, this);
+				patient->setStatus(3);
+			}
 		}
 	}
 

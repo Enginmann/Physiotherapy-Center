@@ -38,10 +38,3 @@ void Resource::print(int count)
 
 	cout << resetColor;
 }
-
-//ostream & operator<<(ostream & out, Resource * resource)
-//{
-//	/// Later
-//
-//	return out;
-//}

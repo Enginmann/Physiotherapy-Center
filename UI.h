@@ -26,37 +26,14 @@ public:
         XWaitingQueue<Patient*>& xWaiting,
         LinkedQueue<Resource*>& uDevices,
         LinkedQueue<Resource*>& eDevices,
-        LinkedQueue<XResource*>& xRooms,
-        int x) /// for demo purposes
+        LinkedQueue<XResource*>& xRooms)
 	{
         system("cls");
 
 		cout << "Current Timestep: " << timestep << endl;
         cout << endl;
 
-        ///////////////////////
-        cout << "Next x: " << x << endl;
 
-        if (x < 10)
-            cout << "early ==> random wait" << endl;
-        else if (x < 20)
-            cout << "late ==> random wait" << endl;
-        else if (x < 40)
-            cout << "2 patients random wait ==> in-treatment" << endl;
-        else if (x < 50)
-            cout << "in-treatment ==> random wait" << endl;
-        else if (x < 60)
-            cout << "in-treatment ==> finish" << endl;
-        else if (x < 70)
-            cout << "x-waiting ==> finish (cancel)" << endl;
-        else if (x < 80)
-            cout << "reschedule" << endl;
-        else
-            cout << "nothing special" << endl;
-
-        cout << endl;
-        //////////////////////
-        
 		cout << "========= All List =========" << endl;
         cout << allPatients.getCount() << " patients remaining: ";
         allPatients.print(10);

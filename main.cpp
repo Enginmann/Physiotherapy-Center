@@ -15,13 +15,7 @@ void simulate()
 	/// Main Loop
 	while (!scheduler.isOver() && scheduler.getFinishedPatientsCount() != count)
 	{
-		int x = rand() % 100;
-
-		scheduler.print(x); /// we pass the x to the function only for demo purposes
-
-		scheduler.movePatientFromAll();
-		
-		scheduler.simulate(x);			
+		scheduler.simulate();			
 
 		scheduler.incrementTimeStep();
 	}

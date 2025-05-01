@@ -7,6 +7,11 @@ Scheduler::Scheduler()
 {
 	srand(time(0));
 	timeStep = 0;
+	rCount = 0;
+	nCount = 0;
+	earlyCount = 0;
+	lateCount = 0;
+	totalPenality = 0;
 	over = false;
 }
 
@@ -80,6 +85,11 @@ void Scheduler::loadInputFile()
 	{
 		inFile >> pType >> pt >> vt >> tNum;
 
+		if (pType == 'N')
+			nCount++;
+		else
+			rCount++;
+
 		Patient * patient = new Patient(i, pt, vt, pType);
 		
 		for (int j = 0; j < tNum; j++)
@@ -125,12 +135,15 @@ void Scheduler::movePatientFromAll()
 		{
 			patient->setStatus(1);
 			earlyPatients.enqueue(patient, -patient->getPt());
+			earlyCount++;
 		}
 		/// late
 		else if (timeStep > patient->getPt())
 		{
 			patient->setStatus(2);
 			latePatients.enqueue(patient, -(timeStep + (timeStep - patient->getPt()) / 2));
+			lateCount++;
+			totalPenality += (timeStep - patient->getPt()) / 2;
 		}
 		/// serve
 		else
@@ -140,8 +153,6 @@ void Scheduler::movePatientFromAll()
 				Treatment* treatment = patient->chooseMinLatency(eWaiting.calcTreatmentLatency(), uWaiting.calcTreatmentLatency(), xWaiting.calcTreatmentLatency());
 				treatment->addToWait(patient, this);
 				patient->setStatus(3);
-				
-				
 			}
 			else
 			{
@@ -157,12 +168,19 @@ void Scheduler::movePatientFromAll()
 }
 
 
-void Scheduler::simulate(int x)
+void Scheduler::simulate()
 {
-	
+	movePatientFromAll();
+	moveFromEarly();
+	moveFromLate();
+	assignE();
+	assignU();
+	assignX();
+	moveFromInTreatmentToWaitOrFinish();
+	print();
 }
 
-void Scheduler::print(int x)
+void Scheduler::print()
 {
 	ui.print(
 		timeStep,
@@ -176,9 +194,7 @@ void Scheduler::print(int x)
 		xWaiting,
 		uDevices,
 		eDevices,
-		xRooms,
-		x /// for demo purposes
-	);
+		xRooms);
 
 	char key = ui.getKey();
 	if (key == 27) // Escape key
@@ -406,4 +422,66 @@ void Scheduler::moveFromInTreatmentToWaitOrFinish()
 	}
 
 
+}
+
+void Scheduler::toOutFile(string fileName)
+{
+	ofstream outFile(fileName + ".txt");
+	if (!outFile)
+		return;
+
+	float allCount = finishedPatients.getCount();
+
+	outFile << "PID\tPType\tPT\tVT\tFT\tWT\tTT\tCancel\tResc" << endl;
+
+	float nWait = 0;
+	float rWait = 0;
+	float nTreat = 0;
+	float rTreat = 0;
+	float cancelCount = 0;
+	float rescCount = 0;
+
+	for (int i = 0; i < finishedPatients.getCount(); i++)
+	{
+		Patient * patient;
+		finishedPatients.pop(patient);
+		if (patient->getType() == 'N')
+		{
+			nWait += patient->getWt();
+			nTreat += patient->getTt();
+		}
+		else
+		{
+			rTreat += patient->getTt();
+			rWait += patient->getWt();
+		}
+
+		if (patient->isCancel())
+			cancelCount++;
+
+		if (patient->isResc())
+			rescCount++;
+
+		patient->print(-1);
+	}
+
+	outFile << "Total number of timesteps = " << timeStep << endl;
+
+	outFile << "Total number of all, N, and R patients = " << allCount << ", " << nCount << ", " << rCount << endl;
+	
+	float allWait = nWait + rWait;
+	outFile << "Average total waiting time of all, N, and R patients = " << allWait / allCount << ", " << nWait / nCount << ", " << rWait / rCount << endl;
+
+	float allTreat = nTreat + rTreat;
+	outFile << "Average total treatment time of all, N, and R patients = " << allTreat / allCount << ", " << nTreat / nCount << ", " << rTreat / rCount << endl;
+	
+	outFile << "Percentage of patients of an accepted cancellation" << cancelCount / allCount * 100 << endl;
+	
+	outFile << "Percentage of patients of an accepted rescheduling" << rescCount / allCount * 100 << endl;
+	
+	outFile << "Percentage of early patients" << earlyCount / allCount * 100 << endl;
+
+	outFile << "Percentage of late patients" << lateCount / allCount * 100 << endl;
+
+	outFile << "Average late penality" << totalPenality / lateCount << endl;
 }

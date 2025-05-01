@@ -1,4 +1,5 @@
 #include "Patient.h"
+#include "Resource.h"
 #include <iostream>
 #include <fstream>
 
@@ -230,8 +231,7 @@ void Patient::print(int count)
 	{
 		Treatment * treatment = nullptr;
 		reqTreatments.peek(treatment);
-		//if (!treatment || !treatment->getResource()) // no resource yet in phase 1.2
-		if (!treatment)
+		if (!treatment || !treatment->getResource())
 		{
 			cout << resetColor;
 			return;
@@ -239,8 +239,7 @@ void Patient::print(int count)
 
 		Resource * resource = treatment->getResource();
 		
-		cout << "P" << id << "_" << treatment->getType() << "#"; // '#' no resource is assigned to the treatment yet (phase 1.2)
-		//resource->print();
+		cout << "P" << id << "_" << treatment->getType() << resource->getId();
 	}
 
 	cout << resetColor;
@@ -253,44 +252,25 @@ Treatment * Patient::getTreatment()
 	return treatment;
 }
 
-//ostream & operator<<(ostream & out, Patient * patient)
-//{
-//	// 0:idle, 1:early, 2:late, 3:wait, 4:serve, 5:finish
-//	if (patient->getStatus() == 0) // idle
-//		out << "P" << patient->getId() << "_" << patient->getVt() << ", ";
-//	else if (
-//		patient->getStatus() == 1 || // early
-//		patient->getStatus() == 2 || // late
-//		patient->getStatus() == 3 || // wait
-//		patient->getStatus() == 5	 // finish
-//		)
-//		out << patient->getId() << ", ";
-//	else							 // serve
-//		out << "P" << patient->getId() << "_";
-//
-//	return out;
-//}
-
-fstream & operator<<(fstream & out, Patient * patient)
+void Patient::toOutFile(fstream & out)
 {
-	out << patient->getId() << '\t';
-	out << patient->getType() << '\t';
-	out << patient->getPt() << '\t';
-	out << patient->getVt() << '\t';
-	out << patient->getFt() << '\t';
-	out << patient->getWt() << '\t';
-	out << patient->getTt() << '\t';
+	out << id << '\t';
+	out << type << '\t';
+	out << pt << '\t';
+	out << vt << '\t';
+	out << ft << '\t';
+	out << wt << '\t';
+	out << tt << '\t';
 	
-	if (patient->isCancel())
+	if (cancelState)
 		out << 'T' << '\t';
 	else
 		out << 'F' << '\t';
 
-	if (patient->isResc())
+	if (rescState)
 		out << 'T' << '\t';
 	else
 		out << 'F' << '\t';
+
 	cout << endl;
-
-	return out;
 }

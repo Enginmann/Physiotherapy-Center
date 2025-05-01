@@ -28,6 +28,12 @@ private:
 	int maxPt;
 	int timeStep;
 	bool over;
+	float rCount;
+	float nCount;
+	float earlyCount;
+	float lateCount;
+	float totalPenality;
+
 	string fileName;
 	UI ui;
 
@@ -63,9 +69,9 @@ public:
 
 	bool isOver();
 
-	void simulate(int x);
+	void simulate();
 
-	void print(int x);
+	void print();
 
 	void inputFileName();
 
@@ -87,4 +93,6 @@ public:
 	bool isUAvailable();
 	bool isXAvailable();
 	void moveFromInTreatmentToWaitOrFinish();
+
+	void toOutFile(string fileName);
 };

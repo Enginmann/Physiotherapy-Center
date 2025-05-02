@@ -478,8 +478,9 @@ void Scheduler::exportOutputFile()
 
 	for (int i = 0; i < finishedPatients.getCount(); i++)
 	{
-		Patient * patient;
+		Patient * patient = nullptr;
 		finishedPatients.pop(patient);
+
 		if (patient->getType() == 'N')
 		{
 			nWait += patient->getWt();

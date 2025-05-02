@@ -261,7 +261,6 @@ void Patient::toOutFile(ofstream & out)
 {
 	out << id << '\t';
 	out << type << '\t';
-	out << '\t';
 	out << pt << '\t';
 	out << vt << '\t';
 	out << ft << '\t';
@@ -273,14 +272,10 @@ void Patient::toOutFile(ofstream & out)
 	else
 		out << 'F' << '\t';
 
-	out << '\t';
-
 	if (rescState)
 		out << 'T' << '\t';
 	else
 		out << 'F' << '\t';
-
-	out << '\t';
 
 	out << endl;
 }

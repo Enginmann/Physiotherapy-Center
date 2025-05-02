@@ -33,6 +33,8 @@ int XResource::getNumOfPatient()
 
 void XResource::decNumOfPatient()
 {
+	if (numOfPatient == 0)
+		return;
 	numOfPatient--;
 }
 

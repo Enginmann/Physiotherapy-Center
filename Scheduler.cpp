@@ -251,14 +251,14 @@ void Scheduler::addXWaiting(Patient* patient)
 void Scheduler::assignX()
 {
 	Patient* patient = nullptr;
-	xWaiting.peek(patient);
-	if (xWaiting.cancel(patient))
+	if (xWaiting.cancel(patient, pCancel))
 	{
 		finishedPatients.push(patient);
 		patient->setStatus(5);
 	}
 	patient = nullptr;
 	xWaiting.peek(patient);
+	
 	if (patient)
 	{
 		if (patient->getTreatment()->canAssign(this))
@@ -325,7 +325,7 @@ void Scheduler::moveFromEarly()
 	int pT;
 	if (earlyPatients.isEmpty())
 		return;
-	earlyPatients.reschedule(maxPt);
+	earlyPatients.reschedule(maxPt, pResc);
 	earlyPatients.peek(patient,pT);
 	while (patient && patient->getPt() == timeStep)
 	{

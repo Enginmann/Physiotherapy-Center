@@ -10,8 +10,12 @@ class XWaitingQueue : public EUWaitingQueue<T>
 private:
 
 public:
-	bool cancel(T& patient)
+	bool cancel(T& patient, int pCancel)
 	{
+		int probCancel = rand() % 100;
+		if (probCancel >= pCancel)
+			return false;
+
 		if (this->count == 0)
 			return false;
 
@@ -48,7 +52,8 @@ public:
 			tempPtr = tempPtr->getNext();
 			tempIndex++;
 		}
-
+		if (tempCount == 0)
+			return false;
 		int index = tempContainer[rand() % tempCount];
 
 		for (int i = 0; i < index - 1; i++)
@@ -66,6 +71,11 @@ public:
 			this->count--;
 			return true;
 		}
+		patient = ptr2->getItem();
+		ptr->setNext(ptr2->getNext());
+		ptr2->setNext(nullptr);
+		delete ptr2;
+		this->count--;
 		return true;
 	}
 };

@@ -10,54 +10,7 @@ class XWaitingQueue : public EUWaitingQueue<T>
 private:
 
 public:
-	/// Phase 1.2 Cancel
-	bool cancel(T & patient)
-	{
-		if (this->count == 0)
-			return false;
-
-		if (this->count == 1)
-		{
-			patient = this->frontPtr->getItem();
-			delete this->frontPtr;
-
-			this->frontPtr = nullptr;
-			this->backPtr = nullptr;
-			
-			this->count--;
-			return true;
-		}
-
-		Node<T> * ptr = this->frontPtr;
-		Node<T> * ptr2 = this->frontPtr;
-		int index = rand() % this->count;
-
-		for (int i = 0; i < index - 1; i++)
-			ptr = ptr->getNext();
-
-		ptr2 = ptr->getNext();
-
-		
-		if (index == this->count - 1)
-		{
-			ptr->setNext(nullptr);
-			this->backPtr = ptr;
-			patient = ptr2->getItem();
-			delete ptr2;
-			this->count--;
-			return true;
-		}
-
-		ptr->setNext(ptr2->getNext());
-		patient = ptr2->getItem();
-		ptr2->setNext(nullptr);
-		delete ptr2;
-		this->count--;
-		return true;
-	} 
-
-	/// Phase 2 Cancel
-	bool cancel_ph2(T& patient)
+	bool cancel(T& patient)
 	{
 		if (this->count == 0)
 			return false;

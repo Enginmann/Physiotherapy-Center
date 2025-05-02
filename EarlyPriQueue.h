@@ -24,7 +24,7 @@ public:
 		if (!index) {
 			this->dequeue(patient, temp);
 			if (maxPt == patient->getPt())
-				maxPt += 10;
+				maxPt += 2;
 			int npt = patient->getPt() + rand() % (maxPt - patient->getPt()) + 1;
 			patient->setPt(npt);
 			this->enqueue(patient, -npt);

@@ -1,61 +1,70 @@
 PID	PType	PT	VT	FT	WT	TT	Cancel	Resc
-13	N	138	36	0	0	0	F	F	
-1	R	138	0	0	0	0	F	F	
-44	N	95	91	0	0	0	F	F	
-46	R	90	92	0	0	0	F	F	
-47	N	96	94	0	0	0	F	F	
-49	N	97	103	0	0	0	F	F	
-41	N	91	87	0	0	0	F	F	
-48	N	96	96	0	0	0	F	F	
-42	N	79	88	0	0	0	F	F	
-38	R	75	75	0	0	0	F	F	
-39	N	80	80	0	0	0	F	F	
-43	R	92	91	0	0	0	F	F	
-45	R	93	92	0	0	0	F	F	
-31	N	64	63	0	0	0	F	F	
-29	N	62	62	0	0	0	F	F	
-37	R	73	73	0	0	0	F	F	
-40	R	86	86	0	0	0	F	F	
-28	N	55	60	0	0	0	F	F	
-35	R	68	68	0	0	0	F	F	
-25	R	57	57	0	0	0	F	F	
-26	R	48	58	0	0	0	F	F	
-34	R	66	66	0	0	0	F	F	
-36	N	68	69	0	0	0	F	F	
-32	R	65	64	0	0	0	F	F	
-30	R	62	62	0	0	0	F	F	
-33	N	66	65	0	0	0	F	F	
-18	N	42	49	0	0	0	F	F	
-24	N	57	55	0	0	0	F	F	
-12	R	35	35	0	0	0	F	F	
-23	N	47	54	0	0	0	F	F	
-21	R	40	50	0	0	0	F	F	
-27	R	59	59	0	0	0	F	F	
-22	N	53	53	0	0	0	F	F	
-20	N	50	50	0	0	0	F	F	
-17	N	49	49	0	0	0	F	F	
-8	R	14	14	0	0	0	F	F	
-19	N	50	50	0	0	0	F	F	
-15	R	39	39	0	0	0	F	F	
-14	R	39	37	0	0	0	F	F	
-16	N	39	39	0	0	0	F	F	
-11	R	26	26	0	0	0	F	F	
-9	R	24	19	0	0	0	F	F	
-7	R	5	14	0	0	0	F	F	
-6	N	19	13	0	0	0	F	F	
-10	N	17	20	0	0	0	F	F	
-4	R	1	0	0	0	0	F	F	
-3	N	2	0	0	0	0	F	F	
-0	R	0	0	0	0	0	F	F	
-5	N	1	1	0	0	0	F	F	
-2	R	0	0	0	0	0	F	F	
+13	N	125	36	153	0	0	F	T	
+6	N	119	13	131	0	0	F	T	
+4	R	115	0	129	0	0	F	T	
+44	N	95	91	129	0	0	F	F	
+46	R	90	92	123	0	0	F	F	
+32	R	113	64	121	0	0	F	T	
+47	N	96	94	120	0	0	F	F	
+49	N	97	103	120	0	0	F	F	
+41	N	91	87	109	0	0	F	F	
+48	N	96	96	109	0	0	F	F	
+42	N	79	88	105	0	0	F	F	
+38	R	75	75	102	0	0	F	F	
+39	N	80	80	100	0	0	F	F	
+43	R	92	91	99	0	0	F	F	
+45	R	93	92	96	0	0	F	F	
+29	N	62	62	92	0	0	F	F	
+37	R	73	73	90	0	0	F	F	
+40	R	86	86	89	0	0	F	F	
+31	N	64	63	89	0	0	F	F	
+24	N	73	55	85	0	0	F	T	
+28	N	55	60	82	0	0	F	F	
+25	R	57	57	78	0	0	F	F	
+26	R	48	58	78	0	0	F	F	
+35	R	68	68	77	0	0	F	F	
+36	N	68	69	76	0	0	F	F	
+34	R	66	66	75	0	0	F	F	
+30	R	62	62	71	0	0	F	F	
+33	N	66	65	67	0	0	F	F	
+18	N	42	49	67	0	0	F	F	
+21	R	40	50	65	0	0	F	F	
+12	R	35	35	65	0	0	F	F	
+23	N	47	54	62	0	0	F	F	
+27	R	59	59	60	0	0	F	F	
+22	N	53	53	60	0	0	F	F	
+20	N	50	50	58	0	0	F	F	
+17	N	49	49	57	0	0	F	F	
+8	R	14	14	54	0	0	F	F	
+19	N	50	50	51	0	0	F	F	
+15	R	39	39	51	0	0	F	F	
+14	R	39	37	47	0	0	F	F	
+16	N	39	39	45	0	0	F	F	
+11	R	26	26	44	0	0	F	F	
+9	R	24	19	36	0	0	F	F	
+7	R	5	14	34	0	0	F	F	
+10	N	17	20	31	0	0	F	F	
+3	N	2	0	15	0	0	F	F	
+1	R	2	0	15	0	0	F	F	
+0	R	0	0	14	0	0	F	F	
+5	N	1	1	14	0	0	F	F	
+2	R	0	0	8	0	0	F	F	
 
-Total number of timesteps = 168
+
+Total number of timesteps = 154
+
 Total number of all, N, and R patients = 50, 25, 25
+
 Average total waiting time of all, N, and R patients = 0, 0, 0
+
 Average total treatment time of all, N, and R patients = 0, 0, 0
-Percentage of patients of an accepted cancellation = 0
-Percentage of patients of an accepted rescheduling = 0
-Percentage of early patients = 32
-Percentage of late patients = 22
-Average late penality = 2.81818
+
+Percentage of patients of an accepted cancellation = 0%
+
+Percentage of patients of an accepted rescheduling = 10%
+
+Percentage of early patients = 32%
+
+Percentage of late patients = 22%
+
+Average late penalty = 2.81818

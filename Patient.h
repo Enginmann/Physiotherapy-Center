@@ -36,6 +36,9 @@ public:
 	void setStatus(int status);
 	void setPt(int pt);
 	void setReqTreatment(Treatment * treatment);
+	void setFt(int ft);
+	void setIsCancel(bool cancel);
+	void setIsResc(bool resc);
 	
 	int getTreatmentDuration();
 	void print(int count);

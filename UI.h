@@ -84,7 +84,8 @@ public:
         cout << endl;
 
         cout << endl;
-        cout << "Press any key to Continue - Press Escape to Exit" << endl;
+        cout << "Press any key to Continue - Press Escape to Exit - Press F to Enter Auto Mode - Press Space to Enter Silent Mode" << endl;
+        cout << endl;
 	}
 
     char getKey()
@@ -108,5 +109,10 @@ public:
         string fileName;
         cin >> fileName;
         return fileName;
+    }
+
+    void clear()
+    {
+        system("cls");
     }
 };

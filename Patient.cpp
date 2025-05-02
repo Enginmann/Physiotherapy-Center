@@ -74,6 +74,21 @@ void Patient::setReqTreatment(Treatment * treatment)
 	reqTreatments.enqueue(treatment);
 }
 
+void Patient::setFt(int ft)
+{
+	this->ft = ft;
+}
+
+void Patient::setIsCancel(bool cancel)
+{
+	cancelState = cancel;
+}
+
+void Patient::setIsResc(bool resc)
+{
+	rescState = resc;
+}
+
 int Patient::getTreatmentDuration()
 {
 	/// check null

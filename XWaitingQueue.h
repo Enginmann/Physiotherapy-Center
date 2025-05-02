@@ -22,7 +22,7 @@ public:
 		if (this->count == 1)
 		{
 			if (!this->frontPtr->getItem()->canCancel())
-				return 0;
+				return false;
 			patient = this->frontPtr->getItem();
 
 			delete this->frontPtr;

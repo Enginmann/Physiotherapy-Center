@@ -33,6 +33,8 @@ private:
 	float earlyCount;
 	float lateCount;
 	float totalPenality;
+	bool silentMode;
+	bool autoMode;
 
 	string inputFileName;
 	string outputFileName;

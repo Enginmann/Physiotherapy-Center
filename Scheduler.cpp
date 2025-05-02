@@ -13,6 +13,8 @@ Scheduler::Scheduler()
 	lateCount = 0;
 	totalPenality = 0;
 	over = false;
+	silentMode = false;
+	autoMode = false;
 }
 
 void Scheduler::incrementTimeStep()
@@ -179,7 +181,11 @@ void Scheduler::simulate()
 	assignU();
 	assignX();
 	moveFromInTreatmentToWaitOrFinish();
-	print();
+	if (!silentMode)
+		print();
+	else
+		ui.clear();
+
 	timeStep++;
 }
 
@@ -199,9 +205,17 @@ void Scheduler::print()
 		eDevices,
 		xRooms);
 
+	if (autoMode)
+		return;
+	
 	char key = ui.getKey();
-	if (key == 27) // Escape key
+	
+	if (key == 27) /// Escape key
 		over = true;
+	else if (key == 32) /// Space key
+		silentMode = true;
+	else if (key == 102) /// F key
+		autoMode = true;
 }
 
 void Scheduler::reset()
@@ -253,8 +267,10 @@ void Scheduler::assignX()
 	Patient* patient = nullptr;
 	if (xWaiting.cancel(patient, pCancel))
 	{
-		finishedPatients.push(patient);
 		patient->setStatus(5);
+		patient->setFt(timeStep);
+		patient->setIsCancel(true);
+		finishedPatients.push(patient);
 	}
 	patient = nullptr;
 	xWaiting.peek(patient);
@@ -350,7 +366,6 @@ void Scheduler::moveFromEarly()
 		patient = nullptr;
 		earlyPatients.peek(patient, pT);
 	}
-
 }
 
 void Scheduler::moveFromLate()
@@ -437,6 +452,7 @@ void Scheduler::moveFromInTreatmentToWaitOrFinish()
 		{
 			finishedPatients.push(patient);
 			patient->setStatus(5);
+			patient->setFt(timeStep);
 		}
 		else
 		{
@@ -503,26 +519,35 @@ void Scheduler::exportOutputFile()
 	}
 
 	outFile << endl;
+	outFile << endl;
 
 	outFile << "Total number of timesteps = " << timeStep << endl;
+	outFile << endl;
 
 	outFile << "Total number of all, N, and R patients = " << allCount << ", " << nCount << ", " << rCount << endl;
+	outFile << endl;
 	
 	float allWait = nWait + rWait;
 	outFile << "Average total waiting time of all, N, and R patients = " << allWait / allCount << ", " << nWait / nCount << ", " << rWait / rCount << endl;
+	outFile << endl;
 
 	float allTreat = nTreat + rTreat;
 	outFile << "Average total treatment time of all, N, and R patients = " << allTreat / allCount << ", " << nTreat / nCount << ", " << rTreat / rCount << endl;
+	outFile << endl;
 	
-	outFile << "Percentage of patients of an accepted cancellation = " << cancelCount / allCount * 100 << endl;
+	outFile << "Percentage of patients of an accepted cancellation = " << cancelCount / allCount * 100 << " %" << endl;
+	outFile << endl;
 	
-	outFile << "Percentage of patients of an accepted rescheduling = " << rescCount / allCount * 100 << endl;
+	outFile << "Percentage of patients of an accepted rescheduling = " << rescCount / allCount * 100 << " %" << endl;
+	outFile << endl;
 	
-	outFile << "Percentage of early patients = " << earlyCount / allCount * 100 << endl;
+	outFile << "Percentage of early patients = " << earlyCount / allCount * 100 << " %" << endl;
+	outFile << endl;
 
-	outFile << "Percentage of late patients = " << lateCount / allCount * 100 << endl;
+	outFile << "Percentage of late patients = " << lateCount / allCount * 100 << " %" << endl;
+	outFile << endl;
 
-	outFile << "Average late penality = " << totalPenality / lateCount << endl;
+	outFile << "Average late penalty = " << totalPenality / lateCount << endl;
 
 	outFile.close();
 }

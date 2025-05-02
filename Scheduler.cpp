@@ -476,7 +476,8 @@ void Scheduler::exportOutputFile()
 	float cancelCount = 0;
 	float rescCount = 0;
 
-	for (int i = 0; i < finishedPatients.getCount(); i++)
+	int finishedCount = finishedPatients.getCount();
+	for (int i = 0; i < finishedCount; i++)
 	{
 		Patient * patient = nullptr;
 		finishedPatients.pop(patient);

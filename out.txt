@@ -1,1 +1,111 @@
 PID	PType	PT	VT	FT	WT	TT	Cancel	Resc
+3	N		117	0	0	0	0	F		F		
+i = 0
+6	N		117	13	0	0	0	F		F		
+i = 1
+44	N		95	91	0	0	0	F		F		
+i = 2
+9	R		113	19	0	0	0	F		F		
+i = 3
+46	R		90	92	0	0	0	F		F		
+i = 4
+47	N		96	94	0	0	0	F		F		
+i = 5
+49	N		97	103	0	0	0	F		F		
+i = 6
+41	N		91	87	0	0	0	F		F		
+i = 7
+48	N		96	96	0	0	0	F		F		
+i = 8
+42	N		79	88	0	0	0	F		F		
+i = 9
+38	R		75	75	0	0	0	F		F		
+i = 10
+39	N		80	80	0	0	0	F		F		
+i = 11
+43	R		92	91	0	0	0	F		F		
+i = 12
+45	R		93	92	0	0	0	F		F		
+i = 13
+31	N		64	63	0	0	0	F		F		
+i = 14
+29	N		62	62	0	0	0	F		F		
+i = 15
+37	R		73	73	0	0	0	F		F		
+i = 16
+40	R		86	86	0	0	0	F		F		
+i = 17
+28	N		55	60	0	0	0	F		F		
+i = 18
+35	R		68	68	0	0	0	F		F		
+i = 19
+25	R		57	57	0	0	0	F		F		
+i = 20
+34	R		66	66	0	0	0	F		F		
+i = 21
+36	N		68	69	0	0	0	F		F		
+i = 22
+32	R		65	64	0	0	0	F		F		
+i = 23
+30	R		62	62	0	0	0	F		F		
+i = 24
+33	N		66	65	0	0	0	F		F		
+i = 25
+21	R		40	50	0	0	0	F		F		
+i = 26
+13	N		39	36	0	0	0	F		F		
+i = 27
+18	N		42	49	0	0	0	F		F		
+i = 28
+24	N		57	55	0	0	0	F		F		
+i = 29
+12	R		35	35	0	0	0	F		F		
+i = 30
+26	R		48	58	0	0	0	F		F		
+i = 31
+23	N		47	54	0	0	0	F		F		
+i = 32
+27	R		59	59	0	0	0	F		F		
+i = 33
+22	N		53	53	0	0	0	F		F		
+i = 34
+20	N		50	50	0	0	0	F		F		
+i = 35
+17	N		49	49	0	0	0	F		F		
+i = 36
+15	R		39	39	0	0	0	F		F		
+i = 37
+19	N		50	50	0	0	0	F		F		
+i = 38
+14	R		39	37	0	0	0	F		F		
+i = 39
+16	N		39	39	0	0	0	F		F		
+i = 40
+11	R		26	26	0	0	0	F		F		
+i = 41
+8	R		14	14	0	0	0	F		F		
+i = 42
+7	R		5	14	0	0	0	F		F		
+i = 43
+10	N		17	20	0	0	0	F		F		
+i = 44
+4	R		1	0	0	0	0	F		F		
+i = 45
+0	R		0	0	0	0	0	F		F		
+i = 46
+5	N		1	1	0	0	0	F		F		
+i = 47
+2	R		0	0	0	0	0	F		F		
+i = 48
+1	R		2	0	0	0	0	F		F		
+i = 49
+
+Total number of timesteps = 131
+Total number of all, N, and R patients = 50, 25, 25
+Average total waiting time of all, N, and R patients = 0, 0, 0
+Average total treatment time of all, N, and R patients = 0, 0, 0
+Percentage of patients of an accepted cancellation = 0
+Percentage of patients of an accepted rescheduling = 0
+Percentage of early patients = 32
+Percentage of late patients = 22
+Average late penality = 2.81818

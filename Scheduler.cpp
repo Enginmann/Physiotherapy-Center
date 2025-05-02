@@ -134,6 +134,8 @@ void Scheduler::movePatientFromAll()
 	{
 		allPatients.dequeue(patient);
 
+		patient->setEnterTime(timeStep);
+
 		/// early
 		if (timeStep < patient->getPt())
 		{
@@ -152,17 +154,16 @@ void Scheduler::movePatientFromAll()
 		/// serve
 		else
 		{
+			patient->setStatus(3);
 			if (patient->getType() == 'R')
 			{
 				Treatment* treatment = patient->chooseMinLatency(eWaiting.calcTreatmentLatency(), uWaiting.calcTreatmentLatency(), xWaiting.calcTreatmentLatency());
 				treatment->addToWait(patient, this);
-				patient->setStatus(3);
 			}
 			else
 			{
 				Treatment* treatment = patient->getTreatment();
 				treatment->addToWait(patient, this);
-				patient->setStatus(3);
 			}
 		}
 
@@ -170,7 +171,6 @@ void Scheduler::movePatientFromAll()
 		allPatients.peek(patient);
 	}
 }
-
 
 void Scheduler::simulate()
 {
@@ -288,6 +288,11 @@ void Scheduler::assignX()
 			patient->getTreatment()->setResource(xroom);
 			patient->setStatus(4);
 
+			int temp1 = patient->getEnterTime();
+			int temp2 = patient->getWt();
+			patient->setWt(temp2 + timeStep - temp1);
+			patient->setEnterTime(timeStep);
+
 			if (xroom->getCapacity() == xroom->getNumOfPatient())
 			{
 				xRooms.dequeue(xroom);
@@ -312,6 +317,10 @@ void Scheduler::assignU()
 			patient->getTreatment()->setResource(resource);
 			patient->setStatus(4);
 
+			int temp1 = patient->getEnterTime();
+			int temp2 = patient->getWt();
+			patient->setWt(temp2 + timeStep - temp1);
+			patient->setEnterTime(timeStep);
 		}
 	}
 }
@@ -331,6 +340,11 @@ void Scheduler::assignE()
 			eDevices.dequeue(resource);
 			patient->getTreatment()->setResource(resource);
 			patient->setStatus(4);
+
+			int temp1 = patient->getEnterTime();
+			int temp2 = patient->getWt();
+			patient->setWt(temp2 + timeStep - temp1);
+			patient->setEnterTime(timeStep);
 		}
 	}
 }
@@ -453,6 +467,11 @@ void Scheduler::moveFromInTreatmentToWaitOrFinish()
 			finishedPatients.push(patient);
 			patient->setStatus(5);
 			patient->setFt(timeStep);
+
+			int temp1 = patient->getEnterTime();
+			int temp2 = patient->getTt();
+			patient->setTt(temp2 + timeStep - temp1);
+			patient->setEnterTime(timeStep);
 		}
 		else
 		{
@@ -467,6 +486,11 @@ void Scheduler::moveFromInTreatmentToWaitOrFinish()
 				patient->getTreatment()->addToWait(patient, this);
 				patient->setStatus(3);
 			}
+
+			int temp1 = patient->getEnterTime();
+			int temp2 = patient->getTt();
+			patient->setTt(temp2 + timeStep - temp1);
+			patient->setEnterTime(timeStep);
 		}
 		patient = nullptr;
 		inTreatmentPatients.peek(patient, due);

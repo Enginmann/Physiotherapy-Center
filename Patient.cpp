@@ -15,6 +15,7 @@ Patient::Patient(int id, int pt, int vt, char type)
 	tt = 0;
 	ft = 0;
 	status = 0; // Idle
+	enterTime = 0;
 	cancelState = false;
 	rescState = false;
 }
@@ -87,6 +88,26 @@ void Patient::setIsCancel(bool cancel)
 void Patient::setIsResc(bool resc)
 {
 	rescState = resc;
+}
+
+int Patient::getEnterTime()
+{
+	return enterTime;
+}
+
+void Patient::setEnterTime(int x)
+{
+	enterTime = x;
+}
+
+void Patient::setWt(int x)
+{
+	wt = x;
+}
+
+void Patient::setTt(int x)
+{
+	tt = x;
 }
 
 int Patient::getTreatmentDuration()

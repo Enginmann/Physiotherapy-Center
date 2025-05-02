@@ -16,6 +16,7 @@ private:
 	int tt;
 	bool cancelState;
 	bool rescState;
+	int enterTime;
 
 	LinkedQueue<Treatment *> reqTreatments;
 
@@ -39,6 +40,12 @@ public:
 	void setFt(int ft);
 	void setIsCancel(bool cancel);
 	void setIsResc(bool resc);
+
+	int getEnterTime();
+	void setEnterTime(int x);
+
+	void setWt(int x);
+	void setTt(int x);
 	
 	int getTreatmentDuration();
 	void print(int count);

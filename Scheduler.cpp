@@ -260,11 +260,11 @@ void Scheduler::assignX()
 		{
 			XResource* xroom;
 			xWaiting.dequeue(patient);
-			inTreatmentPatients.enqueue(patient, -patient->getTreatmentDuration());
+			patient->getTreatment()->setSt(timeStep);
+			inTreatmentPatients.enqueue(patient, -(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
 			xRooms.peek(xroom);
 			xroom->incNumOfPatient();
 			patient->getTreatment()->setResource(xroom);
-			patient->getTreatment()->setSt(timeStep);
 			patient->setStatus(4);
 
 			if (xroom->getCapacity() == xroom->getNumOfPatient())
@@ -285,10 +285,10 @@ void Scheduler::assignU()
 		{
 			Resource* resource;
 			uWaiting.dequeue(patient);
-			inTreatmentPatients.enqueue(patient, -patient->getTreatmentDuration());
+			patient->getTreatment()->setSt(timeStep);
+			inTreatmentPatients.enqueue(patient, -(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
 			uDevices.dequeue(resource);
 			patient->getTreatment()->setResource(resource);
-			patient->getTreatment()->setSt(timeStep);
 			patient->setStatus(4);
 
 		}
@@ -305,10 +305,10 @@ void Scheduler::assignE()
 		{
 			Resource* resource;
 			eWaiting.dequeue(patient);
-			inTreatmentPatients.enqueue(patient,-patient->getTreatmentDuration());
+			patient->getTreatment()->setSt(timeStep);
+			inTreatmentPatients.enqueue(patient,-(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
 			eDevices.dequeue(resource);
 			patient->getTreatment()->setResource(resource);
-			patient->getTreatment()->setSt(timeStep);
 			patient->setStatus(4);
 		}
 	}
@@ -404,10 +404,10 @@ void Scheduler::moveFromInTreatmentToWaitOrFinish()
 
 	inTreatmentPatients.peek(patient,due);
 
-	while (patient && patient->getTreatment()->getSt() - due == timeStep)
+	while (patient && - due == timeStep)
 	{
 		inTreatmentPatients.dequeue(patient, due);
-
+		
 		Treatment* treatment = patient->removeTreatment();
 		XResource* resource = dynamic_cast<XResource*>(treatment->getResource());
 		if (resource)

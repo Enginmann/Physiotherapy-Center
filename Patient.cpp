@@ -148,13 +148,7 @@ Treatment* Patient::chooseMinLatency(int eWaiting, int uWaiting, int xWaiting)
 		if (latency2 < min)
 			min = latency2;
 
-		if (min == latency2)
-		{
-			Q.dequeue(treatment);
-			reqTreatments.enqueue(treatment);
-			reqTreatments.peek(treatment);
-		}
-		else if (min == latency1)
+		if (min == latency1)
 		{
 			reqTreatments.dequeue(treatment);
 			Q.enqueue(treatment);
@@ -163,12 +157,23 @@ Treatment* Patient::chooseMinLatency(int eWaiting, int uWaiting, int xWaiting)
 			reqTreatments.peek(treatment);
 			
 		}
+		else if (min == latency2)
+		{
+			Q.dequeue(treatment);
+			reqTreatments.enqueue(treatment);
+			reqTreatments.peek(treatment);
+		}
 		return treatment;
 		
 	}
 
 	else if (reqTreatments.getCount() == 3)
 	{
+		if (eWaiting == uWaiting && uWaiting == xWaiting)
+		{
+			reqTreatments.peek(treatment);
+			return treatment;
+		}
 		int min = eWaiting;
 		if (uWaiting < min)
 			min = uWaiting;

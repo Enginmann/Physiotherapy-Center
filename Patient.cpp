@@ -257,10 +257,11 @@ Treatment * Patient::getTreatment()
 	return treatment;
 }
 
-void Patient::toOutFile(fstream & out)
+void Patient::toOutFile(ofstream & out)
 {
 	out << id << '\t';
 	out << type << '\t';
+	out << '\t';
 	out << pt << '\t';
 	out << vt << '\t';
 	out << ft << '\t';
@@ -272,10 +273,14 @@ void Patient::toOutFile(fstream & out)
 	else
 		out << 'F' << '\t';
 
+	out << '\t';
+
 	if (rescState)
 		out << 'T' << '\t';
 	else
 		out << 'F' << '\t';
 
-	cout << endl;
+	out << '\t';
+
+	out << endl;
 }

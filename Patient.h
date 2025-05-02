@@ -46,5 +46,5 @@ public:
 
 	Treatment* chooseMinLatency(int eWaiting, int uWaiting, int xWaiting);
 
-	void toOutFile(fstream & out);
+	void toOutFile(ofstream & out);
 };

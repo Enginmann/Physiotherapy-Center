@@ -42,7 +42,9 @@ bool Scheduler::isOver()
 
 void Scheduler::loadInputFile()
 {
-	ifstream inFile(fileName + ".txt");
+	inputFileName = ui.inputFileName();
+
+	ifstream inFile(inputFileName + ".txt");
 	if (!inFile)
 		return;
 
@@ -178,6 +180,7 @@ void Scheduler::simulate()
 	assignX();
 	moveFromInTreatmentToWaitOrFinish();
 	print();
+	timeStep++;
 }
 
 void Scheduler::print()
@@ -199,11 +202,6 @@ void Scheduler::print()
 	char key = ui.getKey();
 	if (key == 27) // Escape key
 		over = true;
-}
-
-void Scheduler::inputFileName()
-{
-	fileName = ui.inputFileName();
 }
 
 void Scheduler::reset()
@@ -400,7 +398,7 @@ bool Scheduler::isXAvailable()
 void Scheduler::moveFromInTreatmentToWaitOrFinish()
 {
 	Patient* patient = nullptr;
-	int due = -99;
+	int due;
 
 	inTreatmentPatients.peek(patient,due);
 
@@ -452,9 +450,11 @@ void Scheduler::moveFromInTreatmentToWaitOrFinish()
 	}
 }
 
-void Scheduler::toOutFile(string fileName)
+void Scheduler::exportOutputFile()
 {
-	ofstream outFile(fileName + ".txt");
+	outputFileName = ui.outputFileName();
+
+	ofstream outFile(outputFileName + ".txt");
 	if (!outFile)
 		return;
 
@@ -490,8 +490,10 @@ void Scheduler::toOutFile(string fileName)
 		if (patient->isResc())
 			rescCount++;
 
-		patient->print(-1);
+		patient->toOutFile(outFile);
 	}
+
+	outFile << endl;
 
 	outFile << "Total number of timesteps = " << timeStep << endl;
 
@@ -503,13 +505,15 @@ void Scheduler::toOutFile(string fileName)
 	float allTreat = nTreat + rTreat;
 	outFile << "Average total treatment time of all, N, and R patients = " << allTreat / allCount << ", " << nTreat / nCount << ", " << rTreat / rCount << endl;
 	
-	outFile << "Percentage of patients of an accepted cancellation" << cancelCount / allCount * 100 << endl;
+	outFile << "Percentage of patients of an accepted cancellation = " << cancelCount / allCount * 100 << endl;
 	
-	outFile << "Percentage of patients of an accepted rescheduling" << rescCount / allCount * 100 << endl;
+	outFile << "Percentage of patients of an accepted rescheduling = " << rescCount / allCount * 100 << endl;
 	
-	outFile << "Percentage of early patients" << earlyCount / allCount * 100 << endl;
+	outFile << "Percentage of early patients = " << earlyCount / allCount * 100 << endl;
 
-	outFile << "Percentage of late patients" << lateCount / allCount * 100 << endl;
+	outFile << "Percentage of late patients = " << lateCount / allCount * 100 << endl;
 
-	outFile << "Average late penality" << totalPenality / lateCount << endl;
+	outFile << "Average late penality = " << totalPenality / lateCount << endl;
+
+	outFile.close();
 }

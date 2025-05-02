@@ -34,7 +34,8 @@ private:
 	float lateCount;
 	float totalPenality;
 
-	string fileName;
+	string inputFileName;
+	string outputFileName;
 	UI ui;
 
 	LinkedQueue<Patient*> allPatients;		/// patients are loaded sorted according to their vt from the input file
@@ -73,8 +74,6 @@ public:
 
 	void print();
 
-	void inputFileName();
-
 	void reset();
 	
 	void addEWaiting(Patient* patient);
@@ -94,5 +93,5 @@ public:
 	bool isXAvailable();
 	void moveFromInTreatmentToWaitOrFinish();
 
-	void toOutFile(string fileName);
+	void exportOutputFile();
 };

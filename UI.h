@@ -96,7 +96,15 @@ public:
 
     string inputFileName()
     {
-        cout << "Enter File Name (without .txt): ";
+        cout << "Enter the Input File Name (without .txt): ";
+        string fileName;
+        cin >> fileName;
+        return fileName;
+    }
+
+    string outputFileName()
+    {
+        cout << "Enter the Output File Name (without .txt): ";
         string fileName;
         cin >> fileName;
         return fileName;

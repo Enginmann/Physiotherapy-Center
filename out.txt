@@ -1,0 +1,36 @@
+PID	PType	PT	VT	FT	WT	TT	Cancel	Resc
+44	N		95	91	0	0	0	F		F		
+46	R		90	92	0	0	0	F		F		
+47	N		96	94	0	0	0	F		F		
+49	N		97	103	0	0	0	F		F		
+41	N		91	87	0	0	0	F		F		
+48	N		96	96	0	0	0	F		F		
+42	N		79	88	0	0	0	F		F		
+38	R		75	75	0	0	0	F		F		
+39	N		80	80	0	0	0	F		F		
+43	R		92	91	0	0	0	F		F		
+45	R		93	92	0	0	0	F		F		
+31	N		64	63	0	0	0	F		F		
+29	N		62	62	0	0	0	F		F		
+37	R		73	73	0	0	0	F		F		
+40	R		86	86	0	0	0	F		F		
+28	N		55	60	0	0	0	F		F		
+35	R		68	68	0	0	0	F		F		
+25	R		57	57	0	0	0	F		F		
+26	R		48	58	0	0	0	F		F		
+34	R		66	66	0	0	0	F		F		
+36	N		68	69	0	0	0	F		F		
+32	R		65	64	0	0	0	F		F		
+30	R		62	62	0	0	0	F		F		
+13	N		39	36	0	0	0	F		F		
+33	N		66	65	0	0	0	F		F		
+
+Total number of timesteps = 130
+Total number of all, N, and R patients = 50, 25, 25
+Average total waiting time of all, N, and R patients = 0, 0, 0
+Average total treatment time of all, N, and R patients = 0, 0, 0
+Percentage of patients of an accepted cancellation = 0
+Percentage of patients of an accepted rescheduling = 0
+Percentage of early patients = 32
+Percentage of late patients = 22
+Average late penality = 2.81818

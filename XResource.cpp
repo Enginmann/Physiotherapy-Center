@@ -16,7 +16,7 @@ void XResource::print(int count)
 	cout << resetColor;
 	cout << purpleColor;
 
-	cout << "R" << this->id << "[" <<count << "," << capacity << "]";
+	cout << "R" << this->id << "[" << numOfPatient << "," << capacity << "]";
 
 	cout << resetColor;
 }

@@ -177,10 +177,10 @@ void Scheduler::simulate()
 	movePatientFromAll();
 	moveFromEarly();
 	moveFromLate();
+	moveFromInTreatmentToWaitOrFinish();
 	assignE();
 	assignU();
 	assignX();
-	moveFromInTreatmentToWaitOrFinish();
 	if (!silentMode)
 		print();
 	else

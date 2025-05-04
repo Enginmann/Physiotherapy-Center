@@ -306,6 +306,7 @@ void Scheduler::assignU()
 {
 	Patient* patient = nullptr;
 	uWaiting.peek(patient);
+
 	while (patient && patient->getTreatment()->canAssign(this))
 	{
 		Resource* resource;
@@ -321,7 +322,7 @@ void Scheduler::assignU()
 		patient->setWt(temp2 + timeStep - temp1);
 		patient->setEnterTime(timeStep);
 
-		Patient * patient = nullptr;
+		patient = nullptr;
 		uWaiting.peek(patient);
 	}
 }
@@ -345,7 +346,7 @@ void Scheduler::assignE()
 		patient->setWt(temp2 + timeStep - temp1);
 		patient->setEnterTime(timeStep);
 
-		Patient * patient = nullptr;
+		patient = nullptr;
 		eWaiting.peek(patient);
 	}
 }
@@ -354,9 +355,13 @@ void Scheduler::moveFromEarly()
 {
 	Patient* patient = nullptr;
 	int pT;
+
 	if (earlyPatients.isEmpty())
 		return;
-	earlyPatients.reschedule(maxPt, pResc);
+	
+	if (earlyPatients.getCount() > 1)
+		earlyPatients.reschedule(maxPt, pResc);
+	
 	earlyPatients.peek(patient,pT);
 	while (patient && patient->getPt() == timeStep)
 	{
@@ -543,6 +548,8 @@ void Scheduler::exportOutputFile()
 		patient->toOutFile(outFile);
 	}
 
+	int temp = 0;
+
 	outFile << endl;
 	outFile << endl;
 
@@ -572,7 +579,9 @@ void Scheduler::exportOutputFile()
 	outFile << "Percentage of late patients = " << lateCount / allCount * 100 << " %" << endl;
 	outFile << endl;
 
-	outFile << "Average late penalty = " << totalPenality / lateCount << endl;
+	if (lateCount != 0)
+		temp = totalPenality / lateCount;
+	outFile << "Average late penalty = " << temp << endl;
 
 	outFile.close();
 }

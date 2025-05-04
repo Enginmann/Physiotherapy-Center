@@ -1,0 +1,2 @@
+test1: normal
+test2: 0 cancel, 0 resc

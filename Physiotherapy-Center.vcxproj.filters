@@ -30,5 +30,6 @@
     <ClCompile Include="ETreatment.cpp" />
     <ClCompile Include="UTreatment.cpp" />
     <ClCompile Include="XTreatment.cpp" />
+    <ClCompile Include="ToolTreatment.h" />
   </ItemGroup>
 </Project>

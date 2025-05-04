@@ -77,8 +77,9 @@ void Scheduler::loadInputFile()
 	for (int i = 0; i < xRoom; i++)
 	{
 		int xCap;
-		inFile >> xCap;
-		XResource* xR = new XResource(i, 'X', xCap,0,0,0);
+		int A, B, C;
+		inFile >> xCap >> A >> B >> C;
+		XResource* xR = new XResource(i, 'X', xCap,0,0,0, A, B, C);
 		xRooms.enqueue(xR);
 	}
 	
@@ -120,7 +121,19 @@ void Scheduler::loadInputFile()
 			}
 			else if (tType == 'X')
 			{
-				treatment = new XTreatment(tType, tDuration);
+				int tool;
+				inFile >> tool;
+
+				LinkedQueue<Tooltreatment*> toolTreatments;
+				for (int k = 0; k < tool; k++)
+				{
+					char type;
+					int duration;
+					inFile >> type >> duration;
+					Tooltreatment * temp = new Tooltreatment(type, duration);
+					toolTreatments.enqueue(temp);
+				}
+				treatment = new XTreatment(tType, tDuration, toolTreatments);
 				patient->setReqTreatment(treatment);
 			}
 			
@@ -290,29 +303,26 @@ void Scheduler::assignX()
 	
 	while (patient && patient->getTreatment()->canAssign(this))
 	{
-		//if ()
-		//{
-			XResource* xroom;
-			xWaiting.dequeue(patient);
-			patient->getTreatment()->setSt(timeStep);
-			inTreatmentPatients.enqueue(patient, -(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
-			xRooms.peek(xroom);
-			xroom->incNumOfPatient();
-			patient->getTreatment()->setResource(xroom);
-			patient->setStatus(4);
+		XResource* xroom;
+		xWaiting.dequeue(patient);
+		patient->getTreatment()->setSt(timeStep);
+		inTreatmentPatients.enqueue(patient, -(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
+		xRooms.peek(xroom);
+		xroom->incNumOfPatient();
+		patient->getTreatment()->setResource(xroom);
+		patient->setStatus(4);
 
-			int temp1 = patient->getEnterTime();
-			int temp2 = patient->getWt();
-			patient->setWt(temp2 + timeStep - temp1);
-			patient->setEnterTime(timeStep);
+		int temp1 = patient->getEnterTime();
+		int temp2 = patient->getWt();
+		patient->setWt(temp2 + timeStep - temp1);
+		patient->setEnterTime(timeStep);
 
-			if (xroom->getCapacity() == xroom->getNumOfPatient())
-			{
-				xRooms.dequeue(xroom);
-			}
-		//}
-			patient = nullptr;
-			xWaiting.peek(patient);
+		if (xroom->getCapacity() == xroom->getNumOfPatient())
+		{
+			xRooms.dequeue(xroom);
+		}
+		patient = nullptr;
+		xWaiting.peek(patient);
 	}
 }
 

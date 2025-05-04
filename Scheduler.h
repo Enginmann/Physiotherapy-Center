@@ -14,6 +14,7 @@
 #include "ETreatment.h"
 #include "UTreatment.h"
 #include "XTreatment.h"
+#include "ToolTreatment.h"
 
 #include <string>
 
@@ -53,6 +54,10 @@ private:
 	EUWaitingQueue<Patient*> uWaiting;		/// patients are sorted according to their pt, insertSorted
 	EUWaitingQueue<Patient*> eWaiting;		/// patients are sorted according to their pt, insertSorted
 	XWaitingQueue<Patient*> xWaiting;		/// patients are sorted according to their pt, insertSorted, cancel
+	
+	XWaitingQueue<Patient*> xWaiting1;		
+	XWaitingQueue<Patient*> xWaiting2;		/// patients are sorted according to their pt, insertSorted, cancel
+	XWaitingQueue<Patient*> xWaiting3;		/// patients are sorted according to their pt, insertSorted, cancel
 
 	LinkedQueue<Resource*> uDevices;		/// devices are inserted whenever they get available
 	LinkedQueue<Resource*> eDevices;		/// devices are inserted whenever they get available
@@ -61,6 +66,8 @@ private:
 	priQueue<Resource*> maintenance;
 	LinkedQueue<Patient*> eInterruptedPatients;
 	LinkedQueue<Patient*> uInterruptedPatients;
+
+
 
 public:
 	Scheduler();

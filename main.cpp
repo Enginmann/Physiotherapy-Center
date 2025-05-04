@@ -7,7 +7,11 @@ void simulate()
 	Scheduler scheduler;
 
 	/// File loading
-	scheduler.loadInputFile();
+	bool opened;
+	opened = scheduler.loadInputFile();
+	
+	if (!opened)
+		return;
 
 	int count = scheduler.getAllPatientsCount();
 

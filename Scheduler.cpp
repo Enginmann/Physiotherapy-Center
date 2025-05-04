@@ -42,13 +42,13 @@ bool Scheduler::isOver()
 	return over;
 }
 
-void Scheduler::loadInputFile()
+bool Scheduler::loadInputFile()
 {
 	inputFileName = ui.inputFileName();
 
 	ifstream inFile(inputFileName + ".txt");
 	if (!inFile)
-		return;
+		return false;
 
 	/// devices,rooms and capacity
 	int eDevice, uDevice, xRoom;
@@ -123,6 +123,7 @@ void Scheduler::loadInputFile()
 	}
 
 	inFile.close();
+	return true;
 }
 
 void Scheduler::movePatientFromAll()
@@ -275,7 +276,7 @@ void Scheduler::assignX()
 	patient = nullptr;
 	xWaiting.peek(patient);
 	
-	if (patient && patient->getTreatment()->canAssign(this))
+	while (patient && patient->getTreatment()->canAssign(this))
 	{
 		XResource* xroom;
 		xWaiting.dequeue(patient);
@@ -305,7 +306,7 @@ void Scheduler::assignU()
 {
 	Patient* patient = nullptr;
 	uWaiting.peek(patient);
-	if (patient && patient->getTreatment()->canAssign(this))
+	while (patient && patient->getTreatment()->canAssign(this))
 	{
 		Resource* resource;
 		uWaiting.dequeue(patient);
@@ -329,7 +330,7 @@ void Scheduler::assignE()
 {
 	Patient* patient = nullptr;
 	eWaiting.peek(patient);
-	if (patient && patient->getTreatment()->canAssign(this))
+	while (patient && patient->getTreatment()->canAssign(this))
 	{
 		Resource* resource;
 		eWaiting.dequeue(patient);

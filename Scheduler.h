@@ -62,7 +62,7 @@ public:
 
 	int getTimeStep();
 
-	void loadInputFile();
+	bool loadInputFile();
 
 	int getAllPatientsCount();
 

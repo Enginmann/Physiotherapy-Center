@@ -102,4 +102,5 @@ public:
 	void moveFromMaintenence();
 
 	void exportOutputFile();
+	void checkInTreatBusy(Patient*& patient);
 };

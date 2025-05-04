@@ -14,6 +14,7 @@ public:
 	Treatment(char type, int duration);
 	char getType();
 	int getDuration();
+	void setDuration(int newde);
 
 	void setSt(int st);
 

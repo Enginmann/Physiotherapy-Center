@@ -333,8 +333,12 @@ void Scheduler::assignU()
 		}
 		if (patient->getTreatment()->canAssign(this))
 		{
-			
-			uWaiting.dequeue(patient);
+
+			if (interruptedPatients.isEmpty())
+				uWaiting.dequeue(patient);
+			else
+				interruptedPatients.dequeue(patient);
+
 			patient->getTreatment()->setSt(timeStep);
 			inTreatmentPatients.enqueue(patient, -(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
 			uDevices.dequeue(resource);
@@ -375,7 +379,10 @@ void Scheduler::assignE()
 		{
 
 			
-			eWaiting.dequeue(patient);
+			if (interruptedPatients.isEmpty())
+				eWaiting.dequeue(patient);
+			else
+				interruptedPatients.dequeue(patient);
 			patient->getTreatment()->setSt(timeStep);
 			inTreatmentPatients.enqueue(patient,-(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
 			eDevices.dequeue(resource);
@@ -641,4 +648,43 @@ void Scheduler::exportOutputFile()
 	outFile << "Percentage of free devices that failed = " << failedFreeDevicesCount / EUdevicesCount * 100 << " %" << endl;
 
 	outFile.close();
+}
+
+void Scheduler::checkInTreatBusy(Patient*&patient)
+{
+	priQueue<Patient*>temp;
+	bool done = false;
+	int random = rand() % 100;
+	
+	int tev,count=0;
+
+	while (!done&&(count!= inTreatmentPatients.getCount())) {
+		int random2 = rand() % inTreatmentPatients.getCount();
+		for (int i = 0; i < random2; i++) {
+			inTreatmentPatients.dequeue(patient,tev);
+			if (!(i == random2 - 1))
+				temp.enqueue(patient,tev);
+
+		}
+		if (patient->getTreatment()->getResource()->getType() == 'X') {
+			inTreatmentPatients.enqueue(patient, tev);
+			while (inTreatmentPatients.dequeue(patient, tev))
+				temp.enqueue(patient, tev);
+			while (temp.dequeue(patient, tev)) {
+				if (patient->getTreatment()->getResource()->getType() == 'X')
+					count++;
+				inTreatmentPatients.enqueue(patient, tev);
+			}
+		}
+		else 
+		{
+			if (random < patient->getTreatment()->getResource()->getBusy()) {
+				patient->getTreatment()->setDuration(patient->getTreatment()->getDuration() - (timeStep - patient->getTreatment()->getSt()));
+				interruptedPatients.enqueue(patient);
+				maintenance.enqueue(patient->getTreatment()->getResource(), -(patient->getTreatment()->getResource()->getmaint() + timeStep));
+			}
+			done = true;
+
+		}
+	}
 }

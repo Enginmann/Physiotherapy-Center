@@ -19,6 +19,11 @@ int Treatment::getDuration()
 	return duration;
 }
 
+void Treatment::setDuration(int newde)
+{
+	duration = newde;
+}
+
 void Treatment::setSt(int st)
 {
 	this->st = st;

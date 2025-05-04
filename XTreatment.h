@@ -2,14 +2,12 @@
 #include "Treatment.h"
 #include "Patient.h"
 #include "Scheduler.h"
-#include "ToolTreatment.h"
 #include "Queue.h"
 
 class XTreatment : public Treatment
 {
-	LinkedQueue<Tooltreatment *> toolList;
 public:
-	XTreatment(char type, int duration, LinkedQueue<Tooltreatment*> x);
+	XTreatment(char type, int duration);
 
 	virtual bool canAssign(Scheduler* scheduler);
 

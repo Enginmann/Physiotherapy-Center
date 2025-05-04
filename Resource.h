@@ -9,6 +9,8 @@ protected:
 	int pFreeFailure;
 	int pBusyFailure;
 	int maintenence;
+	bool isBusyFailed;
+	bool isFreeFailed;
 
 public:
 	Resource(int Id, char Type, int free,int busy,int maint);
@@ -22,6 +24,14 @@ public:
 	int getBusy();
 
 	int getmaint();
+
+	void setBusy();
+
+	void setFree();
+
+	bool getIsFree();
+
+	bool getIsBusy();
 
 	virtual void print(int count = 0);
 };

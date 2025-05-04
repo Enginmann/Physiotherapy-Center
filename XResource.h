@@ -10,7 +10,7 @@ private:
 	int A, B, C;
 
 public:
-	XResource(int id, char type, int capacity, int free, int busy, int maint, int A, int B, int C);
+	XResource(int id, char type, int capacity, int free, int busy, int maint);
 	void print(int count = 0);
 	int getCapacity();
 	void decNumOfPatient();

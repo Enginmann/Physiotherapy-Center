@@ -2,11 +2,8 @@
 #include "iostream"
 
 using namespace std;
-XResource::XResource(int id, char type, int capacity, int free, int busy, int maint, int A, int B, int C) : Resource(id, type, free,busy,maint)
+XResource::XResource(int id, char type, int capacity, int free, int busy, int maint) : Resource(id, type, free,busy,maint)
 {
-	this->A = A;
-	this->B = B;
-	this->C = C;
 	this->capacity = capacity;
 	this->numOfPatient = 0;
 } 

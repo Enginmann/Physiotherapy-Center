@@ -152,7 +152,6 @@
     <ClCompile Include="Patient.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="Scheduler.cpp" />
-    <ClCompile Include="ToolTreatment.h" />
     <ClCompile Include="Treatment.cpp" />
     <ClCompile Include="UTreatment.cpp" />
     <ClCompile Include="XResource.cpp" />

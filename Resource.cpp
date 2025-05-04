@@ -13,6 +13,8 @@ Resource::Resource(int Id, char Type, int free, int busy, int maint)
 	pFreeFailure = free;
 	pBusyFailure = busy;
 	maintenence = maint;
+	isFreeFailed = false;
+	isBusyFailed = false;
 }
 
 int Resource::getId()
@@ -38,6 +40,26 @@ int Resource::getBusy()
 int Resource::getmaint()
 {
 	return maintenence;
+}
+
+void Resource::setBusy()
+{
+	isBusyFailed = true;
+}
+
+void Resource::setFree()
+{
+	isFreeFailed = true;
+}
+
+bool Resource::getIsFree()
+{
+	return isFreeFailed;
+}
+
+bool Resource::getIsBusy()
+{
+	return isBusyFailed;
 }
 
 void Resource::print(int count) 

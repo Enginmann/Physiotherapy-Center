@@ -1,2 +1,6 @@
 test1: normal
 test2: 0 cancel, 0 resc
+test3: 100, 0
+test4: 0, 100
+test5:
+test6: large file

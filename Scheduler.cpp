@@ -5,7 +5,7 @@
 
 Scheduler::Scheduler()
 {
-	srand(time(0));
+	srand(0);
 	timeStep = 0;
 	rCount = 0;
 	nCount = 0;
@@ -429,11 +429,11 @@ void Scheduler::assignE()
 				eInterruptedPatients.dequeue(patient);
 
 				patient->getTreatment()->setSt(timeStep);
-				inTreatmentPatients.enqueue(patient, -(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
+				
 				eDevices.dequeue(resource);
 				patient->getTreatment()->setResource(resource);
 				patient->setStatus(4);
-
+				inTreatmentPatients.enqueue(patient, -(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
 				int temp1 = patient->getEnterTime();
 				int temp2 = patient->getWt();
 				patient->setWt(temp2 + timeStep - temp1);
@@ -466,14 +466,14 @@ void Scheduler::assignE()
 
 
 
-				eWaiting.dequeue(patient);
+				
 
 				patient->getTreatment()->setSt(timeStep);
-				inTreatmentPatients.enqueue(patient, -(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
+				
 				eDevices.dequeue(resource);
 				patient->getTreatment()->setResource(resource);
 				patient->setStatus(4);
-
+				inTreatmentPatients.enqueue(patient, -(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
 				int temp1 = patient->getEnterTime();
 				int temp2 = patient->getWt();
 				patient->setWt(temp2 + timeStep - temp1);
@@ -747,7 +747,7 @@ void Scheduler::checkInTreatBusy()
 	int random = rand() % 100;
 	int incount = inTreatmentPatients.getCount();
 	int tev,count=0;
-
+	int carrier;
 	while (!done&&(count!= incount)) {
 		int random2 = rand() % inTreatmentPatients.getCount();
 		for (int i = 0; i < random2; i++) {
@@ -757,7 +757,7 @@ void Scheduler::checkInTreatBusy()
 
 		}
 		if (patient && patient->getTreatment()->getResource()->getType() == 'X') {
-			inTreatmentPatients.enqueue(patient, tev);
+			temp.enqueue(patient, tev);
 			while (inTreatmentPatients.dequeue(patient, tev))
 				temp.enqueue(patient, tev);
 			while (temp.dequeue(patient, tev)) {
@@ -778,6 +778,18 @@ void Scheduler::checkInTreatBusy()
 				maintenance.enqueue(patient->getTreatment()->getResource(), -(patient->getTreatment()->getResource()->getmaint() + timeStep));
 				patient->getTreatment()->setResource(nullptr);
 				failedBusyDevicesCount++;
+			}
+			else if(patient)
+			{
+				temp.enqueue(patient, tev);
+				while (inTreatmentPatients.dequeue(patient, tev))
+					temp.enqueue(patient, tev);
+				while (temp.dequeue(patient, tev)) {
+					if (patient->getTreatment()->getResource()->getType() == 'X')
+						count++;
+					inTreatmentPatients.enqueue(patient, tev);
+				}
+
 			}
 			done = true;
 

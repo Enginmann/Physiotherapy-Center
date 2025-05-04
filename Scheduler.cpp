@@ -275,29 +275,29 @@ void Scheduler::assignX()
 	patient = nullptr;
 	xWaiting.peek(patient);
 	
-	if (patient)
+	if (patient && patient->getTreatment()->canAssign(this))
 	{
-		if (patient->getTreatment()->canAssign(this))
+		XResource* xroom;
+		xWaiting.dequeue(patient);
+		patient->getTreatment()->setSt(timeStep);
+		inTreatmentPatients.enqueue(patient, -(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
+		xRooms.peek(xroom);
+		xroom->incNumOfPatient();
+		patient->getTreatment()->setResource(xroom);
+		patient->setStatus(4);
+
+		int temp1 = patient->getEnterTime();
+		int temp2 = patient->getWt();
+		patient->setWt(temp2 + timeStep - temp1);
+		patient->setEnterTime(timeStep);
+
+		if (xroom->getCapacity() == xroom->getNumOfPatient())
 		{
-			XResource* xroom;
-			xWaiting.dequeue(patient);
-			patient->getTreatment()->setSt(timeStep);
-			inTreatmentPatients.enqueue(patient, -(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
-			xRooms.peek(xroom);
-			xroom->incNumOfPatient();
-			patient->getTreatment()->setResource(xroom);
-			patient->setStatus(4);
-
-			int temp1 = patient->getEnterTime();
-			int temp2 = patient->getWt();
-			patient->setWt(temp2 + timeStep - temp1);
-			patient->setEnterTime(timeStep);
-
-			if (xroom->getCapacity() == xroom->getNumOfPatient())
-			{
-				xRooms.dequeue(xroom);
-			}
+			xRooms.dequeue(xroom);
 		}
+
+		patient = nullptr;
+		xWaiting.peek(patient);
 	}
 }
 
@@ -305,23 +305,23 @@ void Scheduler::assignU()
 {
 	Patient* patient = nullptr;
 	uWaiting.peek(patient);
-	if (patient)
+	if (patient && patient->getTreatment()->canAssign(this))
 	{
-		if (patient->getTreatment()->canAssign(this))
-		{
-			Resource* resource;
-			uWaiting.dequeue(patient);
-			patient->getTreatment()->setSt(timeStep);
-			inTreatmentPatients.enqueue(patient, -(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
-			uDevices.dequeue(resource);
-			patient->getTreatment()->setResource(resource);
-			patient->setStatus(4);
+		Resource* resource;
+		uWaiting.dequeue(patient);
+		patient->getTreatment()->setSt(timeStep);
+		inTreatmentPatients.enqueue(patient, -(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
+		uDevices.dequeue(resource);
+		patient->getTreatment()->setResource(resource);
+		patient->setStatus(4);
 
-			int temp1 = patient->getEnterTime();
-			int temp2 = patient->getWt();
-			patient->setWt(temp2 + timeStep - temp1);
-			patient->setEnterTime(timeStep);
-		}
+		int temp1 = patient->getEnterTime();
+		int temp2 = patient->getWt();
+		patient->setWt(temp2 + timeStep - temp1);
+		patient->setEnterTime(timeStep);
+
+		Patient * patient = nullptr;
+		uWaiting.peek(patient);
 	}
 }
 
@@ -329,23 +329,23 @@ void Scheduler::assignE()
 {
 	Patient* patient = nullptr;
 	eWaiting.peek(patient);
-	if (patient)
+	if (patient && patient->getTreatment()->canAssign(this))
 	{
-		if (patient->getTreatment()->canAssign(this))
-		{
-			Resource* resource;
-			eWaiting.dequeue(patient);
-			patient->getTreatment()->setSt(timeStep);
-			inTreatmentPatients.enqueue(patient,-(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
-			eDevices.dequeue(resource);
-			patient->getTreatment()->setResource(resource);
-			patient->setStatus(4);
+		Resource* resource;
+		eWaiting.dequeue(patient);
+		patient->getTreatment()->setSt(timeStep);
+		inTreatmentPatients.enqueue(patient,-(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
+		eDevices.dequeue(resource);
+		patient->getTreatment()->setResource(resource);
+		patient->setStatus(4);
 
-			int temp1 = patient->getEnterTime();
-			int temp2 = patient->getWt();
-			patient->setWt(temp2 + timeStep - temp1);
-			patient->setEnterTime(timeStep);
-		}
+		int temp1 = patient->getEnterTime();
+		int temp2 = patient->getWt();
+		patient->setWt(temp2 + timeStep - temp1);
+		patient->setEnterTime(timeStep);
+
+		Patient * patient = nullptr;
+		eWaiting.peek(patient);
 	}
 }
 

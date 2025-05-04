@@ -6,10 +6,13 @@
 using namespace std;
 
 
-Resource::Resource(int Id, char Type)
+Resource::Resource(int Id, char Type, int free, int busy, int maint)
 {
 	id = Id;
 	type = Type;
+	pFreeFailure = free;
+	pBusyFailure = busy;
+	maintenence = maint;
 }
 
 int Resource::getId()
@@ -20,6 +23,21 @@ int Resource::getId()
 char Resource::getType()
 {
 	return type;
+}
+
+int Resource::getFree()
+{
+	return pFreeFailure;
+}
+
+int Resource::getBusy()
+{
+	return pBusyFailure;
+}
+
+int Resource::getmaint()
+{
+	return maintenence;
 }
 
 void Resource::print(int count) 

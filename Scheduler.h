@@ -35,6 +35,8 @@ private:
 	float totalPenality;
 	bool silentMode;
 	bool autoMode;
+	float failedFreeDevicesCount;
+	float EUdevicesCount;
 
 	string inputFileName;
 	string outputFileName;
@@ -54,6 +56,9 @@ private:
 	LinkedQueue<Resource*> uDevices;		/// devices are inserted whenever they get available
 	LinkedQueue<Resource*> eDevices;		/// devices are inserted whenever they get available
 	LinkedQueue<XResource*> xRooms;			/// devices are inserted whenever they get available
+
+	priQueue<Resource*> maintenance;
+	LinkedQueue<Patient*> interruptedPatients;
 
 public:
 	Scheduler();
@@ -94,6 +99,7 @@ public:
 	bool isUAvailable();
 	bool isXAvailable();
 	void moveFromInTreatmentToWaitOrFinish();
+	void moveFromMaintenence();
 
 	void exportOutputFile();
 };

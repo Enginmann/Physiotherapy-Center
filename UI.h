@@ -26,7 +26,8 @@ public:
         XWaitingQueue<Patient*>& xWaiting,
         LinkedQueue<Resource*>& uDevices,
         LinkedQueue<Resource*>& eDevices,
-        LinkedQueue<XResource*>& xRooms)
+        LinkedQueue<XResource*>& xRooms,
+        priQueue<Resource*>& maintenance)
 	{
         system("cls");
 
@@ -76,6 +77,11 @@ public:
 		cout << "========= In-treatment List =========" << endl;
         cout << inTreatmentPatients.getCount() << " In-treatment patients" << ": ";
         inTreatmentPatients.print();
+        cout << endl;
+
+        cout << "========= Maintenance List =========" << endl;
+        cout << maintenance.getCount() << " devices: ";
+        maintenance.print();
         cout << endl;
 
 		cout << "========= Finished List =========" << endl;

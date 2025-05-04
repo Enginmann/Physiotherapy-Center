@@ -17,6 +17,7 @@ Scheduler::Scheduler()
 	autoMode = false;
 	failedFreeDevicesCount = 0;
 	EUdevicesCount = 0;
+	failedBusyDevicesCount = 0;
 }
 
 void Scheduler::incrementTimeStep()
@@ -77,7 +78,7 @@ void Scheduler::loadInputFile()
 	{
 		int xCap;
 		inFile >> xCap;
-		XResource* xR = new XResource(i, 'X', xCap);
+		XResource* xR = new XResource(i, 'X', xCap,0,0,0);
 		xRooms.enqueue(xR);
 	}
 	
@@ -184,6 +185,8 @@ void Scheduler::simulate()
 	movePatientFromAll();
 	moveFromEarly();
 	moveFromLate();
+	moveFromMaintenence();
+	checkInTreatBusy();
 	moveFromInTreatmentToWaitOrFinish();
 	assignE();
 	assignU();
@@ -211,7 +214,9 @@ void Scheduler::print()
 		uDevices,
 		eDevices,
 		xRooms,
-		maintenance);
+		maintenance,
+		eInterruptedPatients,
+		uInterruptedPatients);
 
 	if (autoMode)
 		return;
@@ -313,7 +318,7 @@ void Scheduler::assignU()
 {
 	Patient* patient = nullptr;
 	Resource* resource = nullptr;
-	uWaiting.peek(patient);
+	uInterruptedPatients.peek(patient);
 	if (patient)
 	{
 		for (;;)
@@ -334,10 +339,9 @@ void Scheduler::assignU()
 		if (patient->getTreatment()->canAssign(this))
 		{
 
-			if (interruptedPatients.isEmpty())
-				uWaiting.dequeue(patient);
-			else
-				interruptedPatients.dequeue(patient);
+
+			uInterruptedPatients.dequeue(patient);
+
 
 			patient->getTreatment()->setSt(timeStep);
 			inTreatmentPatients.enqueue(patient, -(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
@@ -351,48 +355,130 @@ void Scheduler::assignU()
 			patient->setEnterTime(timeStep);
 		}
 	}
+	else
+	{
+		uWaiting.peek(patient);
+		if (patient)
+		{
+			for (;;)
+			{
+				uDevices.peek(resource);
+				if (!resource)
+					break;
+				int random = rand() % 100;
+				if (random < resource->getFree())
+				{
+					uDevices.dequeue(resource);
+					maintenance.enqueue(resource, -(resource->getmaint() + timeStep));
+					failedFreeDevicesCount++;
+				}
+				else
+					break;
+			}
+			if (patient->getTreatment()->canAssign(this))
+			{
+
+				
+				uWaiting.dequeue(patient);
+				
+
+				patient->getTreatment()->setSt(timeStep);
+				inTreatmentPatients.enqueue(patient, -(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
+				uDevices.dequeue(resource);
+				patient->getTreatment()->setResource(resource);
+				patient->setStatus(4);
+
+				int temp1 = patient->getEnterTime();
+				int temp2 = patient->getWt();
+				patient->setWt(temp2 + timeStep - temp1);
+				patient->setEnterTime(timeStep);
+			}
+		}
+	}
 }
 
 void Scheduler::assignE()
 {
 	Patient* patient = nullptr;
 	Resource* resource = nullptr;
-	eWaiting.peek(patient);
+	eInterruptedPatients.peek(patient);
 	if (patient)
 	{
-		for (;;)
+		if (patient)
 		{
-			eDevices.peek(resource);
-			if (!resource)
-				break;
-			int random = rand() % 100;
-			if (random < resource->getFree())
+			for (;;)
 			{
-				eDevices.dequeue(resource);
-				maintenance.enqueue(resource, -(resource->getmaint() + timeStep));
-				failedFreeDevicesCount++;
+				eDevices.peek(resource);
+				if (!resource)
+					break;
+				int random = rand() % 100;
+				if (random < resource->getFree())
+				{
+					eDevices.dequeue(resource);
+					maintenance.enqueue(resource, -(resource->getmaint() + timeStep));
+					failedFreeDevicesCount++;
+				}
+				else
+					break;
 			}
-			else
-				break;
+			if (patient->getTreatment()->canAssign(this))
+			{
+
+
+
+				eInterruptedPatients.dequeue(patient);
+
+				patient->getTreatment()->setSt(timeStep);
+				inTreatmentPatients.enqueue(patient, -(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
+				eDevices.dequeue(resource);
+				patient->getTreatment()->setResource(resource);
+				patient->setStatus(4);
+
+				int temp1 = patient->getEnterTime();
+				int temp2 = patient->getWt();
+				patient->setWt(temp2 + timeStep - temp1);
+				patient->setEnterTime(timeStep);
+			}
 		}
-		if (patient->getTreatment()->canAssign(this))
+	}
+	else
+	{
+		eWaiting.peek(patient);
+		if (patient)
 		{
+			for (;;)
+			{
+				eDevices.peek(resource);
+				if (!resource)
+					break;
+				int random = rand() % 100;
+				if (random < resource->getFree())
+				{
+					eDevices.dequeue(resource);
+					maintenance.enqueue(resource, -(resource->getmaint() + timeStep));
+					failedFreeDevicesCount++;
+				}
+				else
+					break;
+			}
+			if (patient->getTreatment()->canAssign(this))
+			{
 
-			
-			if (interruptedPatients.isEmpty())
+
+
 				eWaiting.dequeue(patient);
-			else
-				interruptedPatients.dequeue(patient);
-			patient->getTreatment()->setSt(timeStep);
-			inTreatmentPatients.enqueue(patient,-(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
-			eDevices.dequeue(resource);
-			patient->getTreatment()->setResource(resource);
-			patient->setStatus(4);
 
-			int temp1 = patient->getEnterTime();
-			int temp2 = patient->getWt();
-			patient->setWt(temp2 + timeStep - temp1);
-			patient->setEnterTime(timeStep);
+				patient->getTreatment()->setSt(timeStep);
+				inTreatmentPatients.enqueue(patient, -(patient->getTreatmentDuration() + patient->getTreatment()->getSt()));
+				eDevices.dequeue(resource);
+				patient->getTreatment()->setResource(resource);
+				patient->setStatus(4);
+
+				int temp1 = patient->getEnterTime();
+				int temp2 = patient->getWt();
+				patient->setWt(temp2 + timeStep - temp1);
+				patient->setEnterTime(timeStep);
+			}
 		}
 	}
 }
@@ -483,7 +569,7 @@ void Scheduler::moveFromInTreatmentToWaitOrFinish()
 {
 	Patient* patient = nullptr;
 	int due;
-
+	
 	inTreatmentPatients.peek(patient,due);
 
 	while (patient && - due == timeStep)
@@ -646,19 +732,23 @@ void Scheduler::exportOutputFile()
 	outFile << endl;
 
 	outFile << "Percentage of free devices that failed = " << failedFreeDevicesCount / EUdevicesCount * 100 << " %" << endl;
+	outFile << endl;
+
+	outFile << "Percentage of busy devices that failed = " << failedBusyDevicesCount / EUdevicesCount * 100 << " %" << endl;
 
 	outFile.close();
 }
 
-void Scheduler::checkInTreatBusy(Patient*&patient)
+void Scheduler::checkInTreatBusy()
 {
 	priQueue<Patient*>temp;
+	Patient* patient = nullptr;
 	bool done = false;
 	int random = rand() % 100;
-	
+	int incount = inTreatmentPatients.getCount();
 	int tev,count=0;
 
-	while (!done&&(count!= inTreatmentPatients.getCount())) {
+	while (!done&&(count!= incount)) {
 		int random2 = rand() % inTreatmentPatients.getCount();
 		for (int i = 0; i < random2; i++) {
 			inTreatmentPatients.dequeue(patient,tev);
@@ -666,7 +756,7 @@ void Scheduler::checkInTreatBusy(Patient*&patient)
 				temp.enqueue(patient,tev);
 
 		}
-		if (patient->getTreatment()->getResource()->getType() == 'X') {
+		if (patient && patient->getTreatment()->getResource()->getType() == 'X') {
 			inTreatmentPatients.enqueue(patient, tev);
 			while (inTreatmentPatients.dequeue(patient, tev))
 				temp.enqueue(patient, tev);
@@ -678,10 +768,16 @@ void Scheduler::checkInTreatBusy(Patient*&patient)
 		}
 		else 
 		{
-			if (random < patient->getTreatment()->getResource()->getBusy()) {
+			if (patient && random < patient->getTreatment()->getResource()->getBusy()) {
 				patient->getTreatment()->setDuration(patient->getTreatment()->getDuration() - (timeStep - patient->getTreatment()->getSt()));
-				interruptedPatients.enqueue(patient);
+				if(patient->getTreatment()->getType()=='E')
+					eInterruptedPatients.enqueue(patient);
+				else if(patient->getTreatment()->getType()=='U')
+					uInterruptedPatients.enqueue(patient);
+
 				maintenance.enqueue(patient->getTreatment()->getResource(), -(patient->getTreatment()->getResource()->getmaint() + timeStep));
+				patient->getTreatment()->setResource(nullptr);
+				failedBusyDevicesCount++;
 			}
 			done = true;
 

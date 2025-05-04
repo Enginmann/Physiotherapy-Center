@@ -37,6 +37,7 @@ private:
 	bool autoMode;
 	float failedFreeDevicesCount;
 	float EUdevicesCount;
+	float failedBusyDevicesCount;
 
 	string inputFileName;
 	string outputFileName;
@@ -58,7 +59,8 @@ private:
 	LinkedQueue<XResource*> xRooms;			/// devices are inserted whenever they get available
 
 	priQueue<Resource*> maintenance;
-	LinkedQueue<Patient*> interruptedPatients;
+	LinkedQueue<Patient*> eInterruptedPatients;
+	LinkedQueue<Patient*> uInterruptedPatients;
 
 public:
 	Scheduler();
@@ -102,5 +104,5 @@ public:
 	void moveFromMaintenence();
 
 	void exportOutputFile();
-	void checkInTreatBusy(Patient*& patient);
+	void checkInTreatBusy();
 };

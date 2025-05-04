@@ -2,11 +2,11 @@
 #include "iostream"
 
 using namespace std;
-XResource::XResource(int id, char type, int capacity) : Resource(id, type)
+XResource::XResource(int id, char type, int capacity, int free, int busy, int maint) : Resource(id, type, free,busy,maint)
 {
 	this->capacity = capacity;
 	this->numOfPatient = 0;
-}
+} 
 
 void XResource::print(int count)
 {
